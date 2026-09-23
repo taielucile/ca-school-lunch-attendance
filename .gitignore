@@ -1,0 +1,26 @@
+# Raw CDE data
+data/raw/*
+!data/raw/.gitkeep
+!data/raw/README.md
+
+# Derived data and outputs
+data/derived/*
+!data/derived/.gitkeep
+output/diagnostics/*
+output/tables/*
+output/figures/*
+!output/diagnostics/.gitkeep
+!output/tables/.gitkeep
+!output/figures/.gitkeep
+
+# R
+.Rhistory
+.RData
+.Ruserdata
+.Rproj.user/
+renv/library/
+renv/staging/
+
+# OS
+.DS_Store
+Thumbs.db
