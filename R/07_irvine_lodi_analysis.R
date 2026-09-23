@@ -84,3 +84,45 @@ write.csv(
 
 message("Irvine/Lodi summary:")
 print(focus_summary)
+
+
+# Sample-composition sensitivity: charter calendars/program models may differ.
+summarise_sample <- function(dat, sample_label) {
+  dat <- dat[
+    !is.na(dat$tk_k_total_absence_days) &
+      !is.na(dat$tk_k_eligible_cumulative_enrollment),
+    , drop = FALSE
+  ]
+  ds <- unique(dat$district_focus)
+  do.call(rbind, lapply(ds, function(d) {
+    g <- dat[dat$district_focus == d, , drop = FALSE]
+    A <- sum(g$proxy_attended_census_180)
+    B <- sum(g$proxy_attended_cumulative_180)
+    data.frame(
+      sample = sample_label,
+      district = d,
+      schools_usable = nrow(g),
+      census_tk_k = sum(g$tk_k_census_enrollment),
+      eligible_cumulative_tk_k = sum(g$tk_k_eligible_cumulative_enrollment),
+      total_absence_days = sum(g$tk_k_total_absence_days),
+      proxy_attended_census_180 = A,
+      proxy_attended_cumulative_180 = B,
+      cumulative_vs_census_pct = 100 * (B / A - 1),
+      stringsAsFactors = FALSE
+    )
+  }))
+}
+
+sample_sensitivity <- rbind(
+  summarise_sample(focus, "all focus schools"),
+  summarise_sample(focus[focus$charter_census == "N", , drop = FALSE],
+                   "non-charter schools only")
+)
+sample_sensitivity <- sample_sensitivity[
+  order(sample_sensitivity$district, sample_sensitivity$sample), ]
+
+write.csv(
+  sample_sensitivity,
+  file.path(TABLE_DIR, "irvine_lodi_sample_sensitivity_2024_25.csv"),
+  row.names = FALSE, na = ""
+)
