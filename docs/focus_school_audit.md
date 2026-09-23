@@ -6,11 +6,11 @@ This note tracks school-level exceptions that may matter for the Irvine/Lodi den
 
 | District | School | CDS | Census TK | Census K | CBEDS TK program | CBEDS K program | Current audit note |
 |---|---|---|---:|---:|---|---|---|
-| Irvine Unified | Irvine Chinese Immersion Academy | 30736500142232 | 79 | 119 | Part-day | Full-day | 2024–25 school calendar was separately approved by the charter board; exact instructional-day count still to verify. TK/K schedule types differ here. |
+| Irvine Unified | Irvine Chinese Immersion Academy | 30736500142232 | 79 | 119 | Part-day | Full-day | A school job description states staff work 180 days as set in the school calendar and that work hours reflect student attendance. This supports a 180-day calendar benchmark, although the primary source calendar should still be retained if located. TK/K schedule types differ here. |
 | Lodi Unified | Rio Valley Charter | 39685850122580 | 19 | 40 | missing | missing | Public descriptions identify a TK–12 homeschool/independent-study model. Treat separately in meal-access interpretation; exact student instructional-day exposure is not inferred from staff work-year postings. |
-| Lodi Unified | Aspire Vincent Shalvey Academy | 39685856116594 | 23 | 72 | Full-day | Full-day | 2024–25 school calendar located; exact instructional-day count still to code/verify. |
+| Lodi Unified | Aspire Vincent Shalvey Academy | 39685856116594 | 23 | 72 | Full-day | Full-day | External 2024–25 school-system comparison material reports Aspire Public Schools at 180 school days for FY 2024–25; the school-specific calendar is also located. Treat 180 as supported for this benchmark. |
 | Lodi Unified | Joe Serna Jr. Charter | 39685856117675 | 0 | 44 | missing | Full-day | 2024–25 instructional calendar located; exact instructional-day count still to code/verify. |
-| Lodi Unified | Aspire River Oaks Charter | 39685856118921 | 24 | 72 | Full-day | Full-day | 2024–25 school calendar located; exact instructional-day count still to code/verify. |
+| Lodi Unified | Aspire River Oaks Charter | 39685856118921 | 24 | 72 | Full-day | Full-day | 2024–25 instructional calendar located. Exact day count remains to be verified from the calendar rather than assumed from district policy. |
 
 ## Why this matters
 
