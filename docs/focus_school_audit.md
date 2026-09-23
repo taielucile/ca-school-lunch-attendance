@@ -10,7 +10,7 @@ This note tracks school-level exceptions that may matter for the Irvine/Lodi den
 | Lodi Unified | Rio Valley Charter | 39685850122580 | 19 | 40 | missing | missing | Public descriptions identify a TK–12 homeschool/independent-study model. Treat separately in meal-access interpretation; exact student instructional-day exposure is not inferred from staff work-year postings. |
 | Lodi Unified | Aspire Vincent Shalvey Academy | 39685856116594 | 23 | 72 | Full-day | Full-day | External 2024–25 school-system comparison material reports Aspire Public Schools at 180 school days for FY 2024–25; the school-specific calendar is also located. Treat 180 as supported for this benchmark. |
 | Lodi Unified | Joe Serna Jr. Charter | 39685856117675 | 0 | 44 | missing | Full-day | 2024–25 instructional calendar located; exact instructional-day count still to code/verify. |
-| Lodi Unified | Aspire River Oaks Charter | 39685856118921 | 24 | 72 | Full-day | Full-day | 2024–25 instructional calendar located. Exact day count remains to be verified from the calendar rather than assumed from district policy. |
+| Lodi Unified | Aspire River Oaks Charter | 39685856118921 | 24 | 72 | Full-day | Full-day | The published 2024–25 instructional calendar runs July 29, 2024 through May 30, 2025. Counting weekdays and removing the listed fall, Thanksgiving/non-instruction, winter, and spring breaks plus listed weekday holidays yields 180 instructional days. |
 
 ## Why this matters
 
