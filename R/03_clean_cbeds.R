@@ -4,7 +4,16 @@ if (!exists("read_tab_latin1")) stop("Run R/01_clean_enrollment.R first.")
 
 cbeds_raw <- read_tab_latin1(FILES$cbeds)
 cbeds <- cbeds_raw[cbeds_raw$Level == "S", , drop = FALSE]
-cbeds$cds_code <- sprintf("%014s", trimws(cbeds$Cdscode))
+
+pad14 <- function(x) {
+  x <- trimws(as.character(x))
+  vapply(x, function(z) {
+    if (is.na(z) || z == "") return(NA_character_)
+    if (nchar(z) >= 14) return(z)
+    paste0(strrep("0", 14 - nchar(z)), z)
+  }, character(1))
+}
+cbeds$cds_code <- pad14(cbeds$Cdscode)
 
 truth <- function(x) tolower(trimws(as.character(x))) == "true"
 
@@ -21,7 +30,7 @@ tk_map <- c(
   "Transitional Kindergarten None" = "None"
 )
 
-school_ids <- unique(cbeds$cds_code)
+school_ids <- unique(cbeds$cds_code[!is.na(cbeds$cds_code)])
 
 classify_program <- function(id, map) {
   z <- cbeds[
