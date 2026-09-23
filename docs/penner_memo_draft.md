@@ -100,7 +100,9 @@ For the public-data version, my current ordering is:
 
 The reason for putting Census first is not that Census enrollment equals annual exposure. It does not. The reason is that the cumulative alternative has a known directional problem: it necessarily treats every eligible cumulative student as a full-year student. Census has offsetting entry/exit errors whose direction is not known a priori.
 
-The strongest version of the denominator would instead aggregate STAS Expected Attendance Days directly for TK/K students at each school. If those data become accessible, that would supersede these proxies.
+The strongest version of the denominator would instead aggregate STAS Expected Attendance Days directly for TK/K students at each school. CDE documentation confirms that STAS is required for TK–12 primary/short-term enrollments and that Expected Attendance Days reflect the number of days the student is actually expected to attend, including schedules with fewer than five expected days per week. That makes STAS conceptually aligned with the target denominator.
+
+However, obtaining non-public CALPADS data is not a lightweight public-records step. CDE limits student-level CALPADS releases to approved authorized-representative research conducted on behalf of CDE under a data-sharing agreement, with review and staff/legal fees. I therefore would not initiate a restricted-data request independently. If the public-data sensitivity materially affects the substantive meal results, we can decide whether pursuing STAS through the formal research process is worth it.
 
 ## Remaining items
 
