@@ -1,10 +1,5 @@
 # Project configuration
-
-required_packages <- c("readr", "dplyr", "tidyr", "stringr", "lubridate", "purrr")
-missing_packages <- required_packages[!vapply(required_packages, requireNamespace, logical(1), quietly = TRUE)]
-if (length(missing_packages) > 0) {
-  stop("Install required packages before running: ", paste(missing_packages, collapse = ", "))
-}
+# Package-free by design: the core pipeline uses base R only.
 
 RAW_DIR <- "data/raw"
 DERIVED_DIR <- "data/derived"
@@ -12,10 +7,9 @@ DIAGNOSTIC_DIR <- "output/diagnostics"
 TABLE_DIR <- "output/tables"
 FIGURE_DIR <- "output/figures"
 
-dir.create(DERIVED_DIR, recursive = TRUE, showWarnings = FALSE)
-dir.create(DIAGNOSTIC_DIR, recursive = TRUE, showWarnings = FALSE)
-dir.create(TABLE_DIR, recursive = TRUE, showWarnings = FALSE)
-dir.create(FIGURE_DIR, recursive = TRUE, showWarnings = FALSE)
+for (d in c(DERIVED_DIR, DIAGNOSTIC_DIR, TABLE_DIR, FIGURE_DIR)) {
+  dir.create(d, recursive = TRUE, showWarnings = FALSE)
+}
 
 FILES <- list(
   enrollment = file.path(RAW_DIR, "cdenroll2425.txt"),
@@ -29,10 +23,14 @@ if (length(missing_files) > 0) {
        ". See data/README.md.")
 }
 
-# District identifiers
+# 2024-25 focus districts
 IRVINE_COUNTY <- "30"
 IRVINE_DISTRICT <- "73650"
 LODI_COUNTY <- "39"
 LODI_DISTRICT <- "68585"
 
 ACADEMIC_YEAR <- "2024-25"
+
+# Sensitivity benchmarks, not claims about each student's actual exposure.
+DAYS_PRIMARY <- 180
+DAYS_ALT <- 175
