@@ -32,4 +32,13 @@ stopifnot(nrow(school_panel) == nrow(enrollment_clean))
 stopifnot(all(school_panel$tk_k_expected_student_days_publicly_identified == FALSE))
 stopifnot(all(school_panel$tk_k_attended_student_days_publicly_identified == FALSE))
 
+# Non-charter sensitivity regression checks.
+nc <- sample_sensitivity[sample_sensitivity$sample == "non-charter schools only", ]
+irv_nc <- nc[nc$district == "Irvine Unified", ]
+lodi_nc <- nc[nc$district == "Lodi Unified", ]
+stopifnot(irv_nc$schools_usable == 29)
+stopifnot(lodi_nc$schools_usable == 29)
+stopifnot(abs(irv_nc$cumulative_vs_census_pct - 8.757419480393104) < 1e-9)
+stopifnot(abs(lodi_nc$cumulative_vs_census_pct - 8.521180656919913) < 1e-9)
+
 message("All pipeline regression and integrity tests passed.")
