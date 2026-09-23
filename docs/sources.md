@@ -40,3 +40,22 @@ Lodi Unified Board Policy 6111 states that district calendars offer 180 days of 
 ## Interpretation rule
 
 Calendar days offered by a school/district and student-level expected attendance days are different quantities. The former can justify a full-year benchmark; it cannot solve mobility or partial-year enrollment exposure.
+
+
+## Charter calendar audit sources
+
+### Irvine Chinese Immersion Academy
+
+A public 2024–25-era job description states that instructional assistants work 180 days as set in the school calendar and that work hours reflect student attendance. This is supporting evidence for a 180-day school calendar benchmark, not a student-level exposure measure.
+
+### Aspire Public Schools
+
+Public comparison material for FY 2024–25 reports Aspire Public Schools at 180 school days. School-specific 2024–25 calendars were also located for Aspire Vincent Shalvey Academy and Aspire River Oaks Charter School.
+
+### Joe Serna Jr. Charter
+
+A school-specific 2024–25 instructional calendar was located through Lodi Unified. The repository does not yet encode a verified instructional-day count from that calendar.
+
+### Rio Valley Charter
+
+Public 2024–25 job postings describe Rio Valley as a TK–12 homeschool/independent-study charter and list 180-day work years for some instructional positions. Staff work-year length is not used as a student instructional-day count. The program model is flagged separately because it may differ substantively from campus-based meal access.
