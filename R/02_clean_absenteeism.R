@@ -30,7 +30,9 @@ metric_cols <- c(
 )
 
 # Preserve suppression as an explicit flag before numeric parsing.
-suppressed <- apply(absenteeism[metric_cols], 1, function(z) any(trimws(z) == "*"))
+suppressed <- apply(absenteeism[metric_cols], 1, function(z) {
+  any(trimws(z) == "*", na.rm = TRUE)
+})
 
 absenteeism_clean <- data.frame(
   cds_code = absenteeism$cds_code,
