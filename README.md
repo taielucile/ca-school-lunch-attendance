@@ -16,27 +16,58 @@ Raw CDE files are **not committed**. Place these files in `data/raw/`:
 - `cdenroll2425.txt` — 2024–25 Census Day enrollment
 - `cbedsora24b.txt` — 2024–25 CBEDS school/program data
 
-See `data/README.md`.
+See `data/README.md` and `docs/sources.md`.
 
-## Workflow
+## Reproduce
 
-`RUN_ALL.R` runs the project from raw files through cleaned school-level data, diagnostics, denominator constructions, and Irvine/Lodi outputs.
+The core pipeline uses base R only.
 
-Planned modules:
+From the repository root:
 
-1. clean Census enrollment
-2. clean absenteeism data
-3. clean CBEDS program data
-4. build and validate the school panel
-5. construct alternative TK/K attendance denominators
-6. compare Irvine and Lodi
-7. export memo tables and diagnostics
+```r
+source("RUN_ALL.R")
+```
+
+or from a shell:
+
+```sh
+Rscript RUN_ALL.R
+```
+
+The runner executes:
+
+1. `R/00_config.R`
+2. `R/01_clean_enrollment.R`
+3. `R/02_clean_absenteeism.R`
+4. `R/03_clean_cbeds.R`
+5. `R/04_build_school_panel.R`
+6. `R/05_validate_links.R`
+7. `R/06_build_denominators.R`
+8. `R/07_irvine_lodi_analysis.R`
+
+Generated data and outputs are ignored by Git and can always be rebuilt from the raw inputs.
+
+## Tests
+
+After placing the raw files in `data/raw/`, run:
+
+```sh
+Rscript tests/test_pipeline.R
+```
+
+The regression test checks the current Irvine/Lodi benchmark totals as well as core row-count and identification invariants.
 
 ## Measurement status
 
-Observed quantities are kept separate from reconstructed or assumption-dependent quantities. In particular, neither Census enrollment × 180 nor eligible cumulative enrollment × 180 is treated as observed expected student-days.
+Observed quantities are kept separate from reconstructed or assumption-dependent quantities. Neither Census enrollment × 180 nor eligible cumulative enrollment × 180 is treated as observed expected student-days.
 
-See `docs/denominator_method_note.md` and `docs/decisions.md`.
+For the focus districts, 180 is supported as a full-year district calendar benchmark for district-operated schools, but calendar days offered are not the same as each student's expected attendance exposure. Charter/school-specific calendar exceptions remain under review.
+
+See `docs/denominator_method_note.md`, `docs/decisions.md`, and `docs/memo_outline.md`.
+
+## Current benchmark result
+
+Under a 180-day full-year benchmark, the eligible-cumulative construction produces an aggregate attended-days proxy about 8.20% above the Census construction in Irvine and 7.99% above it in Lodi. This is a sensitivity result, not evidence that either proxy is the true denominator.
 
 ## Status
 
