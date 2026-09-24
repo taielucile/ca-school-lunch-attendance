@@ -25,29 +25,29 @@ write.csv(
 )
 
 # Clean school-level handoff file for comparison with Irvine/Lodi district data.
-# Keep one row per focus school, including suppressed/unusable rows so that the
-# district comparison can distinguish missing public cells from true zeros.
+# CDS is deliberately written from the character field as a 14-digit identifier.
+# Spreadsheet software may auto-format long identifiers; import cds_code_14char as text.
 school_handoff <- data.frame(
-  cds_code = focus$cds_code,
+  cds_code_14char = as.character(focus$cds_code),
   district = focus$district_focus,
   school = focus$school,
   charter = focus$charter_census,
-  census_tk = focus$tk_census_enrollment,
-  census_k = focus$k_census_enrollment,
-  census_tk_k = focus$tk_k_census_enrollment,
-  eligible_cumulative_tk_k = focus$tk_k_eligible_cumulative_enrollment,
-  total_absence_days_tk_k = focus$tk_k_total_absence_days,
-  proxy_attended_census_180 = focus$proxy_attended_census_180,
-  proxy_attended_cumulative_180 = focus$proxy_attended_cumulative_180,
-  proxy_attended_midpoint_180 = focus$proxy_attended_midpoint_180,
-  cumulative_minus_census_student_days =
+  census_day_tk_enrollment = focus$tk_census_enrollment,
+  census_day_k_enrollment = focus$k_census_enrollment,
+  census_day_tk_k_enrollment = focus$tk_k_census_enrollment,
+  eligible_cumulative_tk_k_enrollment = focus$tk_k_eligible_cumulative_enrollment,
+  observed_tk_k_absence_days = focus$tk_k_total_absence_days,
+  estimated_tk_k_attended_student_days_census_180 =
+    focus$proxy_attended_census_180,
+  estimated_tk_k_attended_student_days_cumulative_180 =
+    focus$proxy_attended_cumulative_180,
+  cumulative_minus_census_estimated_student_days =
     focus$proxy_attended_cumulative_180 - focus$proxy_attended_census_180,
-  cumulative_vs_census_pct = focus$cumulative_vs_census_180_pct,
-  k_program = focus$k_program,
-  tk_program = focus$tk_program,
+  cumulative_vs_census_estimate_pct = focus$cumulative_vs_census_180_pct,
+  cbeds_k_program = focus$k_program,
+  cbeds_tk_program = focus$tk_program,
   absenteeism_suppressed = focus$tk_k_absenteeism_suppressed,
-  usable_public_denominator =
-    !is.na(focus$tk_k_total_absence_days) &
+  usable_public_denominator = !is.na(focus$tk_k_total_absence_days) &
     !is.na(focus$tk_k_eligible_cumulative_enrollment),
   notes = ifelse(
     focus$school == "Rio Valley Charter",
@@ -61,6 +61,11 @@ school_handoff <- school_handoff[
   order(school_handoff$district, school_handoff$school),
   , drop = FALSE
 ]
+
+stopifnot(
+  all(nchar(school_handoff$cds_code_14char) == 14),
+  !anyDuplicated(school_handoff$cds_code_14char)
+)
 
 write.csv(
   school_handoff,
