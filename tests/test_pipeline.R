@@ -42,3 +42,15 @@ stopifnot(abs(irv_nc$cumulative_vs_census_pct - 8.757419480393104) < 1e-9)
 stopifnot(abs(lodi_nc$cumulative_vs_census_pct - 8.521180656919913) < 1e-9)
 
 message("All pipeline regression and integrity tests passed.")
+
+
+# School-level handoff integrity checks
+stopifnot(
+  exists("school_handoff"),
+  nrow(school_handoff) == 64,
+  !anyDuplicated(school_handoff$cds_code),
+  sum(school_handoff$district == "Irvine Unified") == 30,
+  sum(school_handoff$district == "Lodi Unified") == 34,
+  sum(school_handoff$usable_public_denominator) == 63,
+  sum(school_handoff$absenteeism_suppressed, na.rm = TRUE) == 1
+)
