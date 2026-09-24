@@ -45,7 +45,7 @@ school_handoff <- data.frame(
   cumulative_vs_census_pct = focus$cumulative_vs_census_180_pct,
   k_program = focus$k_program,
   tk_program = focus$tk_program,
-  absenteeism_suppressed = focus$tk_k_absence_suppressed,
+  absenteeism_suppressed = focus$tk_k_absenteeism_suppressed,
   usable_public_denominator =
     !is.na(focus$tk_k_total_absence_days) &
     !is.na(focus$tk_k_eligible_cumulative_enrollment),
