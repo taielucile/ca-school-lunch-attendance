@@ -24,6 +24,50 @@ write.csv(
   row.names = FALSE, na = ""
 )
 
+# Clean school-level handoff file for comparison with Irvine/Lodi district data.
+# Keep one row per focus school, including suppressed/unusable rows so that the
+# district comparison can distinguish missing public cells from true zeros.
+school_handoff <- data.frame(
+  cds_code = focus$cds_code,
+  district = focus$district_focus,
+  school = focus$school,
+  charter = focus$charter_census,
+  census_tk = focus$tk_census_enrollment,
+  census_k = focus$k_census_enrollment,
+  census_tk_k = focus$tk_k_census_enrollment,
+  eligible_cumulative_tk_k = focus$tk_k_eligible_cumulative_enrollment,
+  total_absence_days_tk_k = focus$tk_k_total_absence_days,
+  proxy_attended_census_180 = focus$proxy_attended_census_180,
+  proxy_attended_cumulative_180 = focus$proxy_attended_cumulative_180,
+  proxy_attended_midpoint_180 = focus$proxy_attended_midpoint_180,
+  cumulative_minus_census_student_days =
+    focus$proxy_attended_cumulative_180 - focus$proxy_attended_census_180,
+  cumulative_vs_census_pct = focus$cumulative_vs_census_180_pct,
+  k_program = focus$k_program,
+  tk_program = focus$tk_program,
+  absenteeism_suppressed = focus$tk_k_absence_suppressed,
+  usable_public_denominator =
+    !is.na(focus$tk_k_total_absence_days) &
+    !is.na(focus$tk_k_eligible_cumulative_enrollment),
+  notes = ifelse(
+    focus$school == "Rio Valley Charter",
+    "Homeschool/independent-study model; interpret campus meal access separately.",
+    ""
+  ),
+  stringsAsFactors = FALSE
+)
+
+school_handoff <- school_handoff[
+  order(school_handoff$district, school_handoff$school),
+  , drop = FALSE
+]
+
+write.csv(
+  school_handoff,
+  file.path(TABLE_DIR, "irvine_lodi_tk_k_attendance_denominators_2024_25.csv"),
+  row.names = FALSE, na = ""
+)
+
 usable <- focus[
   !is.na(focus$tk_k_total_absence_days) &
     !is.na(focus$tk_k_eligible_cumulative_enrollment),
