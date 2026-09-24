@@ -48,6 +48,8 @@ message("All pipeline regression and integrity tests passed.")
 stopifnot(
   exists("school_handoff"),
   nrow(school_handoff) == 64,
+  ncol(school_handoff) == 18,
+  all(nchar(school_handoff$cds_code_14char) == 14),
   !anyDuplicated(school_handoff$cds_code),
   sum(school_handoff$district == "Irvine Unified") == 30,
   sum(school_handoff$district == "Lodi Unified") == 34,
