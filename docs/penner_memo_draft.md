@@ -95,3 +95,5 @@ If the meal results are meaningfully sensitive to the denominator choice, the cl
 ## Reproducibility note
 
 The data cleaning, joins, denominator constructions, and school-level diagnostics are organized as a reproducible R workflow. Suppressed absenteeism cells are retained as missing rather than converted to zero, and the analysis keeps the Census and cumulative constructions explicitly labeled as proxies rather than observed student-days attended.
+
+I reran the full workflow from the three original CDE raw files on September 24. The pipeline reproduced the Irvine and Lodi results reported above, and all automated regression and integrity tests passed.
