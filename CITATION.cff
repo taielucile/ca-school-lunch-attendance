@@ -1,0 +1,8 @@
+cff-version: 1.2.0
+message: "If you use this research workflow, please cite the repository version used."
+title: "California School Lunch Attendance Denominator"
+type: software
+authors:
+  - family-names: Lucile
+    given-names: Taiel
+repository-code: "https://github.com/hthynes/ca-school-lunch-attendance"
