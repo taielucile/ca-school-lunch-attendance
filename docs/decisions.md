@@ -104,3 +104,34 @@ Andrew requested a memo detailing the alternative approaches and the differences
 **Requirements before estimation:** Verify school, date, grade, and meal-type alignment; preserve breakfast and lunch separately; document unmatched or ambiguous records; and do not annualize the five-day result.
 
 **Consequence:** This analysis remains separate from the 2024–25 annual denominator sensitivity analysis. Lodi is not included in an analogous TK/K take-up calculation unless its numerator and attendance populations can be aligned.
+
+
+---
+
+## 2026-09-25 — Reopen denominator audit for Lodi grade-specific report fields
+
+**Decision:** Follow up on Andrew Penner's observation that the original Lodi report contains Kindergarten `Highest Eligible` and `Last Day` fields rather than leaving the annual-denominator investigation closed without examining the new evidence.
+
+**Evidence:** The source report is filtered to Kindergarten and the July 29, 2025–May 29, 2026 eligibility period. It labels `Highest Eligible` and `Last Day`, and defines `Last Day` as the number of enrolled students on the last day of the selected date range.
+
+**Consequence:** The prior stopping rule was satisfied: this was new evidence worth testing. A dedicated `R/09_lodi_enrollment_triangulation.R` module now preserves and evaluates the measures.
+
+---
+
+## 2026-09-25 — Lodi eligibility-report measures do not identify annual attendance exposure
+
+**Decision:** Retain the Lodi `Highest Eligible` and `Last Day` fields as source-triangulation evidence, but do not use either as an independently validated annual attendance denominator or as a basis for selecting between the Census and cumulative-enrollment constructions.
+
+**Evidence:** Across the 31 Kindergarten schools in the report, `Highest Eligible` and `Last Day` are identical school-by-school and both total 3,481. Same-year CDE Kindergarten Census enrollment for the matched schools totals 1,763. The report-side quantity exceeds Census enrollment at all 31 schools.
+
+**Reason:** The two report fields do not provide independent observations in these data, and neither supplies student-specific expected attendance days. The comparison therefore characterizes another enrollment/eligibility quantity but does not recover the duration-weighted exposure required for annual attended student-days.
+
+**Consequence:** The Census and eligible-cumulative annual constructions remain parallel sensitivity specifications. The annual denominator investigation returns to its stopping point unless genuinely new grade-aligned attendance/exposure evidence becomes available.
+
+---
+
+## 2026-09-25 — Resume Irvine five-day meal-participation analysis
+
+**Decision:** With the Lodi lead audited and its identification contribution documented, return to the planned Irvine November 3–7, 2025 meal-participation analysis.
+
+**Consequence:** Before estimating participation, verify the meal-report row semantics, school/date/grade alignment, and whether `Total Quantity` represents meals rather than item quantities. Keep breakfast and lunch separate and do not annualize the five-day result.

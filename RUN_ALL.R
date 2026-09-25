@@ -12,7 +12,8 @@ scripts <- c(
   "R/05_validate_links.R",
   "R/06_build_denominators.R",
   "R/07_irvine_lodi_analysis.R",
-  "R/08_district_validation.R"
+  "R/08_district_validation.R",
+  "R/09_lodi_enrollment_triangulation.R"
 )
 
 for (script in scripts) {
@@ -21,3 +22,4 @@ for (script in scripts) {
 }
 
 message("Build complete.")
+

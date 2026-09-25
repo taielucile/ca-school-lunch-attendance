@@ -162,5 +162,57 @@ stopifnot(
   ) < 1e-7
 )
 
+
+# Lodi 2025-26 Kindergarten eligibility-report triangulation checks.
+#
+# The district source is a meal-program eligibility report filtered to
+# Kindergarten for 7/29/2025-5/29/2026. Highest Eligible and Last Day
+# are retained as source-reported quantities, not as observed expected
+# or attended student-days.
+
+stopifnot(
+  exists("lodi_k_district"),
+  exists("lodi_k_validation"),
+  exists("lodi_k_summary")
+)
+
+# Source extraction integrity.
+stopifnot(
+  nrow(lodi_k_district) == 31,
+  !anyDuplicated(lodi_k_district$school),
+  sum(lodi_k_district$kindergarten_highest_eligible) == 3481,
+  sum(lodi_k_district$kindergarten_last_day) == 3481,
+  all(
+    lodi_k_district$kindergarten_highest_eligible ==
+      lodi_k_district$kindergarten_last_day
+  )
+)
+
+# Same-year CDE matching and descriptive comparison.
+stopifnot(
+  nrow(lodi_k_validation) == 31,
+  !anyDuplicated(lodi_k_validation$cds_code_14char),
+  all(nchar(lodi_k_validation$cds_code_14char) == 14),
+  sum(lodi_k_validation$cde_k_census) == 1763,
+  sum(lodi_k_validation$lodi_report_k_highest_eligible) == 3481,
+  all(
+    lodi_k_validation$lodi_report_k_highest_eligible >
+      lodi_k_validation$cde_k_census
+  )
+)
+
+# Frozen aggregate descriptive results.
+stopifnot(
+  lodi_k_summary$schools == 31,
+  lodi_k_summary$district_highest_eligible_total == 3481,
+  lodi_k_summary$district_last_day_total == 3481,
+  lodi_k_summary$cde_k_census_total == 1763,
+  lodi_k_summary$district_minus_cde_k_total == 1718,
+  abs(
+    lodi_k_summary$aggregate_district_to_cde_ratio -
+      (3481 / 1763)
+  ) < 1e-10
+)
+
 message("All pipeline regression and integrity tests passed.")
 

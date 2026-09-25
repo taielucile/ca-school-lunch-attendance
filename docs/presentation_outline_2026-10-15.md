@@ -65,17 +65,23 @@ This is useful as a same-year check on the scale and school-level behavior of Ce
 
 It does **not** validate an annual 180-day denominator. The reports cover only five days, and the gap between Census enrollment and attendance includes ordinary absences as well as any enrollment differences.
 
-## 7. Why Lodi cannot adjudicate the denominator
+## 7. What the additional Lodi fields tell us
 
-Lodi covers the full 2025–26 reporting period, but the available files contain:
+Lodi covers the full 2025–26 reporting period, but its school-wide ADA and grade-level meal ADP still do not provide grade-specific TK/K attendance.
 
-- grade-specific meal counts;
-- school-wide Average Daily Attendance; and
-- grade-level ADP measures that refer to meal participation, not attendance.
+The original eligibility report does contain Kindergarten-filtered `Highest Eligible` and `Last Day` fields for July 29, 2025–May 29, 2026. The report defines `Last Day` as enrolled students on the last day of the selected date range.
 
-That does not provide a grade-specific TK/K attendance benchmark.
+Across 31 schools:
 
-The meal file also has separate `Preschool` and `Kindergarten` categories. The available repository documentation does not establish that `Preschool` means TK, and Lodi program documentation treats preschool and TK as distinct programs. I therefore do not combine those fields and label them TK/K without additional documentation.
+- Highest Eligible = 3,481;
+- Last Day = 3,481;
+- the two measures are identical at every school;
+- same-year CDE K Census enrollment = 1,763; and
+- the report-side quantity is higher than Census at all 31 schools.
+
+This gives us another grade-specific enrollment/eligibility comparison, but not the missing duration-weighted exposure. It therefore does not select between the Census and cumulative annual denominator constructions.
+
+The meal file also has separate `Preschool` and `Kindergarten` categories. The available documentation does not establish that `Preschool` means TK, and Lodi program documentation treats preschool and TK as distinct programs. I therefore do not combine those fields and label them TK/K.
 
 ## 8. What remains unidentified
 
@@ -91,11 +97,11 @@ If a single annual denominator is required, student-specific or otherwise durati
 
 The remaining questions are data questions rather than reasons to choose an unsupported estimator:
 
-- Is there a grade-specific Lodi attendance field or file that is not in the current repository?
+- Is there student-specific or otherwise duration-weighted Lodi expected-attendance data beyond the eligibility-report fields?
 - What exactly does the Lodi meal-data `Preschool` category represent?
 - For meal-access analyses, should Rio Valley's homeschool/independent-study model be handled separately?
 - If the substantive results are sensitive to the denominator, is obtaining duration-weighted expected-attendance data worth pursuing?
 
 ## Reproducibility
 
-The full R pipeline now runs through `R/08_district_validation.R`. The regression and integrity test suite passes, including the 2024–25 Irvine/Lodi benchmarks and the 2025–26 Irvine district-attendance validation.
+The full R pipeline now runs through `R/09_lodi_enrollment_triangulation.R`. The regression and integrity test suite passes, including the 2024–25 Irvine/Lodi benchmarks, the 2025–26 Irvine district-attendance validation, and the 31-school Lodi Kindergarten source-triangulation checks.

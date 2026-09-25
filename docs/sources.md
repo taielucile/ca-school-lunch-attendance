@@ -68,6 +68,16 @@ The Lodi files in Feed-California-Kinders contain grade-specific meal counts and
 
 The meal data contain separate `Preschool` and `Kindergarten` categories. No documentation located in the repository establishes that `Preschool` represents TK. Lodi's own program materials treat Transitional Kindergarten and preschool as distinct programs, so the workflow does not relabel Preschool as TK or combine Preschool and Kindergarten as a TK/K numerator without additional documentation.
 
+### Lodi Kindergarten eligibility-report fields
+
+The original Lodi workbook also contains a report filtered to `Grade Levels = Kindergarten` and an `Eligibility Date Range` of July 29, 2025 through May 29, 2026. Its headings include `Participants Approved`, `Highest Eligible`, and `Last Day`. A report footnote defines `Last Day` as the number of enrolled students on the last day of the selected date range.
+
+The extracted 31-school Kindergarten report has `Highest Eligible = Last Day` at every school. Each field totals 3,481. The pipeline compares that report-side quantity descriptively with same-year CDE Kindergarten Census enrollment for the same 31 matched schools, which totals 1,763.
+
+The report fields are not interpreted as student-specific expected attendance days. Their role is source triangulation: they document another Kindergarten-specific enrollment/eligibility quantity while leaving annual duration-weighted attendance exposure unidentified.
+
+Source workbook: `Lodi/extracted data/UCI Project - Student Research.xlsx` in the Feed-California-Kinders repository.
+
 Source repository: https://github.com/whippedfruit/Feed-California-Kinders  
 Lodi TK policy: https://www.lodiusd.net/boardpolicies/6000/6170-1  
 Lodi TK information: https://www.lodiusd.net/enrollment/transitional-kindergarten

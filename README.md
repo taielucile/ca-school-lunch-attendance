@@ -8,7 +8,7 @@ How closely can public California education data approximate school-level TK/K s
 
 The 2024–25 public CDE Absenteeism by Reason release combines TK and K and reports eligible cumulative enrollment and total absence days, but not school-by-grade Expected Attendance Days. The workflow therefore keeps TK and K combined and treats the annual attendance denominator as partially unidentified from the public aggregate data.
 
-The primary focus districts are Irvine Unified and Lodi Unified. A separate 2025–26 Irvine validation module compares same-year Census enrollment with observed district TK/K attendance for November 3–7, 2025.
+The primary focus districts are Irvine Unified and Lodi Unified. A 2025–26 Irvine validation module compares same-year Census enrollment with observed district TK/K attendance for November 3–7, 2025. A separate Lodi source-triangulation module audits Kindergarten `Highest Eligible` and `Last Day` measures from the district meal-program eligibility report against same-year CDE Kindergarten Census enrollment.
 
 ## Data
 
@@ -19,6 +19,7 @@ Raw CDE and district source files are **not committed**. Place these files in `d
 - `cbedsora24b.txt` — 2024–25 CBEDS school/program data
 - `cdenroll2526.txt` — 2025–26 Census Day enrollment used for the Irvine validation
 - `irvine_k_pk_attendance_2025_11_03_07.csv` — transcribed Irvine K and PK/TK attendance for November 3–7, 2025
+- `lodi_kindergarten_enrollment_measures_2025_26.csv` — extracted Lodi Kindergarten `Highest Eligible` and `Last Day` measures from the 2025–26 eligibility report
 
 See `data/README.md` and `docs/sources.md` for provenance, definitions, and interpretation.
 
@@ -49,20 +50,21 @@ The runner executes:
 7. `R/06_build_denominators.R`
 8. `R/07_irvine_lodi_analysis.R`
 9. `R/08_district_validation.R`
+10. `R/09_lodi_enrollment_triangulation.R`
 
 Generated derived data, diagnostics, and tables are ignored by Git and can be rebuilt from the raw inputs.
 
 ## Tests
 
-After placing all five raw inputs in `data/raw/`, run:
+After placing all required raw inputs in `data/raw/`, run:
 
 ```sh
 Rscript tests/test_pipeline.R
 ```
 
-The test suite reruns the full pipeline and checks the frozen 2024–25 Irvine/Lodi denominator benchmarks, school-panel integrity, non-charter sensitivity results, the school-level handoff, the Irvine attendance transcription, the 2025–26 Irvine Census extract, deterministic district-to-Census matching, the two zero-TK reconciliations, and the five-day Irvine attendance benchmark.
+The test suite reruns the full pipeline and checks the frozen 2024–25 Irvine/Lodi denominator benchmarks, school-panel integrity, non-charter sensitivity results, the school-level handoff, the Irvine attendance transcription, the 2025–26 Irvine Census extract, deterministic district-to-Census matching, the two zero-TK reconciliations, the five-day Irvine attendance benchmark, and the 31-school Lodi Kindergarten source-triangulation results.
 
-The complete pipeline and test suite have been run locally in R, and all regression and integrity tests passed after the district-validation module was added.
+The complete pipeline through `R/09_lodi_enrollment_triangulation.R` has been run locally in R, and all regression and integrity tests passed.
 
 ## Measurement status
 
@@ -90,7 +92,9 @@ For the 30 Irvine schools represented in the November 3–7, 2025 district atten
 
 This is a short-window descriptive check on Census enrollment relative to observed attendance. It does **not** validate either annual 180-day denominator construction.
 
-The available Lodi files cover the full reporting period but do not provide grade-specific attendance. School-wide ADA and grade-level meal ADP therefore are not treated as TK/K attendance ground truth. The Lodi meal-data `Preschool` category is also not assumed to represent TK without documentation.
+The Lodi files do not provide grade-specific attendance comparable to Irvine's daily attendance reports. School-wide ADA and grade-level meal ADP therefore are not treated as TK/K attendance ground truth. The Lodi meal-data `Preschool` category is also not assumed to represent TK without documentation.
+
+A separate audit of the Lodi Kindergarten eligibility report identified `Highest Eligible` and `Last Day` measures for 31 schools over the July 29, 2025–May 29, 2026 eligibility period. The report defines `Last Day` as the number of enrolled students on the last day of the selected date range. `Highest Eligible` and `Last Day` are identical at all 31 schools and total 3,481, compared with 1,763 Kindergarten students in the same-year CDE Census for the matched schools. These measures provide useful source-triangulation evidence but do not identify student-specific expected attendance days or adjudicate between the annual Census and cumulative-enrollment proxy constructions.
 
 ## Documentation
 
@@ -103,7 +107,7 @@ The available Lodi files cover the full reporting period but do not provide grad
 
 ## Next analysis
 
-The annual public-data denominator work has reached the limit supported by the currently available attendance data. Further changes to the annual denominator specification should be driven by new evidence rather than by choosing among unsupported assumptions.
+The annual public-data denominator work has reached the limit supported by the currently available attendance and exposure data. Penner's suggestion to examine the Lodi Kindergarten `Highest Eligible` and `Last Day` fields was followed through as new evidence; the audit added a useful enrollment/eligibility comparison but did not identify duration-weighted expected attendance exposure. Further changes to the annual denominator specification should therefore be driven by genuinely new exposure data rather than by choosing among unsupported assumptions.
 
 The next planned substantive analysis is an Irvine short-window meal-participation check for November 3–7, 2025. The district files provide observed K and PK/TK attendance and daily grade-specific meal counts for the same week. Before calculating rates, the workflow will verify school, date, grade, and meal-type alignment and will preserve breakfast and lunch separately.
 

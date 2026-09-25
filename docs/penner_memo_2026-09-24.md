@@ -13,7 +13,7 @@ The public files provide TK/K absence days, but not the corresponding expected a
 
 The district files help, but they do not fully resolve which annual construction is closer to the true denominator. Irvine provides actual daily TK and K attendance for one week in 2025–26. Across the 30 schools in those reports, observed TK/K attendance averaged 2,820.8 students per day compared with 3,043 TK/K students in the same-year CDE Census, or 92.70% of Census enrollment. This is useful as a same-year check on the scale of the Census enrollment measure, but it does not validate either annual 180-day construction because it covers only five days and the difference between enrollment and attendance includes ordinary absences.
 
-The Lodi files cover the full year but do not contain grade-specific attendance or student-days attended. They include school-wide ADA and grade-specific meal participation, so they cannot provide a TK/K attendance benchmark comparable to Irvine.
+The Lodi files cover the full year but do not contain grade-specific attendance or student-days attended. They include school-wide ADA and grade-specific meal participation, so they cannot provide a TK/K attendance benchmark comparable to Irvine. I also followed up on the Kindergarten `Highest Eligible` and `Last Day` fields in the original Lodi report. Both equal 3,481 in aggregate and are identical at all 31 reported schools, compared with 1,763 Kindergarten students in the same-year CDE Census for those matched schools. That gives us another grade-specific enrollment/eligibility comparison, but it still does not provide the student-specific expected attendance days needed to adjudicate the annual denominator.
 
 Given those limitations, I do not think the available data establish that either public construction is uniformly closer to the true annual denominator. I would keep the Census and cumulative constructions explicitly labeled as alternative proxies and use the difference between them to show denominator sensitivity rather than label either one as observed student-days attended.
 
@@ -113,7 +113,13 @@ The workbook includes grade-specific meal counts and school-wide Average Daily A
 
 The meal files also separate `Preschool` and `Kindergarten`. I did not find documentation in the repository establishing that the `Preschool` category represents Transitional Kindergarten, and Lodi treats preschool and TK as distinct programs in its program materials. I therefore do not combine Preschool and Kindergarten meals and relabel them as a TK/K numerator without additional documentation.
 
-As a result, the Lodi district files do not currently provide either a grade-aligned attendance benchmark for adjudicating the public denominators or a clearly aligned TK/K meal numerator for calculating TK/K take-up directly.
+The original report does contain another potentially useful Kindergarten-specific check. For the July 29, 2025–May 29, 2026 eligibility period, it reports `Highest Eligible` and `Last Day`; the report defines `Last Day` as the number of enrolled students on the last day of the selected date range. Across the 31 reported schools, both fields total 3,481 and are identical school-by-school.
+
+I matched those 31 schools to the same-year 2025–26 CDE Census. Their CDE Kindergarten Census enrollment totals 1,763, so the Lodi report-side quantity is 1.9745 times the Census total and is higher at every matched school.
+
+I would not interpret that difference as evidence that the Census denominator is wrong by 97%. The Lodi report is an eligibility-report quantity covering the full reporting period, whereas CDE Census enrollment is a point-in-time snapshot. More importantly for the denominator problem, neither quantity tells us how many instructional days each student was expected to attend. Because `Highest Eligible` and `Last Day` are also identical throughout this extract, they do not give us two independent observations with which to recover that missing exposure.
+
+The Lodi fields are therefore useful triangulation evidence, but they still do not adjudicate between the Census and cumulative 180-day annual constructions. The files also do not provide a clearly aligned TK/K meal numerator because `Preschool` cannot be assumed to mean TK.
 
 ## Calendar and sample checks
 
@@ -137,4 +143,4 @@ If an analysis requires a single annual denominator rather than a sensitivity ra
 
 The cleaning, joins, denominator constructions, district comparisons, and diagnostics are organized as a reproducible R workflow. Suppressed absenteeism cells remain missing rather than being converted to zero, and the Census and cumulative constructions remain explicitly labeled as proxies.
 
-The workflow now includes the 2025–26 CDE Census and Irvine district attendance validation. The complete pipeline was rerun from the raw files after these additions, and all automated regression and integrity tests passed.
+The workflow now includes the 2025–26 CDE Census, Irvine district attendance validation, and Lodi Kindergarten eligibility-report triangulation. The complete pipeline through `R/09_lodi_enrollment_triangulation.R` was rerun from the raw files after these additions, and all automated regression and integrity tests passed.

@@ -85,11 +85,17 @@ The workbook contains grade-specific meal counts, including separate Preschool a
 
 Repository searches found no documentation establishing that the Lodi meal-data Preschool category represents Transitional Kindergarten. Lodi's program documentation treats preschool and Transitional Kindergarten as distinct programs. Accordingly, Preschool meal counts are not relabeled as TK, and Preschool plus Kindergarten meals are not combined and presented as a TK+K numerator without additional documentation.
 
-The Lodi files therefore cannot currently adjudicate which public TK+K attendance-denominator construction is closer to true annual TK+K attended student-days. They may support separate downstream meal-participation sensitivity analyses where numerator and denominator populations can be aligned, but they are not treated as denominator ground truth.
+The original Lodi eligibility report also contains Kindergarten-filtered `Highest Eligible` and `Last Day` fields for the July 29, 2025–May 29, 2026 eligibility period. The report defines `Last Day` as the number of enrolled students on the last day of the selected date range.
+
+A dedicated source audit matched 31 reported Kindergarten schools to the 2025–26 CDE Census. `Highest Eligible` and `Last Day` are identical at every school and both total 3,481. Same-year CDE Kindergarten Census enrollment across those 31 matched schools totals 1,763. The report-side quantity is therefore 1.9745 times the Census total, a difference of 1,718 students, and exceeds Census enrollment at all 31 schools.
+
+This is useful triangulation evidence, but it does not identify annual attended student-days. Because `Highest Eligible` and `Last Day` are identical throughout this extract, they do not supply two independent enrollment observations. More importantly, neither field provides student-specific expected attendance duration. The comparison therefore does not establish whether the Census-based or cumulative-enrollment-based 180-day construction is closer to true annual TK/K attended student-days.
+
+The Lodi files may support separate downstream meal-participation sensitivity analyses where numerator and denominator populations can be aligned, but the report-side eligibility/enrollment quantities are not treated as denominator ground truth.
 
 ## Reproducibility status
 
-The R pipeline contains cleaning, joining, validation, denominator-construction, focus-district, and Irvine district-validation modules through `R/08_district_validation.R`.
+The R pipeline contains cleaning, joining, validation, denominator-construction, focus-district, Irvine district-validation, and Lodi source-triangulation modules through `R/09_lodi_enrollment_triangulation.R`.
 
 The complete pipeline has been executed locally in R against the raw source files. `Rscript tests/test_pipeline.R` reruns the full pipeline and checks:
 
@@ -101,6 +107,9 @@ The complete pipeline has been executed locally in R against the raw source file
 - the 47-school 2025–26 Irvine Census extract;
 - deterministic matching of the 30 Irvine district-report schools;
 - the two zero-TK reconciliations; and
-- the 14,104 observed five-day TK+K student-days and associated Census comparison.
+- the 14,104 observed five-day TK+K student-days and associated Census comparison;
+- the 31-school Lodi Kindergarten eligibility-report extract;
+- the identical 3,481 `Highest Eligible` and `Last Day` totals; and
+- the 1,763 same-year CDE Kindergarten Census total for those matched Lodi schools.
 
-The full regression and integrity test suite passed after the addition of the Irvine district-validation module.
+The full regression and integrity test suite passed after the addition of the Lodi source-triangulation module.
