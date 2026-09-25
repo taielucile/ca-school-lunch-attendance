@@ -113,7 +113,7 @@ The workbook includes grade-specific meal counts and school-wide Average Daily A
 
 The meal files also separate `Preschool` and `Kindergarten`. I did not find documentation in the repository establishing that the `Preschool` category represents Transitional Kindergarten, and Lodi treats preschool and TK as distinct programs in its program materials. I therefore do not combine Preschool and Kindergarten meals and relabel them as a TK/K numerator without additional documentation.
 
-The original report does contain another potentially useful Kindergarten-specific check. For the July 29, 2025–May 29, 2026 eligibility period, it reports `Highest Eligible` and `Last Day`; the report defines `Last Day` as the number of enrolled students on the last day of the selected date range. Across the 31 reported schools, both fields total 3,481 and are identical school-by-school.
+The original report does contain another potentially useful Kindergarten-specific check. For the July 29, 2025–May 29, 2026 eligibility period, it reports `Highest Eligible` and `Last Day`; the report defines `Last Day` as the number of enrolled students on the last day of the selected date range. I checked the original PDF directly because the workbook conversion separates the school-name and numeric portions of the wide table. The PDF confirms that they are portions of the same Kindergarten-filtered report in the same school order. Across the 31 reported schools, both fields total 3,481 and are identical school-by-school.
 
 I matched those 31 schools to the same-year 2025–26 CDE Census. Their CDE Kindergarten Census enrollment totals 1,763, so the Lodi report-side quantity is 1.9745 times the Census total and is higher at every matched school.
 
