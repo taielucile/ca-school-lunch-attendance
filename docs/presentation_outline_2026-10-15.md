@@ -2,66 +2,100 @@
 
 ## 1. What I was trying to build
 
-The meal take-up denominator is student-days attended, not simply enrollment.
+The denominator for school-level TK/K meal take-up is student-days attended, not enrollment alone.
 
 At school × TK/K:
 
-`attended days = expected attendance days − absence days`.
+`attended student-days = expected attendance days − absence days`.
 
-## 2. What the public data give us
+## 2. What the public CDE data give us
 
 - Absenteeism by Reason: combined TK/K eligible cumulative enrollment and total absence days.
-- Census enrollment: Census Day TK and K counts.
-- CBEDS: full-day/part-day TK/K program type.
+- Census Day enrollment: separate TK and K enrollment counts.
+- CBEDS: full-day/part-day TK/K program classifications.
 
-Andrew confirmed that keeping TK and K combined is acceptable.
+Keeping TK and K combined avoids trying to allocate a combined public absenteeism measure back to individual grades.
 
 ## 3. What is missing
 
-The public aggregate file does not give the sum of Expected Attendance Days.
+The public aggregate data do not report total Expected Attendance Days at school × TK/K.
 
-CALPADS STAS collects that quantity at the student-school level, so this is a public-release limitation rather than a conceptual ambiguity about the desired measure.
+CALPADS STAS contains student-school Expected Attendance Days, which is the duration-weighted exposure concept needed for the denominator, but that quantity is not released in the public school-by-grade absenteeism file.
 
-## 4. Approaches compared
+## 4. Two main public-data constructions
 
 **Census proxy**  
-180 × Census TK/K enrollment − absence days.
+`180 × Census TK/K enrollment − TK/K absence days`
 
 **Cumulative proxy**  
-180 × eligible cumulative TK/K enrollment − absence days.
+`180 × eligible cumulative TK/K enrollment − TK/K absence days`
 
-**Midpoint sensitivity**  
-180 × mean(Census, cumulative) − absence days.
+The Census approach uses a one-day enrollment stock. The cumulative approach captures eligible students appearing during the year but assigns each a full 180-day exposure.
 
-None is labeled as observed student-days attended.
+A midpoint construction is retained only as a descriptive sensitivity check; it has no independent identification argument.
 
-## 5. Irvine/Lodi result
+## 5. 2024–25 sensitivity
 
-- Irvine: cumulative proxy is 8.20% above Census proxy.
-- Lodi: cumulative proxy is 7.99% above Census proxy.
-- School-level differences exceed 20% in several cases.
-- Restricting to non-charters leaves the aggregate difference around 8–9%.
+| District | Census proxy | Cumulative proxy | Difference |
+|---|---:|---:|---:|
+| Irvine | 537,808 | 581,908 | +8.20% |
+| Lodi | 430,504 | 464,884 | +7.99% |
 
-## 6. Why the difference occurs
+School-level differences exceed 20% in several cases. Restricting to non-charter schools leaves the district-level difference around 8–9%.
 
-The same absence-days value is subtracted in both constructions.
+Because the same observed absence-days value is subtracted from both constructions:
 
-Therefore:
+`D_cumulative − D_census = 180 × (cumulative enrollment − Census enrollment)`.
 
-`difference = 180 × (cumulative enrollment − Census enrollment)`.
+The sensitivity is therefore about how annual enrollment exposure is represented, not about different absence measures.
 
-The sensitivity is about annual exposure, not the absence measure.
+## 6. What the Irvine district data tell us
 
-## 7. Current judgment
+Irvine provides actual daily K and PK/TK attendance for November 3–7, 2025.
 
-Use Census × 180 as the parsimonious public-data main proxy and cumulative × 180 as the primary sensitivity specification.
+For the 30 schools represented in the reports:
 
-Reason: cumulative × 180 has a known overexposure mechanism for every partial-year eligible student. Census is still imperfect, so results should not be presented as exact attendance days.
+- same-year CDE Census TK/K enrollment = 3,043;
+- observed TK/K student-days over five days = 14,104;
+- mean daily observed TK/K attendance = 2,820.8;
+- mean daily attendance / Census enrollment = 92.70%;
+- median school-level attendance / Census ratio = 92.73%.
 
-If STAS expected-days data become available, replace both proxies with the direct aggregate.
+This is useful as a same-year check on the scale and school-level behavior of Census enrollment relative to actual attendance.
 
-## 8. Where I am still stuck / what I need feedback on
+It does **not** validate an annual 180-day denominator. The reports cover only five days, and the gap between Census enrollment and attendance includes ordinary absences as well as any enrollment differences.
 
-- whether Rio Valley's independent-study model belongs in the main meal-access sample;
-- whether Andrew prefers one public proxy as the main denominator or parallel specifications;
-- whether restricted STAS access is worth pursuing if the meal results prove sensitive to the denominator choice.
+## 7. Why Lodi cannot adjudicate the denominator
+
+Lodi covers the full 2025–26 reporting period, but the available files contain:
+
+- grade-specific meal counts;
+- school-wide Average Daily Attendance; and
+- grade-level ADP measures that refer to meal participation, not attendance.
+
+That does not provide a grade-specific TK/K attendance benchmark.
+
+The meal file also has separate `Preschool` and `Kindergarten` categories. The available repository documentation does not establish that `Preschool` means TK, and Lodi program documentation treats preschool and TK as distinct programs. I therefore do not combine those fields and label them TK/K without additional documentation.
+
+## 8. What remains unidentified
+
+Neither the public CDE files nor the available Irvine/Lodi district files identify annual school × TK/K expected attendance days.
+
+The current evidence therefore does not establish that the Census or cumulative construction is uniformly closer to the true annual denominator.
+
+For analyses where the numerator can be aligned to the same TK/K population, I would carry both constructions as explicit sensitivity specifications rather than present either as observed attendance.
+
+If a single annual denominator is required, student-specific or otherwise duration-weighted Expected Attendance Days would be the cleaner target.
+
+## 9. Questions for the team
+
+The remaining questions are data questions rather than reasons to choose an unsupported estimator:
+
+- Is there a grade-specific Lodi attendance field or file that is not in the current repository?
+- What exactly does the Lodi meal-data `Preschool` category represent?
+- For meal-access analyses, should Rio Valley's homeschool/independent-study model be handled separately?
+- If the substantive results are sensitive to the denominator, is obtaining duration-weighted expected-attendance data worth pursuing?
+
+## Reproducibility
+
+The full R pipeline now runs through `R/08_district_validation.R`. The regression and integrity test suite passes, including the 2024–25 Irvine/Lodi benchmarks and the 2025–26 Irvine district-attendance validation.
