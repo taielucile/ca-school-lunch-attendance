@@ -101,6 +101,16 @@ The available Lodi files cover the full reporting period but do not provide grad
 - `docs/penner_memo_2026-09-24.md` — current collaborator memo
 - `docs/presentation_outline_2026-10-15.md` — meeting walkthrough
 
+## Next analysis
+
+The annual public-data denominator work has reached the limit supported by the currently available attendance data. Further changes to the annual denominator specification should be driven by new evidence rather than by choosing among unsupported assumptions.
+
+The next planned substantive analysis is an Irvine short-window meal-participation check for November 3–7, 2025. The district files provide observed K and PK/TK attendance and daily grade-specific meal counts for the same week. Before calculating rates, the workflow will verify school, date, grade, and meal-type alignment and will preserve breakfast and lunch separately.
+
+This short-window Irvine analysis is conceptually separate from the 2024–25 annual denominator sensitivity analysis and will not be presented as an annual take-up estimate.
+
+Lodi remains unresolved for a population-aligned TK/K take-up calculation because the available files do not provide grade-specific attendance and do not establish that the meal-data `Preschool` category represents TK.
+
 ## Status
 
-Active research repository. Private while the project is in development.
+Active research repository. The denominator workflow is complete under the currently available data; the next planned work is the Irvine five-day meal/attendance analysis. Private while the project is in development.
