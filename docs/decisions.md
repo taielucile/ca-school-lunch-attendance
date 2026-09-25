@@ -81,3 +81,26 @@ Andrew requested a memo detailing the alternative approaches and the differences
 **Reason:** The repository does not establish that the Lodi `Preschool` category represents Transitional Kindergarten, and Lodi program materials distinguish preschool from TK.
 
 **Consequence:** A population-aligned TK/K meal numerator remains unresolved for Lodi.
+
+
+---
+
+## 2026-09-24 — Pause annual denominator development absent new evidence
+
+**Decision:** Treat the annual public-data denominator work as complete under the currently available data. Do not continue modifying the annual specification merely to force a single preferred estimator.
+
+**Reason:** The public CDE data, the five-day Irvine attendance check, and the available full-year Lodi files do not identify annual school × TK/K Expected Attendance Days or empirically select between the Census and eligible-cumulative constructions.
+
+**Consequence:** Revisit the annual denominator only if the team supplies new grade-aligned attendance/exposure data or another source that materially changes identification.
+
+---
+
+## 2026-09-24 — Next substantive analysis: Irvine five-day meal participation
+
+**Decision:** The next planned analysis is a short-window Irvine meal-participation analysis for November 3–7, 2025.
+
+**Reason:** Irvine provides observed K and PK/TK attendance and daily grade-specific meal-served reports for the same five-day period. This creates an opportunity to study meal participation with an observed attendance denominator rather than an annual reconstructed proxy.
+
+**Requirements before estimation:** Verify school, date, grade, and meal-type alignment; preserve breakfast and lunch separately; document unmatched or ambiguous records; and do not annualize the five-day result.
+
+**Consequence:** This analysis remains separate from the 2024–25 annual denominator sensitivity analysis. Lodi is not included in an analogous TK/K take-up calculation unless its numerator and attendance populations can be aligned.
