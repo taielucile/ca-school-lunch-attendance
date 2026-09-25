@@ -72,7 +72,7 @@ The meal data contain separate `Preschool` and `Kindergarten` categories. No doc
 
 The original Lodi workbook also contains a report filtered to `Grade Levels = Kindergarten` and an `Eligibility Date Range` of July 29, 2025 through May 29, 2026. Its headings include `Participants Approved`, `Highest Eligible`, and `Last Day`. A report footnote defines `Last Day` as the number of enrolled students on the last day of the selected date range.
 
-The extracted 31-school Kindergarten report has `Highest Eligible = Last Day` at every school. Each field totals 3,481. The pipeline compares that report-side quantity descriptively with same-year CDE Kindergarten Census enrollment for the same 31 matched schools, which totals 1,763.
+The extracted 31-school Kindergarten report has `Highest Eligible = Last Day` at every school. Each field totals 3,481. Because the workbook conversion places the school-name and numeric portions of this wide report in separate row blocks, the original PDF was also inspected directly. The PDF confirms that the blocks are horizontally paginated portions of the same Kindergarten-filtered report and preserve the same 31-school order. The school-level pairing is therefore treated as verified against the source PDF, not assumed from the workbook layout. The pipeline compares that report-side quantity descriptively with same-year CDE Kindergarten Census enrollment for the same 31 matched schools, which totals 1,763.
 
 The report fields are not interpreted as student-specific expected attendance days. Their role is source triangulation: they document another Kindergarten-specific enrollment/eligibility quantity while leaving annual duration-weighted attendance exposure unidentified.
 
