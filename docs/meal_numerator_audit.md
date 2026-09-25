@@ -10,45 +10,49 @@ A generic expression is:
 
 Breakfast and lunch should remain separate unless the substantive analysis explicitly defines a combined measure.
 
-## What the public CDE sources currently support
+## Public CDE sources
 
-CDE's Food Programs page describes its Annual Child Nutrition Programs Participation Data as **county data** from school districts and local agencies. The School Nutrition Programs county profiles currently listed there run through 2022–23, not 2024–25.
+The public CDE sources reviewed for the denominator work do not supply the required school × TK/K meals-served numerator. Enrollment, absenteeism, FRPM/eligibility measures, reimbursement dollars, and geographically aggregated participation products are not substitutes for grade-aligned meals actually served.
 
-CDE's nutrition finance documentation states that participating sponsors submit monthly reimbursement claims through the Child Nutrition Information and Payment System (CNIPS). Public CDE guidance also states that California Universal Meals allows one breakfast and one lunch to be claimed per student per school day.
+## District/project meal files
 
-Those facts establish the administrative meal-counting system, but the public sources located in this audit do **not** provide the required 2024–25 school × TK/K meals-served numerator.
+Andrew's Feed-California-Kinders repository supplies meal-service data for the focus-district validation work, but numerator alignment differs by district.
 
-## Sources that are not valid substitutes
+### Irvine
 
-### FRPM / student-poverty files
+The Irvine files contain daily meal-served reports for November 3–7, 2025 with separate grade labels, including Kindergarten and PK. Irvine Unified identifies PK as the program formerly known as Transitional Kindergarten, so these files potentially support a population-aligned **short-window** TK/K meal numerator for the same week as the district attendance reports.
 
-These measure eligibility/enrollment, not meals actually taken. They should not be used as a meal-service numerator.
+That calculation is distinct from the 2024–25 annual public-data denominator analysis. A one-week meal/attendance rate should not be presented as an annual take-up rate.
 
-### County participation profiles
+### Lodi
 
-These are too geographically aggregated for the school-level Irvine/Lodi analysis and the posted SNP series is not current to 2024–25.
+The Lodi files contain grade-specific meal counts over the 2025–26 reporting period, but the meal fields separate `Preschool` and `Kindergarten`.
 
-### Reimbursement dollars
+The available repository documentation does not establish that `Preschool` represents Transitional Kindergarten. Lodi's program materials distinguish preschool from TK. Therefore:
 
-Reimbursement amounts should not be reverse-engineered into TK/K meals without a source-specific accounting model. Multiple meal types, eligibility/reimbursement categories, adjustments, and aggregation levels can break that inference.
+- Preschool is not relabeled as TK;
+- Preschool + Kindergarten is not presented as a TK/K numerator without additional documentation; and
+- Kindergarten-only meals should not be paired with the combined TK/K public attendance denominator as though the populations were identical.
 
-### Whole-school meal counts without grade information
+The workbook's grade-level ADP fields are meal participation measures, not attendance denominators. School-wide Average Daily Attendance also cannot be substituted for grade-specific TK/K attendance.
 
-These could become useful only if Andrew's project has a defensible way to identify or allocate TK/K meals. A TK/K attendance denominator cannot simply be paired with an all-grade meal numerator.
+## Current alignment status
 
-## Current blocker
+The denominator workflow is reproducible, but a full-year population-aligned TK/K meal take-up calculation is not yet identified from the available Lodi data.
 
-The numerator must come from Andrew's project data or another source with sufficient school/grade detail. Until that source is available, the repository can complete the denominator analysis but cannot honestly report meal take-up rates.
+Irvine can support a separate five-day TK/K meal-participation analysis for November 3–7, 2025 if that short-window analysis is substantively useful. It should remain clearly separated from the annual 2024–25 denominator sensitivity analysis.
 
-## Intake checks when the file arrives
+## Intake checks for additional meal data
 
-1. Identify the unit of observation.
-2. Identify school/site IDs and map them to CDS codes.
-3. Preserve breakfast and lunch separately.
-4. Determine whether counts are daily, monthly, claim-period, or annual.
-5. Determine whether TK/K are directly identified.
-6. Check duplicate site-period records.
-7. Check whether meal counts are claims, meals prepared, meals served, or meals reimbursed.
-8. Reconcile school-year coverage.
-9. Join without dropping unmatched schools.
-10. Flag impossible or suspicious take-up rates rather than silently capping them.
+For any new numerator source:
+
+1. identify the unit of observation and reporting period;
+2. identify school/site IDs and map them to CDS codes;
+3. preserve breakfast and lunch separately;
+4. determine whether counts are daily, monthly, claim-period, or annual;
+5. verify exactly how TK, PK, preschool, and K are defined;
+6. check duplicate site-period records;
+7. determine whether counts represent meals claimed, prepared, served, or reimbursed;
+8. reconcile school-year coverage with the denominator;
+9. join without silently dropping unmatched schools; and
+10. flag impossible or suspicious take-up rates rather than silently capping them.
