@@ -13,6 +13,7 @@ for (d in c(DERIVED_DIR, DIAGNOSTIC_DIR, TABLE_DIR, FIGURE_DIR)) {
 
 FILES <- list(
   enrollment = file.path(RAW_DIR, "cdenroll2425.txt"),
+  enrollment_2526 = file.path(RAW_DIR, "cdenroll2526.txt"),
   absenteeism = file.path(RAW_DIR, "absenteeismreason25-v2.txt"),
   cbeds = file.path(RAW_DIR, "cbedsora24b.txt")
 )
