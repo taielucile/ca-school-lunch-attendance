@@ -105,6 +105,27 @@ A separate audit of the Lodi Kindergarten eligibility report identified `Highest
 - `docs/penner_memo_2026-09-24.md` — current collaborator memo
 - `docs/presentation_outline_2026-10-15.md` — meeting walkthrough
 
+## October 2026 stability audit (draft PR #5)
+
+A separate, reproducible **2024–25 school-level stability check** has been proposed in [PR #5](https://github.com/taielucile/ca-school-lunch-attendance/pull/5). It links the CDE TK/K Stability Rate school records to the 64-school Irvine/Lodi denominator-comparison panel (30 Irvine, 34 Lodi). This analysis characterizes how enrollment stability covaries with the **percentage gap between two constructed annual attendance denominators**; it does not estimate the true denominator.
+
+The draft adds `R/10_stability_audit.R` and [its source and verification note](docs/october_2026_stability_reproduction.md). After rebuilding the upstream panel with `Rscript RUN_ALL.R` (or obtaining its saved school comparison from the analyst), place the original CDE stability file at `data/raw/sr2425-v3.txt` and run:
+
+```sh
+Rscript R/10_stability_audit.R
+```
+
+The independently reproduced correlations reported in the PR are:
+
+| District | Schools linked | Usable in correlation | Pearson r | Spearman rho |
+| --- | ---: | ---: | ---: | ---: |
+| Irvine Unified | 30 | 30 | -0.798 | -0.735 |
+| Lodi Unified | 34 | 33 | -0.647 | -0.664 |
+
+One Lodi school is excluded from the correlation because TK/K absenteeism is suppressed; it remains in the school-matching and weighted-stability checks. The stability rate describes an enrollment measure; it does **not** measure instructional days or duration-weighted expected attendance days. These correlations are descriptive and cannot validate one 180-day proxy over the other. The original full upstream pipeline was **not rerun as part of the October reproduction** because its raw inputs were unavailable in that verification workspace.
+
+**Review status:** This module and note are proposed on a draft branch and are not yet part of the `main` pipeline. `RUN_ALL.R` intentionally remains unchanged. The separate five-day Irvine meal/attendance analysis is still planned rather than completed in this repository.
+
 ## Next analysis
 
 The annual public-data denominator work has reached the limit supported by the currently available attendance and exposure data. Penner's suggestion to examine the Lodi Kindergarten `Highest Eligible` and `Last Day` fields was followed through as new evidence; the audit added a useful enrollment/eligibility comparison but did not identify duration-weighted expected attendance exposure. Further changes to the annual denominator specification should therefore be driven by genuinely new exposure data rather than by choosing among unsupported assumptions.
