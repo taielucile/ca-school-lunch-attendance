@@ -105,6 +105,15 @@ A separate audit of the Lodi Kindergarten eligibility report identified `Highest
 - `docs/penner_memo_2026-09-24.md` — current collaborator memo
 - `docs/presentation_outline_2026-10-15.md` — meeting walkthrough
 
+## October 2026 statewide and Ventura evidence (documentation branch)
+
+The October research handoff records two **reported, not yet independently rerun in this repository** analyses:
+
+- **Statewide 2024–25 district ADA alignment:** 930 of 937 district records retained after excluding seven all-charter districts without the benchmark B-1 ADA line. The TK/K–3 aggregate Census-minus-absence proxy gap was reported as +0.26%; 56%, 75%, and 90% of districts were within 1%, 2%, and 5%, respectively. This is district-level alignment, **not** school-level TK/K validation. See [statewide methods and exclusions](docs/statewide_ada_comparison_2026-10.md).
+- **Ventura 2025–26 combined TK/K ADA validation:** 17 matched schools; observed TK/K ADA 1,179.14 versus absence-adjusted Census proxy 1,186.06 (+0.59%), cumulative proxy 1,236.06 (+4.83%), and unadjusted Census 1,263.00 (+7.11%). This is one district/year and does not establish a statewide preferred estimator. See [Ventura methods and caveats](docs/ventura_tkk_ada_validation_2026-10.md).
+
+See the [October handoff and reproduction checklist](docs/october_2026_handoff.md). The statewide/Ventura source files and original scripts have **not** been added, and `RUN_ALL.R` has **not** been modified to imply these analyses are executable here. The October stability audit is separately proposed in draft PR #5.
+
 ## Next analysis
 
 The annual public-data denominator work has reached the limit supported by the currently available attendance and exposure data. Penner's suggestion to examine the Lodi Kindergarten `Highest Eligible` and `Last Day` fields was followed through as new evidence; the audit added a useful enrollment/eligibility comparison but did not identify duration-weighted expected attendance exposure. Further changes to the annual denominator specification should therefore be driven by genuinely new exposure data rather than by choosing among unsupported assumptions.
