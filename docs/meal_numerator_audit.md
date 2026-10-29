@@ -1,58 +1,36 @@
 # Meal numerator audit
 
-## Target
+## Target and interpretation
 
-For each school, the eventual take-up calculation needs a meal count whose population and time period align with the TK/K student-days-attended denominator.
+A meal-per-student-day measure requires meal counts and attendance aligned by date, school, and grade. Breakfast and lunch remain separate. The resulting aggregate is meals per attending student-day; it is not a count of unique students unless the source confirms one meal per student per service and excludes seconds or duplicate transactions.
 
-A generic expression is:
+## Irvine five-day source audit
 
-`meal take-up = TK/K meals served / TK/K student-days attended`.
+The companion [Feed California Kinders repository](https://github.com/whippedfruit/Feed-California-Kinders/tree/7d6c3824b4beb3fcc89f9d4ff2eb6908da38a443/Irvine) contains daily Meals Served PDFs for November 3–7, 2025 and the K/PK attendance source PDFs. I extracted the school-grade-session rows from the five daily reports and matched the district labels to the existing attendance CSV. IUSD states that its Pre-Kindergarten (PK) replaced the former Transitional Kindergarten (TK) program, supporting the PK/TK alignment for this district.
 
-Breakfast and lunch should remain separate unless the substantive analysis explicitly defines a combined measure.
+**Extraction checks**
 
-## Public CDE sources
+- The five PDFs contain 466, 471, 469, 468, and 470 item rows. The sum of extracted `Total Quantity` across all grades matches each report's printed total: 15,512; 15,543; 15,454; 16,032; and 16,136.
+- The TK/K extraction has 500 school-grade-session rows and no duplicate school-date-grade-meal combinations.
+- The meal reports cover 29 K campuses and 28 PK/TK campuses. The attendance extract has 30 K and 28 PK/TK schools. The only K attendance school without a meal-report site is IUSD Virtual Academy Elementary, with five student-days; it is excluded from the campus-based matched sample rather than recoded to zero meals.
+- Four school-name variants were normalized to the attendance roster: Beacon Park School/Beacon Park K-8; Cadence Park School/Cadence Park K-8; Solis Park K-8 School/Solis Park K-8; Vista Verde School/Vista Verde K-8.
+- The meal reports contain no row for 70 of 570 possible matched school-grade-day-meal combinations: 26 K breakfasts, 34 PK/TK breakfasts, and 10 PK/TK lunches. The rows appear to be a transaction listing, but the available report does not explicitly define whether an omitted combination means zero served or missing data. The calculations below therefore remain conditional on omissions meaning zero.
 
-The public CDE sources reviewed for the denominator work do not supply the required school × TK/K meals-served numerator. Enrollment, absenteeism, FRPM/eligibility measures, reimbursement dollars, and geographically aggregated participation products are not substitutes for grade-aligned meals actually served.
+## Provisional aggregate results
 
-## District/project meal files
+| Grade group | Matched attendance student-days | Breakfast quantity | Breakfast per student-day | Lunch quantity | Lunch per student-day |
+|---|---:|---:|---:|---:|---:|
+| Kindergarten | 8,698 | 1,729 | 19.88% | 2,915 | 33.51% |
+| IUSD PK/TK | 5,401 | 949 | 17.57% | 1,108 | 20.51% |
+| Combined matched campuses | 14,099 | 2,678 | 18.99% | 4,023 | 28.53% |
 
-Andrew's Feed-California-Kinders repository supplies meal-service data for the focus-district validation work, but numerator alignment differs by district.
+These figures treat absent report rows as zero quantities. They are short-window descriptive estimates for November 3–7, 2025, not annual meal take-up rates. The matched-campus denominator excludes IUSD Virtual Academy and includes all 28 PK/TK attendance sites.
 
-### Irvine
+## Checks needed before treating these as results
 
-The Irvine files contain daily meal-served reports for November 3–7, 2025 with separate grade labels, including Kindergarten and PK. Irvine Unified identifies PK as the program formerly known as Transitional Kindergarten, so these files potentially support a population-aligned **short-window** TK/K meal numerator for the same week as the district attendance reports.
+1. Confirm that `Total Quantity` for `Breakfast Meal` and `Lunch Meal` means meals served (or reimbursable meals claimed) and whether one unit is one meal.
+2. Confirm that school-grade-session combinations omitted from these transaction reports represent zero meals rather than missing exports.
+3. Confirm that PK reporting applies to the same IUSD PK/TK students included in attendance. The district's public program description supports the name mapping, but the report's row semantics still need confirmation.
+4. Keep the campus-based primary sample separate from Rio Valley's homeschool/independent-study model unless meal location and target population can be aligned.
 
-That calculation is distinct from the 2024–25 annual public-data denominator analysis. A one-week meal/attendance rate should not be presented as an annual take-up rate.
-
-### Lodi
-
-The Lodi files contain grade-specific meal counts over the 2025–26 reporting period, but the meal fields separate `Preschool` and `Kindergarten`.
-
-The available repository documentation does not establish that `Preschool` represents Transitional Kindergarten. Lodi's program materials distinguish preschool from TK. Therefore:
-
-- Preschool is not relabeled as TK;
-- Preschool + Kindergarten is not presented as a TK/K numerator without additional documentation; and
-- Kindergarten-only meals should not be paired with the combined TK/K public attendance denominator as though the populations were identical.
-
-The workbook's grade-level ADP fields are meal participation measures, not attendance denominators. School-wide Average Daily Attendance also cannot be substituted for grade-specific TK/K attendance.
-
-## Current alignment status
-
-The denominator workflow is reproducible, but a full-year population-aligned TK/K meal take-up calculation is not yet identified from the available Lodi data.
-
-Irvine can support a separate five-day TK/K meal-participation analysis for November 3–7, 2025 if that short-window analysis is substantively useful. It should remain clearly separated from the annual 2024–25 denominator sensitivity analysis.
-
-## Intake checks for additional meal data
-
-For any new numerator source:
-
-1. identify the unit of observation and reporting period;
-2. identify school/site IDs and map them to CDS codes;
-3. preserve breakfast and lunch separately;
-4. determine whether counts are daily, monthly, claim-period, or annual;
-5. verify exactly how TK, PK, preschool, and K are defined;
-6. check duplicate site-period records;
-7. determine whether counts represent meals claimed, prepared, served, or reimbursed;
-8. reconcile school-year coverage with the denominator;
-9. join without silently dropping unmatched schools; and
-10. flag impossible or suspicious take-up rates rather than silently capping them.
+No annualization, FRPM-based imputation, or combination of breakfast and lunch is used. The 2024–25 annual public-data denominator analysis remains separate.
