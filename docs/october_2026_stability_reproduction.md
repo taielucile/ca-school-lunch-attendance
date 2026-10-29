@@ -25,7 +25,7 @@ The stability TSV is read with `encoding="latin1"` rather than `fileEncoding="la
 
 64 schools are matched: 30 Irvine, 34 Lodi. The correlation sample excludes one Lodi school with suppressed TK/K absenteeism, leaving 30 Irvine and 33 Lodi.
 
-The correlated denominator measure is **`B_vs_A_pct`**, the percentage difference between the cumulative-enrollment and Census-enrollment 180-day *constructed* attended-day denominators. It is **not** the raw enrollment count difference. Pearson and Spearman correlations compare this percentage with the CDE's school-level stability rate.
+The correlated denominator measure is **`cumulative_vs_census_180_pct`**, the percentage difference between the cumulative-enrollment and Census-enrollment 180-day *constructed* attended-day denominators. It is **not** the raw enrollment count difference. Pearson and Spearman correlations compare this percentage with the CDE's school-level stability rate.
 
 Expected rounded correlations: Irvine Pearson −0.798 and Spearman −0.735; Lodi Pearson −0.647 and Spearman −0.664. District weighted stability uses **sum(stable enrollment) / sum(adjusted cumulative enrollment)** across all 64 schools (30 Irvine, 34 Lodi), not an average of school percentages: Irvine 3012/3519 = 85.5925%; Lodi 2450/2957 = 82.8542%. The October 15 memo gives Lodi 82.8%; conventional rounding of these source totals gives **82.9%**. This discrepancy is documented, not silently changed.
 
