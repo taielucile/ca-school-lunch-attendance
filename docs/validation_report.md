@@ -97,7 +97,7 @@ The Lodi files may support separate downstream meal-participation sensitivity an
 
 The R pipeline contains cleaning, joining, validation, denominator-construction, focus-district, Irvine district-validation, and Lodi source-triangulation modules through `R/09_lodi_enrollment_triangulation.R`.
 
-The recorded October 25, 2026 execution in the companion repository documents a successful local R run of the pipeline through `R/09_lodi_enrollment_triangulation.R` and `Rscript tests/test_pipeline.R` against the required source inputs. The test script reruns the pipeline and checks:
+The regression script is designed to rerun the pipeline and check:
 
 - the frozen 2024–25 Irvine/Lodi denominator benchmarks;
 - statewide school-panel integrity;
@@ -112,9 +112,13 @@ The recorded October 25, 2026 execution in the companion repository documents a 
 - the identical 3,481 `Highest Eligible` and `Last Day` totals; and
 - the 1,763 same-year CDE Kindergarten Census total for those matched Lodi schools.
 
-The full regression and integrity suite is recorded as passing after the Lodi source-triangulation module was added. This is historical execution evidence, not a fresh run of the current branch. The separate `R/10_stability_audit.R` module is not covered.
+A verifiable full-pipeline run is not available in this workspace. The separate `R/10_stability_audit.R` module is not covered by `tests/test_pipeline.R`.
 
 
-## Companion-recorded reproducibility and scope
+## Current verification status (2026-10-29)
 
-The companion Feed California Kinders repository at commit [7d6c3824b4beb3fcc89f9d4ff2eb6908da38a443](https://github.com/whippedfruit/Feed-California-Kinders/tree/7d6c3824b4beb3fcc89f9d4ff2eb6908da38a443/analysis/2026-10-25) records a successful run of this repository's `RUN_ALL.R` and `tests/test_pipeline.R`: both exit codes were 0, 16 output CSVs were byte-identical across repeat builds, and 230 independent source-field comparisons had zero failures. This is a recorded earlier run, not a fresh run of the current branch in this environment. The October stability module `R/10_stability_audit.R` is separate and is not covered by that R test suite.
+All 11 R modules, `RUN_ALL.R`, and `tests/test_pipeline.R` parsed successfully under R 4.3.3 at project commit `66572de`. This confirms syntax only. Running `Rscript tests/test_pipeline.R` stopped in `R/00_config.R` because the four CDE/CBEDS raw inputs are absent from `data/raw/`; the two district extracts are also absent. The raw-data directory is intentionally excluded from version control.
+
+Earlier documentation cited a successful October 25 pipeline run and linked `analysis/2026-10-25` in the Feed California Kinders repository at commit [7d6c3824b4beb3fcc89f9d4ff2eb6908da38a443](https://github.com/whippedfruit/Feed-California-Kinders/tree/7d6c3824b4beb3fcc89f9d4ff2eb6908da38a443). That path is absent from the cited commit tree, so the log and its claimed output checks could not be verified from that source. Treat the prior pass claim as unverified until the execution record is restored or the suite is rerun with the exact inputs.
+
+The separate `R/10_stability_audit.R` module remains outside the runner and the test suite. It requires both `sr2425-v3.txt` and the generated school comparison CSV; neither is available in this workspace.
