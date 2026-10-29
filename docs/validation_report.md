@@ -113,3 +113,8 @@ The complete pipeline has been executed locally in R against the raw source file
 - the 1,763 same-year CDE Kindergarten Census total for those matched Lodi schools.
 
 The full regression and integrity test suite passed after the addition of the Lodi source-triangulation module.
+
+
+## Companion-recorded reproducibility and scope
+
+The companion Feed California Kinders repository at commit [7d6c3824b4beb3fcc89f9d4ff2eb6908da38a443](https://github.com/whippedfruit/Feed-California-Kinders/tree/7d6c3824b4beb3fcc89f9d4ff2eb6908da38a443/analysis/2026-10-25) records a successful run of this repository's `RUN_ALL.R` and `tests/test_pipeline.R`: both exit codes were 0, 16 output CSVs were byte-identical across repeat builds, and 230 independent source-field comparisons had zero failures. This is a recorded earlier run, not a fresh run of the current branch in this environment. The October stability module `R/10_stability_audit.R` is separate and is not covered by that R test suite.
