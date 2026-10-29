@@ -119,6 +119,15 @@ Rscript R/10_stability_audit.R
 
 The module requires either the generated comparison CSV or the upstream inputs needed to create it. The reported correlations are Irvine Pearson `r = -0.798`, Spearman `rho = -0.735`; Lodi `r = -0.647`, `rho = -0.664`. One Lodi school with suppressed TK/K absenteeism is excluded from the correlations. The rate describes enrollment stability, not instructional days or student-specific expected attendance. The October reproduction did not rerun the entire upstream pipeline because its raw inputs were not available in that verification workspace. This module remains separate from `RUN_ALL.R`, and Actions does not execute it.
 
+## October 2026 statewide and Ventura evidence
+
+The October research handoff records two **reported, not independently rerun in this repository** analyses:
+
+- **Statewide 2024–25 district ADA alignment:** 930 of 937 district records retained after excluding seven all-charter districts without the benchmark B-1 ADA line. The TK/K–3 aggregate Census-minus-absence proxy gap was reported as +0.26%; 56%, 75%, and 90% of districts were within 1%, 2%, and 5%, respectively. This is district-level alignment, **not** school-level TK/K validation. See [statewide methods and exclusions](docs/statewide_ada_comparison_2026-10.md).
+- **Ventura 2025–26 combined TK/K ADA validation:** 17 matched schools; observed TK/K ADA 1,179.14 versus absence-adjusted Census proxy 1,186.06 (+0.59%), cumulative proxy 1,236.06 (+4.83%), and unadjusted Census 1,263.00 (+7.11%). This is one district/year and does not establish a statewide preferred estimator. See [Ventura methods and caveats](docs/ventura_tkk_ada_validation_2026-10.md).
+
+See the [October handoff and reproduction checklist](docs/october_2026_handoff.md). Original statewide/Ventura source files and scripts are not in this repository, so these results remain reported pending independent reproduction. The separate stability audit is included in merged [PR #5](https://github.com/taielucile/ca-school-lunch-attendance/pull/5); its standalone module still needs a run in an R-enabled environment.
+
 ## Next analysis
 
 The annual public-data denominator work has reached the limit supported by available exposure measures. The Irvine November 3–7, 2025 meal-service PDFs and attendance reports have now been transcribed and aligned for a preliminary short-window audit. The five meal reports reconcile to their printed all-grade quantity totals. After excluding the virtual school, the matched campus sample contains 29 Kindergarten schools and 28 PK/TK schools, representing 14,099 student-days.
