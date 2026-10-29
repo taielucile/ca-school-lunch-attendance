@@ -6,7 +6,7 @@ A meal-per-student-day measure requires meal counts and attendance aligned by da
 
 ## Irvine five-day source audit
 
-The companion [Feed California Kinders repository](https://github.com/whippedfruit/Feed-California-Kinders/tree/7d6c3824b4beb3fcc89f9d4ff2eb6908da38a443/Irvine) contains daily Meals Served PDFs for November 3–7, 2025 and the K/PK attendance source PDFs. I extracted the school-grade-session rows from the five daily reports and matched the district labels to the existing attendance CSV. IUSD states that its Pre-Kindergarten (PK) replaced the former Transitional Kindergarten (TK) program, supporting the PK/TK alignment for this district.
+The companion [Feed California Kinders repository](https://github.com/whippedfruit/Feed-California-Kinders/tree/7d6c3824b4beb3fcc89f9d4ff2eb6908da38a443/Irvine) contains daily Meals Served PDFs for November 3–7, 2025 and the K/PK attendance source PDFs. I extracted the school-grade-session rows from the five daily reports and matched the district labels to the existing attendance CSV. This was a manual PDF-to-text extraction and audit in the verification workspace: the source PDFs are in the companion repository, but this repository does not yet contain a parser or derived school-day-grade numerator file. The reported aggregates therefore cannot yet be rebuilt from this repository alone. IUSD states that its Pre-Kindergarten (PK) replaced the former Transitional Kindergarten (TK) program, supporting the PK/TK alignment for this district.
 
 **Extraction checks**
 
