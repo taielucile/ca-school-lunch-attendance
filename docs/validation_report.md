@@ -97,7 +97,7 @@ The Lodi files may support separate downstream meal-participation sensitivity an
 
 The R pipeline contains cleaning, joining, validation, denominator-construction, focus-district, Irvine district-validation, and Lodi source-triangulation modules through `R/09_lodi_enrollment_triangulation.R`.
 
-The complete pipeline has been executed locally in R against the raw source files. `Rscript tests/test_pipeline.R` reruns the full pipeline and checks:
+The recorded October 25, 2026 execution in the companion repository documents a successful local R run of the pipeline through `R/09_lodi_enrollment_triangulation.R` and `Rscript tests/test_pipeline.R` against the required source inputs. The test script reruns the pipeline and checks:
 
 - the frozen 2024–25 Irvine/Lodi denominator benchmarks;
 - statewide school-panel integrity;
@@ -112,7 +112,7 @@ The complete pipeline has been executed locally in R against the raw source file
 - the identical 3,481 `Highest Eligible` and `Last Day` totals; and
 - the 1,763 same-year CDE Kindergarten Census total for those matched Lodi schools.
 
-The full regression and integrity test suite passed after the addition of the Lodi source-triangulation module.
+The full regression and integrity suite is recorded as passing after the Lodi source-triangulation module was added. This is historical execution evidence, not a fresh run of the current branch. The separate `R/10_stability_audit.R` module is not covered.
 
 
 ## Companion-recorded reproducibility and scope
