@@ -130,7 +130,7 @@ See the [October handoff and reproduction checklist](docs/october_2026_handoff.m
 
 ## Next analysis
 
-The annual public-data denominator work has reached the limit supported by available exposure measures. The Irvine November 3–7, 2025 meal-service PDFs and attendance reports have now been transcribed and aligned for a preliminary short-window audit. The five meal reports reconcile to their printed all-grade quantity totals. After excluding the virtual school, the matched campus sample contains 29 Kindergarten schools and 28 PK/TK schools, representing 14,099 student-days.
+The annual public-data denominator work has reached the limit supported by available exposure measures. The Irvine November 3–7, 2025 meal-service PDFs and attendance reports have been manually transcribed and aligned for a provisional short-window audit; the extraction is not yet rebuildable from this repository. The five meal reports reconcile to their printed all-grade quantity totals. After excluding the virtual school, the matched campus sample contains 29 Kindergarten schools and 28 PK/TK schools, representing 14,099 student-days.
 
 If absent school-grade-meal rows are treated as zero, the preliminary extract contains 2,678 breakfasts and 4,023 lunches: 18.99 and 28.53 meals per 100 matched student-days, respectively. These are not final participation estimates. Seventy of 570 possible school-grade-day-meal records have no row in the export, and the report semantics must confirm whether those omissions mean zero meals and whether `Total Quantity` represents meals served. See `docs/meal_numerator_audit.md`.
 
