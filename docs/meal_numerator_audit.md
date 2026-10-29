@@ -16,6 +16,12 @@ The companion [Feed California Kinders repository](https://github.com/whippedfru
 - Four school-name variants were normalized to the attendance roster: Beacon Park School/Beacon Park K-8; Cadence Park School/Cadence Park K-8; Solis Park K-8 School/Solis Park K-8; Vista Verde School/Vista Verde K-8.
 - The meal reports contain no row for 70 of 570 possible matched school-grade-day-meal combinations: 26 K breakfasts, 34 PK/TK breakfasts, and 10 PK/TK lunches. The rows appear to be a transaction listing, but the available report does not explicitly define whether an omitted combination means zero served or missing data. The calculations below therefore remain conditional on omissions meaning zero.
 
+## What IUSD's meal-count documentation establishes
+
+IUSD's published [2025–26 Nutrition Services Data Confirmation](https://iusd.org/sites/default/files/documents/2025-26%20Nutrition%20Services%20Data%20Confirmation.pdf) says the district records meal counts at point of service and consolidates counts by service date and site. It describes duplicate-PIN prevention for first meals and says second meals, adults' meals, a la carte sales, and damaged meals are separately tracked; second meals are not claimed for reimbursement. This supports interpreting the reports as operational meal-service data, but it does **not** establish that this particular `Total Quantity` export includes only reimbursable first meals or specifies how zero-count combinations are exported. The document is districtwide policy documentation for 2025–26, not a data dictionary for the five extracted reports.
+
+Accordingly, retain the zero-row and quantity/unit assumptions below until the report's export definition is confirmed. The provisional counts are meal-report quantities per attendance student-day, not yet verified reimbursable first meals per student-day.
+
 ## Provisional aggregate results
 
 | Grade group | Matched attendance student-days | Breakfast quantity | Breakfast per student-day | Lunch quantity | Lunch per student-day |
@@ -28,8 +34,8 @@ These figures treat absent report rows as zero quantities. They are short-window
 
 ## Checks needed before treating these as results
 
-1. Confirm that `Total Quantity` for `Breakfast Meal` and `Lunch Meal` means meals served (or reimbursable meals claimed) and whether one unit is one meal.
-2. Confirm that school-grade-session combinations omitted from these transaction reports represent zero meals rather than missing exports.
+1. Confirm the field definition and scope of `Total Quantity` for `Breakfast Meal` and `Lunch Meal`, including whether it is first meals only, includes second meals, and whether one unit is one served meal.
+2. Confirm that omitted school-grade-session combinations represent zero meals rather than missing export rows.
 3. Confirm that PK reporting applies to the same IUSD PK/TK students included in attendance. The district's public program description supports the name mapping, but the report's row semantics still need confirmation.
 4. Keep the campus-based primary sample separate from Rio Valley's homeschool/independent-study model unless meal location and target population can be aligned.
 
