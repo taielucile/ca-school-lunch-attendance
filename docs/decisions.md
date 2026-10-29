@@ -135,3 +135,12 @@ Andrew requested a memo detailing the alternative approaches and the differences
 **Decision:** With the Lodi lead audited and its identification contribution documented, return to the planned Irvine November 3–7, 2025 meal-participation analysis.
 
 **Consequence:** Before estimating participation, verify the meal-report row semantics, school/date/grade alignment, and whether `Total Quantity` represents meals rather than item quantities. Keep breakfast and lunch separate and do not annualize the five-day result.
+
+
+---
+
+## 2026-10-29 — Preserve calendar and meal-source distinctions
+
+**Decision:** Retain the 180-day construction as the common comparison benchmark, but correct school-specific calendar documentation using official calendars. Aspire River Oaks' 2024–25 calendar lists 175 weekday instructional days and one Saturday School day; Vincent Shalvey's official family calendar supports a manually counted 184 weekdays; Joe Serna's calendar supports 180 weekdays. These counts inform a limited sensitivity check and do not identify student-specific attendance exposure. Keep Rio Valley in the denominator universe but separate it from the primary campus-based meal sample absent evidence about its meal-serving site and target population.
+
+**Meal-data decision:** Record the Irvine November 3–7, 2025 meal extraction as provisional. The report totals reconcile, but 70 possible school-grade-day-meal slots have no row. Treat them as zero only as an explicit assumption until report semantics are confirmed. Keep breakfast and lunch separate and describe rates as meals per attending student-day.
