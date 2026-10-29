@@ -1,5 +1,5 @@
 # Project configuration
-# Package-free by design: the core pipeline uses base R only.
+# Core pipeline is base R through module 08; module 09 requires dplyr, readr, and stringr.
 
 RAW_DIR <- "data/raw"
 DERIVED_DIR <- "data/derived"
