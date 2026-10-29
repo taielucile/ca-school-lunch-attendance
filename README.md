@@ -25,7 +25,9 @@ See `data/README.md` and `docs/sources.md` for provenance, definitions, and inte
 
 ## Reproduce
 
-The pipeline uses base R only.
+`RUN_ALL.R` uses base R through `R/08_district_validation.R`; `R/09_lodi_enrollment_triangulation.R` requires `dplyr`, `readr`, and `stringr`. `R/10_stability_audit.R` is a separate base-R analysis.
+
+Install the `R/09` dependencies once with `install.packages(c("dplyr", "readr", "stringr"))`.
 
 From the repository root:
 
@@ -64,7 +66,7 @@ Rscript tests/test_pipeline.R
 
 The test suite reruns the full pipeline and checks the frozen 2024–25 Irvine/Lodi denominator benchmarks, school-panel integrity, non-charter sensitivity results, the school-level handoff, the Irvine attendance transcription, the 2025–26 Irvine Census extract, deterministic district-to-Census matching, the two zero-TK reconciliations, the five-day Irvine attendance benchmark, and the 31-school Lodi Kindergarten source-triangulation results.
 
-The complete pipeline through `R/09_lodi_enrollment_triangulation.R` has been run locally in R, and all regression and integrity tests passed. GitHub Actions currently checks repository integrity and excludes committed raw data; it does not run this R suite or the separate `R/10_stability_audit.R` module.
+The existing full-pipeline run through `R/09_lodi_enrollment_triangulation.R` passed with `Rscript RUN_ALL.R` and `Rscript tests/test_pipeline.R` at the project commit used on 2026-10-25. The companion analysis repository records both exit codes as 0, 16 output CSVs identical across repeated builds, and 230 independent source-field checks with no failures. See its [execution record](https://github.com/whippedfruit/Feed-California-Kinders/tree/7d6c3824b4beb3fcc89f9d4ff2eb6908da38a443/analysis/2026-10-25). This is a recorded earlier run, not a new run in the current workspace. GitHub Actions checks repository integrity and raw-data exclusions only; it does not run the R suite. The separate `R/10_stability_audit.R` module is not covered by `tests/test_pipeline.R` and still needs its own run with `sr2425-v3.txt.
 
 ## Measurement status
 
@@ -107,35 +109,24 @@ A separate audit of the Lodi Kindergarten eligibility report identified `Highest
 
 ## October 2026 stability audit
 
-The repository includes a standalone, reproducible **2024–25 school-level stability check**, added in [PR #5](https://github.com/taielucile/ca-school-lunch-attendance/pull/5). It links the CDE TK/K Stability Rate school records to the 64-school Irvine/Lodi denominator-comparison panel (30 Irvine, 34 Lodi). This analysis characterizes how enrollment stability covaries with the **percentage gap between two constructed annual attendance denominators**; it does not estimate the true denominator.
+The repository includes a standalone **2024–25 school-level stability check** added in [PR #5](https://github.com/taielucile/ca-school-lunch-attendance/pull/5). It links CDE TK/K Stability Rate records to the 64-school Irvine/Lodi denominator panel (30 Irvine, 34 Lodi) and tests whether enrollment stability covaries with the percentage gap between two constructed attendance denominators. It does not estimate true annual attendance exposure.
 
-`R/10_stability_audit.R` and [its source and verification note](docs/october_2026_stability_reproduction.md). After rebuilding the upstream panel with `Rscript RUN_ALL.R` (or obtaining its saved school comparison from the analyst), place the original CDE stability file at `data/raw/sr2425-v3.txt` and run:
+Run the existing pipeline first, then place the CDE Stability Rate file at `data/raw/sr2425-v3.txt` and run:
 
 ```sh
 Rscript R/10_stability_audit.R
 ```
 
-The independently reproduced correlations reported in the PR are:
-
-| District | Schools linked | Usable in correlation | Pearson r | Spearman rho |
-| --- | ---: | ---: | ---: | ---: |
-| Irvine Unified | 30 | 30 | -0.798 | -0.735 |
-| Lodi Unified | 34 | 33 | -0.647 | -0.664 |
-
-One Lodi school is excluded from the correlation because TK/K absenteeism is suppressed; it remains in the school-matching and weighted-stability checks. The stability rate describes an enrollment measure; it does **not** measure instructional days or duration-weighted expected attendance days. These correlations are descriptive and cannot validate one 180-day proxy over the other. The original full upstream pipeline was **not rerun as part of the October reproduction** because its raw inputs were unavailable in that verification workspace.
-
-**Execution boundary:** The module is committed to `main` but remains separate from `RUN_ALL.R`. The separate five-day Irvine meal/attendance analysis is still planned rather than completed in this repository.
+The module requires either the generated comparison CSV or the upstream inputs needed to create it. The reported correlations are Irvine Pearson `r = -0.798`, Spearman `rho = -0.735`; Lodi `r = -0.647`, `rho = -0.664`. One Lodi school with suppressed TK/K absenteeism is excluded from the correlations. The rate describes enrollment stability, not instructional days or student-specific expected attendance. The October reproduction did not rerun the entire upstream pipeline because its raw inputs were not available in that verification workspace. This module remains separate from `RUN_ALL.R`, and Actions does not execute it.
 
 ## Next analysis
 
-The annual public-data denominator work has reached the limit supported by the currently available attendance and exposure data. Penner's suggestion to examine the Lodi Kindergarten `Highest Eligible` and `Last Day` fields was followed through as new evidence; the audit added a useful enrollment/eligibility comparison but did not identify duration-weighted expected attendance exposure. Further changes to the annual denominator specification should therefore be driven by genuinely new exposure data rather than by choosing among unsupported assumptions.
+The annual public-data denominator work has reached the limit supported by available exposure measures. The Irvine November 3–7, 2025 meal-service PDFs and attendance reports have now been transcribed and aligned for a preliminary short-window audit. The five meal reports reconcile to their printed all-grade quantity totals. After excluding the virtual school, the matched campus sample contains 29 Kindergarten schools and 28 PK/TK schools, representing 14,099 student-days.
 
-The next planned substantive analysis is an Irvine short-window meal-participation check for November 3–7, 2025. The district files provide observed K and PK/TK attendance and daily grade-specific meal counts for the same week. Before calculating rates, the workflow will verify school, date, grade, and meal-type alignment and will preserve breakfast and lunch separately.
+If absent school-grade-meal rows are treated as zero, the preliminary extract contains 2,678 breakfasts and 4,023 lunches: 18.99 and 28.53 meals per 100 matched student-days, respectively. These are not final participation estimates. Seventy of 570 possible school-grade-day-meal records have no row in the export, and the report semantics must confirm whether those omissions mean zero meals and whether `Total Quantity` represents meals served. See `docs/meal_numerator_audit.md`.
 
-This short-window Irvine analysis is conceptually separate from the 2024–25 annual denominator sensitivity analysis and will not be presented as an annual take-up estimate.
-
-Lodi remains unresolved for a population-aligned TK/K take-up calculation because the available files do not provide grade-specific attendance and do not establish that the meal-data `Preschool` category represents TK.
+Lodi remains unresolved for a population-aligned TK/K meal calculation. Its files do not provide grade-specific attendance, and the `Preschool` meal category is not established as TK. Rio Valley's independent-study model will be kept separate from the primary campus-based meal sample unless its meal-serving arrangements and target population can be aligned.
 
 ## Status
 
-Active research repository. The denominator workflow is complete under the currently available data; the next planned work is the Irvine five-day meal/attendance analysis. Private while the project is in development.
+Active research repository. The denominator workflow is complete under the currently available data; the Irvine five-day meal/attendance analysis is under source-semantic review. Private while the project is in development.
