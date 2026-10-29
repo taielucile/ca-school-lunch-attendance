@@ -64,7 +64,7 @@ Rscript tests/test_pipeline.R
 
 The test suite reruns the full pipeline and checks the frozen 2024–25 Irvine/Lodi denominator benchmarks, school-panel integrity, non-charter sensitivity results, the school-level handoff, the Irvine attendance transcription, the 2025–26 Irvine Census extract, deterministic district-to-Census matching, the two zero-TK reconciliations, the five-day Irvine attendance benchmark, and the 31-school Lodi Kindergarten source-triangulation results.
 
-The complete pipeline through `R/09_lodi_enrollment_triangulation.R` has been run locally in R, and all regression and integrity tests passed.
+The complete pipeline through `R/09_lodi_enrollment_triangulation.R` has been run locally in R, and all regression and integrity tests passed. GitHub Actions currently checks repository integrity and excludes committed raw data; it does not run this R suite or the separate `R/10_stability_audit.R` module.
 
 ## Measurement status
 
@@ -105,11 +105,11 @@ A separate audit of the Lodi Kindergarten eligibility report identified `Highest
 - `docs/penner_memo_2026-09-24.md` — current collaborator memo
 - `docs/presentation_outline_2026-10-15.md` — meeting walkthrough
 
-## October 2026 stability audit (draft PR #5)
+## October 2026 stability audit
 
-A separate, reproducible **2024–25 school-level stability check** has been proposed in [PR #5](https://github.com/taielucile/ca-school-lunch-attendance/pull/5). It links the CDE TK/K Stability Rate school records to the 64-school Irvine/Lodi denominator-comparison panel (30 Irvine, 34 Lodi). This analysis characterizes how enrollment stability covaries with the **percentage gap between two constructed annual attendance denominators**; it does not estimate the true denominator.
+The repository includes a standalone, reproducible **2024–25 school-level stability check**, added in [PR #5](https://github.com/taielucile/ca-school-lunch-attendance/pull/5). It links the CDE TK/K Stability Rate school records to the 64-school Irvine/Lodi denominator-comparison panel (30 Irvine, 34 Lodi). This analysis characterizes how enrollment stability covaries with the **percentage gap between two constructed annual attendance denominators**; it does not estimate the true denominator.
 
-The draft adds `R/10_stability_audit.R` and [its source and verification note](docs/october_2026_stability_reproduction.md). After rebuilding the upstream panel with `Rscript RUN_ALL.R` (or obtaining its saved school comparison from the analyst), place the original CDE stability file at `data/raw/sr2425-v3.txt` and run:
+`R/10_stability_audit.R` and [its source and verification note](docs/october_2026_stability_reproduction.md). After rebuilding the upstream panel with `Rscript RUN_ALL.R` (or obtaining its saved school comparison from the analyst), place the original CDE stability file at `data/raw/sr2425-v3.txt` and run:
 
 ```sh
 Rscript R/10_stability_audit.R
@@ -124,7 +124,7 @@ The independently reproduced correlations reported in the PR are:
 
 One Lodi school is excluded from the correlation because TK/K absenteeism is suppressed; it remains in the school-matching and weighted-stability checks. The stability rate describes an enrollment measure; it does **not** measure instructional days or duration-weighted expected attendance days. These correlations are descriptive and cannot validate one 180-day proxy over the other. The original full upstream pipeline was **not rerun as part of the October reproduction** because its raw inputs were unavailable in that verification workspace.
 
-**Review status:** This module and note are proposed on a draft branch and are not yet part of the `main` pipeline. `RUN_ALL.R` intentionally remains unchanged. The separate five-day Irvine meal/attendance analysis is still planned rather than completed in this repository.
+**Execution boundary:** The module is committed to `main` but remains separate from `RUN_ALL.R`. The separate five-day Irvine meal/attendance analysis is still planned rather than completed in this repository.
 
 ## Next analysis
 
