@@ -122,7 +122,7 @@ jobs:
       - name: Run complete 2024-25 R pipeline and original regression suite
         run: |
           mkdir -p output/legacy-r
-          Rscript RUN_ALL.R > output/legacy-r/RUN_ALL.log 2>&1
+          # tests/test_pipeline.R sources RUN_ALL.R itself: one complete execution is sufficient.
           Rscript tests/test_pipeline.R > output/legacy-r/test_pipeline.log 2>&1
           tail -n 12 output/legacy-r/test_pipeline.log
       - name: Execute Angela original R scripts and validate proxy import bridge
@@ -141,7 +141,6 @@ jobs:
             output/full/source_manifest.json
             output/full/school_denominator_proxies_2025_26.csv
             output/full/district_39_68585_school_proxies_2025_26.csv
-            output/legacy-r/RUN_ALL.log
             output/legacy-r/test_pipeline.log
             output/angela/angela_integration_summary.csv
             output/angela/ventura_angela_bridge_proxies_not_measured.csv
