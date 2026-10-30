@@ -111,13 +111,14 @@ def build(enrollment_path, absence_path, output_dir, districts=None):
         tk, k = number(enrollment["GR_TK"]), number(enrollment["GR_KN"])
         if tk is None or k is None or tk + k <= 0:
             continue
-        by_district[enrollment["DistrictName"]].append(
+        by_district[(cds[:2],cds[2:7])].append(
             estimate_one(enrollment, a.get((cds, "GRTKKN")), a.get((cds, "GR13"))))
     all_rows, quality = [], []
-    for district, rows in sorted(by_district.items()):
+    for (county_code, district_code), rows in sorted(by_district.items()):
         rows.sort(key=lambda r: r["cds_code"])
         all_rows.extend(rows)
-        prefix = rows[0]["county_code"] + "_" + rows[0]["district_code"]
+        prefix = county_code + "_" + district_code
+        district = rows[0]["district_name"]
         write_csv(output_dir / ("district_" + prefix + "_school_proxies_2025_26.csv"), rows, FIELDS)
         complete = [r for r in rows if r["estimated_tk_k_ada"] is not None]
         quality.append(dict(district=district, district_cds=prefix.replace("_", ""),
