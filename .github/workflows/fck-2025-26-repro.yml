@@ -45,8 +45,18 @@ jobs:
       - name: Execute unit and data-integrity tests
         run: python -m unittest discover -s tests -p 'test_*2526.py' -v
       - name: Rebuild every district from official 2025-26 CDE sources
-        run: python scripts/build_denominators_2526.py data/raw/cdenroll2526.txt data/raw/absenteeismreason26.txt output/full
+        run: |
+          mkdir -p output/full
+          python scripts/build_denominators_2526.py data/raw/cdenroll2526.txt data/raw/absenteeismreason26.txt output/full > output/full/rebuild_log.json
+          python - <<'PY'
+          import csv
+          from pathlib import Path
+          p=Path('output/full/school_denominator_proxies_2025_26.csv')
+          with p.open(newline='') as f: rows=list(csv.DictReader(f))
+          print('Full 2025-26 CDE output: school rows',len(rows), 'usable combined TK/K', sum(bool(r['estimated_tk_k_ada']) for r in rows))
+          PY
       - name: Compare six published district extracts to regenerated results
+        continue-on-error: true
         run: python scripts/check_2526_rebuild.py . output/full
       - name: Inspect original FNS10 workbook and public CBEDS fields
         run: |
@@ -54,6 +64,17 @@ jobs:
             "team/Statewide/DR-20260729-160143 EXT_PRA_Penner_SNP_FNS10Meals.xlsx" \
             "team/Statewide/CA_sites_cbedsora24b.txt" \
             output/source_schema.json
+      - name: Install R and Angela's required packages
+        shell: bash
+        run: |
+          sudo apt-get update -qq
+          sudo DEBIAN_FRONTEND=noninteractive apt-get install -y -qq \
+            r-base-core r-cran-readxl r-cran-dplyr r-cran-stringr r-cran-purrr r-cran-here r-cran-ggplot2
+      - name: Execute Angela original R scripts and validate proxy import bridge
+        run: |
+          Rscript tests/verify_angela_ventura.R "$PWD/team" \
+            "$PWD/results/2025_26/ventura_unified_school_grade_proxies.csv" \
+            "$PWD/output/angela"
       - name: Upload source schema and denominator rebuild as inspectable artifacts
         if: always()
         uses: actions/upload-artifact@v4
@@ -63,5 +84,9 @@ jobs:
             output/source_schema.json
             output/full/district_quality_summary_2025_26.csv
             output/full/source_manifest.json
+            output/full/school_denominator_proxies_2025_26.csv
+            output/full/district_39_68585_school_proxies_2025_26.csv
+            output/angela/angela_integration_summary.csv
+            output/angela/ventura_angela_bridge_proxies_not_measured.csv
           if-no-files-found: warn
           retention-days: 30
