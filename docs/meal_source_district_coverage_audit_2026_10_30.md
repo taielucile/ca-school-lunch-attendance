@@ -13,14 +13,14 @@ Compared the **current `main` tree** of the shared team repository, `whippedfrui
 | Irvine Unified | `Irvine/Meals Served 2025.11.03.pdf` through `11.07.pdf` | 31 | 30 | Extract exists; meal data cover only a five-day window |
 | Ojai Unified | `Ojai Unified/raw data/Ojai Meal Totals 25-26 copy.xlsx` | 5 | 5 | Extract exists; one source documents 172 vs 180 instructional days |
 | Chino Valley Unified | `Chino/July 2025 to March 2026 - Meals by School & Grade.xls` | 24 | 24 | **Added by follow-up:** extract from official statewide school table |
-| Davis Joint Unified | `Davis Joint Unified/raw data/Davis Joint Unified Meal cleaned_copy.xlsx` | 11 | 9 | **Added by follow-up:** extract from official statewide school table |
+| Davis Joint Unified | `Davis Joint Unified/raw data/Davis Joint Unified Meal cleaned_copy.xlsx` | 11 (10 actual + 1 pseudo) | 9 | **Added by follow-up:** extract from official statewide school table |
 | Oak Park Unified | `Oak Park Unified/raw data/Oak Park Meals served by grade 12.20.25-6.30.26_copy.pdf` | 3 | 3 | **Added by follow-up:** extract from official statewide school table; partial-year window |
-| Elk Grove Unified | No clearly identified named district meal file in current shared repository tree | 47 | 44 | Extract exists; **meal-source status unverified** |
+| Elk Grove Unified | No clearly identified named district meal file in current shared repository tree | 47 (45 actual + 2 pseudo) | 44 | Extract exists; **meal-source status unverified** |
 | Ontario-Montclair | No clearly identified named district meal file in current shared repository tree | 26 | 26 | Extract exists; **meal-source status unverified** |
 
 **Caution:** This file inventory does not establish whether the Chino workbook is actually school-grade-meal data for the same calendar period, or whether Davis and Oak Park contain usable TK/K numerators. The meal-source classification must be checked by reading workbook fields and reporting dates. Also, file names are not proof that the source includes a full school year.
 
-**Denominator coverage for all nine listed districts:** 199 TK/K Census school records, 192 calculable combined TK/K proxies, 7 missing or suppressed. The three newly identified meal-source districts contribute 38 records and 36 calculable proxies. The nine-district group includes two districts with **unverified** meal-source coverage and should not be called nine matched meal/attendance districts.
+**Denominator coverage for all nine listed districts:** 199 positive-TK/K Census records, including three administrative pseudo-school entities (Davis 1 and Elk Grove 2). Excluding those placeholders yields **196 actual-school records**, **192 calculable combined TK/K proxies**, and **four missing/suppressed actual-school estimates**. The three newly identified meal-source districts contribute 38 Census records (37 actual schools), with 36 calculable proxies. The nine-district group includes two districts with **unverified** meal-source coverage and should not be called nine matched meal/attendance districts.
 
 ## Rebuild
 
@@ -35,7 +35,7 @@ python scripts/extract_additional_meal_districts_2526.py \
   output/additional
 ```
 
-The extractor requires exact county–district CDS identifiers and asserts each school name's district. It writes wide school files, long TK/K/grade-1 sensitivity files, and an additional-district quality summary. The GitHub Actions full-source workflow checks **Chino 24/24**, **Davis 11/9**, and **Oak Park 3/3** against the source-wide output.
+The original public-source extracts retain pseudo-school records for audit transparency. The **analysis-ready handoff must exclude school_code `0000000` and `0000001`**. Our nine-district analysis-ready export contains 196 real-school rows. The extractor requires exact county–district CDS identifiers and asserts each school name's district. It writes wide school files, long TK/K/grade-1 sensitivity files, and an additional-district quality summary. The GitHub Actions full-source workflow checks **Chino 24/24**, **Davis 11/9**, and **Oak Park 3/3** against the source-wide output.
 
 ## Before Angela or Dr. Penner use these as denominators
 
