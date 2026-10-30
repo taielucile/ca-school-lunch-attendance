@@ -20,15 +20,17 @@ Derived public-data files are in `results/2025_26/`. Each district has a **wide 
 
 | District | TK/K Census schools | TK/K estimated (n) | Missing/suppressed (n) | TK/K Census total | Sum P1 across calculable schools (students/day) |
 | --- | ---: | ---: | ---: | ---: | ---: |
-| Lodi Unified | 27 | 26 | 1 | 2,225 | 2,016.63 |
+| Lodi Unified | 35 | 34 | 1 | 2,877 | 2,613.56 |
 | Ventura Unified | 17 | 17 | 0 | 1,263 | 1,186.06 |
 | Irvine Unified | 31 | 30 | 1 | 3,318 | 3,123.12 |
 | Elk Grove Unified | 47 | 44 | 3 | 6,503 | 5,912.13 |
 | Ontario-Montclair | 26 | 26 | 0 | 2,357 | 2,250.92 |
 | Ojai Unified | 5 | 5 | 0 | 234 | 221.69 |
-| **Selected districts only** | **153** | **148** | **5** | **15,900** | **14,710.56** |
+| **Selected districts only** | **161** | **156** | **5** | **16,552** | **15,307.49** |
 
 The P1 sums exclude suppressed or otherwise unusable TK/K records; they must **not** be compared with full Census totals as if each row were measured. These districts were prioritized from the project's current district records; they do **not** comprise a statewide census or establish statewide validity.
+
+**Correction:** The previous 27-school Lodi extract was incomplete because the source retrieval stopped before eight school records. The complete 2025–26 CDE file contains 35 TK/K-serving schools for Lodi; the 27-school figures are superseded.
 
 **Lodi review:** `Independence` (3 Census K students) has a suppressed TK/K absence estimate; it remains missing. `Rio Valley Charter` has 74 TK/K Census students and zero reported TK/K absence days; its independent-study arrangements require separate measurement review. Do not treat this as proof of perfect attendance. **Irvine / Elk Grove:** one and three missing TK/K proxies respectively. **Ojai:** the audit identified a 172-day source file versus 180-day calendar discrepancy; do not interpret the 180-day proxy as verified actual Ojai ADA.
 
@@ -50,11 +52,11 @@ The 180-day benchmark follows Ventura's board-approved 2025–26 180-student-day
 
 ## Source manifest and reproducibility
 
-- **CDE Census Day Enrollment 2025–26:** `cdenroll2526.txt`, file available in the project Library, version 1, last modified 2026-10-25; school TA rows recovered from that indexed source. CDE page: https://www.cde.ca.gov/ds/ad/filesenrcensus.asp . Official release listed as posted April 16, 2026. A full local byte-level checksum for Census could **not** be obtained in this run.
+- **CDE Census Day Enrollment 2025–26:** `cdenroll2526.txt`, file available in the project Library, version 1, last modified 2026-10-25; school TA rows recovered from that indexed source. CDE page: https://www.cde.ca.gov/ds/ad/filesenrcensus.asp . Official release listed as posted April 16, 2026. The complete original CDE Census file was subsequently recovered and verified against SHA-256 `10d074101bc1aa3e9dc7433200a3825e430e261b1382e5c5f3102d989f4fa149`.
 - **CDE Absenteeism by Reason 2025–26:** `absenteeismreason26.txt`, uploaded October 29, 2026 (374,359 data rows; 23 tabular columns). **SHA-256:** `59458d5a12a5c5e104633683f50c741e8d3a7e1e477fd12cc69192aee5581c0a`. CDE context: https://www.cde.ca.gov/ds/ad/filesabr.asp .
 - **Observed Ventura ADA aggregate and earlier per-school ranking:** `FCK_Technical_Appendix_INTERNAL_REVISED.pdf` and `FCK_Kindergarten_Meal_Service_Report_CDE_2026-10_REVISED(2).docx`; these are **reported prior analyses**, not observed student-level records. Original ADA source is still required for independent per-school reconciliation.
 - **Transformation:** strict school-level `TA` and `GRTKKN`/ `GR13`, same `AcademicYear=2025-26`, exact 14-character CDS joins, no name-only linking, and no imputation of `*` suppressed cells.
-- **Checks:** 17 Ventura schools reproduced the published P0/P1/P2 aggregate targets; all six district CSVs were read back from GitHub, with zero repeated CDS keys within each district. A separate local synthetic Python test suite passed six tests. This **does not** constitute a full statewide all-district rerun.
+- **Checks:** 17 Ventura schools reproduced the published P0/P1/P2 aggregate targets; all six district CSVs were read back from GitHub, with zero repeated CDS keys within each district. The full 2025–26 CDE source download and statewide Python builder have now executed, with source hash checks. Separate original 2024–25 legacy R and Angela integration tests are reported in their GitHub Actions logs.
 
 ## Rebuild for every district once source files are mounted locally
 
@@ -65,7 +67,7 @@ python scripts/build_denominators_2526.py
 python -m unittest discover -s tests -p 'test_denominators_2526.py' -v
 ```
 
-Use repeatable `--district 'Lodi Unified'` filters for specific districts. Raw official source files remain excluded from version control. The original `R/11_district_denominator_extracts_2526.R` remains as an earlier combined-TK/K-only prototype; the Python script additionally reports sensitivity allocations and source SHA-256. Do not conflate its all-district potential with a completed all-district run.
+Use repeatable `--district 'Lodi Unified'` filters for specific districts. Raw official source files remain excluded from version control. The original `R/11_district_denominator_extracts_2526.R` remains as a combined-TK/K-only prototype. The Python generator was subsequently run against complete checksum-verified 2025–26 CDE source files. Its statewide output and quality summary are committed under `results/2025_26/`.
 
 ## Handoff to Angela's figures and FNS10
 
@@ -96,3 +98,16 @@ python scripts/reproduce_ventura_2526.py \
 ```
 
 The reproducibility script asserts 17 schools, exact aggregate targets, and a 13/2/2 winner split. The archived benchmark comes from the public shared team repository; the `team/` prefix represents where a local checkout would be placed. It is not part of this private denominator repository. This file is an **archived-reference replication**, not a new independent review of district records.
+
+
+## Full statewide build — October 29–30, 2026
+
+After downloading and verifying both complete 2025–26 CDE files against the team's source SHA-256 values, `scripts/build_denominators_2526.py` produced the complete statewide school table and district quality summary. **This is source-file coverage, not validation of actual ADA.**
+
+- Positive TK/K Census rows: **6,261**; combined TK/K proxy calculable **5,917**; missing **344**.
+- Of these, **96 are pseudo-school entities** with school code `0000000` or `0000001`. Excluding these yields **6,165 actual-school rows**, with **5,912** calculable (95.90%) and 253 missing.
+- The statewide output includes **923 county–district CDS identifiers**. Ten district names are reused across different identifiers, so the generator was corrected to group by county and district code instead of name alone.
+- No negative TK/K proxies arose in the statewide build; zero reported absence totals remain flagged, not assumed to mean perfect attendance.
+- Six selected districts now include **161 TK/K Census school rows**, **156** calculable estimates and **5** missing/suppressed cases. Their combined complete-case estimate is **15,307.49 students attending per day**. This is not an observed district attendance total.
+
+Review school program models, varying calendars and grade-band absence allocations before integrating with school-grade meal data. The 180-day calculation remains a project assumption outside the specifically verified Ventura calendar.
