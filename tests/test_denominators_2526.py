@@ -59,5 +59,23 @@ class RecordLinkageTest(unittest.TestCase):
         s=list(audit([dict(sponsor_name="Lodi Unified",site_name="George Washngton Elementary")],schools))[0]
         self.assertEqual((s["status"],s["candidate_cds"]),("fuzzy_review_only","333"))
 
+
+class LongFormatTest(unittest.TestCase):
+    def test_allocation_and_missingness(self):
+        from reshape_district_denominators_2526 import long_rows
+        wide = dict(school_year="2025-26",cds_code="56726526056030",county_code="56",
+          district_code="72652",district_name="Ventura Unified",school_name="Demo",
+          charter_census="N",tk_census_enrollment="20",k_census_enrollment="40",
+          grade1_census_enrollment="50",tk_k_total_absence_days="900",
+          grade1_3_total_absence_days="",instructional_days_assumed="180",
+          estimated_tk_ada_allocated="18.333333",estimated_k_ada_allocated="36.666667",
+          estimated_grade1_ada_allocated="")
+        r = long_rows([wide])
+        self.assertEqual([x["grade"] for x in r], ["TK","K","01"])
+        self.assertEqual([x["status"] for x in r],
+                         ["model_allocated_proxy","model_allocated_proxy","missing_or_suppressed"])
+        self.assertEqual(r[2]["estimated_ada"], "")
+        self.assertAlmostEqual(float(r[0]["estimated_attended_student_days"]),3300,places=3)
+
 if __name__=="__main__":
     unittest.main()
