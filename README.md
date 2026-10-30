@@ -139,3 +139,28 @@ Lodi remains unresolved for a population-aligned TK/K meal calculation. Its file
 ## Status
 
 Active research repository. The denominator workflow is complete under the currently available data; the Irvine five-day meal/attendance analysis is under source-semantic review. Private while the project is in development.
+
+
+## 2025–26 district denominator extracts (working branch, October 29)
+
+This branch contains public CDE-derived school proxies for **Lodi, Ventura, Irvine, Elk Grove, Ontario-Montclair, and Ojai** in \`results/2025_26/\`. Each has a wide school-level file (\`_school_denominator_proxies.csv\`) and a long TK/K/first-grade **model-based** file (\`_school_grade_proxies.csv\`). See \`results/2025_26/district_extract_quality_summary.csv\`.
+
+**Reproduced public side of Ventura 2025–26 check:** 17 schools; 1,263.00 Census TK/K, 1,186.06 Census-minus-absences/180, 1,236.06 cumulative-minus-absences/180. Previously reported observed TK/K ADA is 1,179.14, but the observed school-by-school source was not available to this run. The 13/2/2 school comparison remains unverified in this branch. The 180-day assumption follows Ventura's verified calendar; days can vary elsewhere.
+
+**Rebuild all districts** with the official 2025–26 files present locally:
+\`\`\`sh
+python scripts/build_denominators_2526.py \
+  data/raw/cdenroll2526.txt data/raw/absenteeismreason26.txt \
+  output/district_denominators
+python -m unittest discover -s tests -p 'test_denominators_2526.py' -v
+\`\`\`
+
+**FNS10 linkage candidate review** is separate:
+\`\`\`sh
+python scripts/audit_fns10_links.py \
+  data/private/fns10_2024_25_pairs.csv \
+  data/derived/cbeds_2024_25_school_catalog.csv \
+  output/diagnostics/fns10_link_candidates_2024_25.csv
+\`\`\`
+
+Read \`docs/district_denominators_2025_26.md\` and \`docs/fns10_cde_linkage_review_2026_10.md\` before using these outputs. TK/K is a combined published absence group; TK and kindergarten separate grade estimates and first-grade estimates in the long files allocate group-level absences by Census enrollment share. These are **assumption-dependent proxies**, not observed grade-specific ADA or participation rates. No meal numerator is merged here; statewide FNS10 2024–25 and district 2025–26 meal records must not be conflated.
