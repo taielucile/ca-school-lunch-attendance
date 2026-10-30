@@ -14,7 +14,7 @@ for (d in names(paths)) {
   cat("\n======== DISTRICT:", d, "========\n", "File:", p, "\n")
   cat("Exists:", file.exists(p), "\n")
   stopifnot(file.exists(p))
-  cat("SHA256:\n"); system2("sha256sum",p,stdout=TRUE) |> writeLines()
+  cat("SHA256:\n"); system2("sha256sum",shQuote(p),stdout=TRUE) |> writeLines()
   sheets <- excel_sheets(p)
   cat("Sheets:", paste(sheets,collapse=" | "), "\n")
   for (sh in sheets) {
