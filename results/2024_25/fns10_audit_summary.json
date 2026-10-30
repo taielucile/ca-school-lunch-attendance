@@ -1,0 +1,36 @@
+{
+  "year": "2024-25",
+  "claim_rows": {
+    "Breakfast": 108259,
+    "Lunch": 108666
+  },
+  "meals_served": {
+    "Breakfast": 327641211,
+    "Lunch": 557472855
+  },
+  "meal_type_code_totals": {
+    "NSLP_BREAKFAST_SEVERENEED": 255621114,
+    "NSLP_BREAKFAST": 72020097,
+    "NSLP_LUNCH": 557472855
+  },
+  "raw_trimmed_site_pairs": 9993,
+  "normalized_site_pairs": 9985,
+  "unique_cbeds_schools": 9972,
+  "exact_unique_candidate_pairs": 6282,
+  "exact_unique_candidate_distinct_cds": 6282,
+  "exact_unique_lunch_meals": 407150310,
+  "exact_unique_breakfast_meals": 238435952,
+  "status_counts": {
+    "unmatched_no_district_block": 2855,
+    "unique_exact_district_site_name": 6282,
+    "unmatched_fuzzy_review_only": 848
+  },
+  "unmatched_review_tiers": {
+    "global_unique_school_name_review": 1874,
+    "within_district_ambiguous_fuzzy_review": 829,
+    "no_reliable_unique_candidate": 981,
+    "within_district_high_similarity_review": 19
+  },
+  "ambiguous_cbeds_key_count": 4,
+  "caveat": "This conservative normalization differs from the previous 9,988 / 6,515 matching method. No name match is an authoritative site-to-CDS crosswalk."
+}

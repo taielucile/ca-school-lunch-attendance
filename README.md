@@ -139,3 +139,25 @@ Lodi remains unresolved for a population-aligned TK/K meal calculation. Its file
 ## Status
 
 Active research repository. The denominator workflow is complete under the currently available data; the Irvine five-day meal/attendance analysis is under source-semantic review. Private while the project is in development.
+
+
+## 2025–26 district denominator extracts (working branch, October 29)
+
+This branch contains public CDE-derived school proxies for **Lodi, Ventura, Irvine, Elk Grove, Ontario-Montclair, and Ojai** in `results/2025_26/`. Each has a wide school-level file (`_school_denominator_proxies.csv`) and a long TK/K/first-grade **model-based** file (`_school_grade_proxies.csv`). See `results/2025_26/district_extract_quality_summary.csv` (corrected **35-school Lodi**; six districts **161 schools/156 calculable TK/K proxies**) and `results/2025_26/all_district_quality_summary.csv` (full statewide source-backed output; actual-school analytical coverage requires excluding pseudo-entities).
+
+**Reproduced public side of Ventura 2025–26 check:** 17 schools; 1,263.00 Census TK/K, 1,186.06 Census-minus-absences/180, 1,236.06 cumulative-minus-absences/180. The 17-school comparison is reproduced against the team's independently checked archived Ventura benchmark (observed 1,179.14): **13 Census-adjusted closer, two cumulative-adjusted closer (Lincoln and Montalvo), two ties**. This remains an archived-reference replication, not a new extraction of the original district workbook. The 180-day assumption follows Ventura's verified calendar; days can vary elsewhere.
+
+**Rebuild all districts** with the official 2025–26 files present locally:
+```sh
+python scripts/build_denominators_2526.py \
+  data/raw/cdenroll2526.txt data/raw/absenteeismreason26.txt \
+  output/district_denominators
+python -m unittest discover -s tests -p 'test_denominators_2526.py' -v
+```
+
+**FNS10 linkage** is separately re-audited directly from the team's complete original **2024–25** claims workbook and CBEDS source using `scripts/run_fns10_source_audit.py`. The full output and unresolved candidate queue are under `results/2024_25/`. Conservative normalization produced 6,282 exact candidates among 9,985 pairs, with 3,703 unmatched; this differs from the earlier 6,515/9,988 matching rules and is not an authoritative site-to-CDS crosswalk.
+
+Read `docs/district_denominators_2025_26.md` and `docs/fns10_cde_linkage_review_2026_10.md` before using these outputs. TK/K is a combined published absence group; TK and kindergarten separate grade estimates and first-grade estimates in the long files allocate group-level absences by Census enrollment share. These are **assumption-dependent proxies**, not observed grade-specific ADA or participation rates. No meal numerator is merged here; statewide FNS10 2024–25 and district 2025–26 meal records must not be conflated.
+
+
+The active branch includes a [full-source GitHub Actions workflow](.github/workflows/fck-2025-26-repro.yml) that downloads and hashes the official CDE inputs and runs the 2025–26 generator, original FNS10 audit, unit tests, original Ventura R integration harness, and the legacy 2024–25 R suite. A complete successful run is now archived as [GitHub Actions #40997088505](https://github.com/taielucile/ca-school-lunch-attendance/actions/runs/40997088505): the 2024–25 original R pipeline/regression suite passed, the 2025–26 full-source build and six-district reconciliation passed, and 50/50 Ventura school-grade proxy rows joined to Angela's original observed ADA and meal rows after a labeled adapter. See [verified execution report](docs/verified_end_to_end_execution_2026_10_30.md) for exact source hashes, original Angela-script defect, and interpretation limits.
