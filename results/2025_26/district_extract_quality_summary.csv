@@ -1,7 +1,7 @@
 district,schools_with_tkk_census,schools_with_calculable_tkk,schools_with_missing_tkk,tk_k_census_enrollment,estimate_tk_k_ada_180_on_complete_cases,cumulative_proxy_tk_k_ada_on_complete_cases,grade1_allocation_calculable
-"Lodi Unified","27","26","1","2225","2016.627778","2171.627778","26"
-"Ventura Unified","17","17","0","1263","1186.055556","1236.055556","17"
-"Irvine Unified","31","30","1","3318","3123.122222","3389.122222","31"
-"Elk Grove Unified","47","44","3","6503","5912.133333","6318.133333","45"
-"Ontario-Montclair","26","26","0","2357","2250.922222","2413.922222","26"
-"Ojai Unified","5","5","0","234","221.694444","227.694444","4"
+"Lodi Unified","35","34","1","2877.0","2613.561111111111","2805.561111111111","34"
+"Ventura Unified","17","17","0","1263.0","1186.0555555555557","1236.055556","17"
+"Irvine Unified","31","30","1","3318.0","3123.1222222222223","3389.122222","31"
+"Elk Grove Unified","47","44","3","6503.0","5912.133333333333","6318.133333","45"
+"Ontario-Montclair","26","26","0","2357.0","2250.9222222222224","2413.922222","26"
+"Ojai Unified","5","5","0","234.0","221.69444444444446","227.694444","4"
