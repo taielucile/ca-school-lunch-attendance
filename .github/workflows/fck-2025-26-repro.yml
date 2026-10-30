@@ -64,6 +64,10 @@ jobs:
             "team/Statewide/DR-20260729-160143 EXT_PRA_Penner_SNP_FNS10Meals.xlsx" \
             "team/Statewide/CA_sites_cbedsora24b.txt" \
             output/source_schema.json
+      - name: Copy Ventura source workbook to artifact-safe filename
+        run: |
+          mkdir -p output/source_safe
+          cp "team/Ventura Unified/extracted data/Ventura 8:13:2025 - 6:4:2026 ADA clear_copy.xlsx" output/source_safe/ventura_ada_2025_26.xlsx
       - name: Archive exact public research sources for byte-level local verification
         uses: actions/upload-artifact@v4
         with:
@@ -73,7 +77,7 @@ jobs:
             data/raw/absenteeismreason26.txt
             team/Statewide/DR-20260729-160143 EXT_PRA_Penner_SNP_FNS10Meals.xlsx
             team/Statewide/CA_sites_cbedsora24b.txt
-            team/Ventura Unified/extracted data/Ventura 8:13:2025 - 6:4:2026 ADA clear_copy.xlsx
+            output/source_safe/ventura_ada_2025_26.xlsx
           if-no-files-found: error
           compression-level: 6
           retention-days: 2
