@@ -64,6 +64,19 @@ jobs:
             "team/Statewide/DR-20260729-160143 EXT_PRA_Penner_SNP_FNS10Meals.xlsx" \
             "team/Statewide/CA_sites_cbedsora24b.txt" \
             output/source_schema.json
+      - name: Archive exact public research sources for byte-level local verification
+        uses: actions/upload-artifact@v4
+        with:
+          name: fck-source-inputs-2025-26
+          path: |
+            data/raw/cdenroll2526.txt
+            data/raw/absenteeismreason26.txt
+            team/Statewide/DR-20260729-160143 EXT_PRA_Penner_SNP_FNS10Meals.xlsx
+            team/Statewide/CA_sites_cbedsora24b.txt
+            team/Ventura Unified/extracted data/Ventura 8:13:2025 - 6:4:2026 ADA clear_copy.xlsx
+          if-no-files-found: error
+          compression-level: 6
+          retention-days: 2
       - name: Install R and Angela's required packages
         shell: bash
         run: |
