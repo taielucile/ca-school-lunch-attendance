@@ -23,6 +23,18 @@ jobs:
           repository: whippedfruit/Feed-California-Kinders
           path: team
           persist-credentials: false
+      - name: Copy source binaries to safe filenames immediately
+        run: |
+          mkdir -p output/source-binaries
+          cp "team/Chino/July 2025 to March 2026 - Meals by School & Grade.xls" output/source-binaries/chino_2025_26.xls
+          cp "team/Davis Joint Unified/raw data/Davis Joint Unified Meal cleaned_copy.xlsx" output/source-binaries/davis_2025_26.xlsx
+          cp "team/Oak Park Unified/raw data/Oak Park Meals served by grade 12.20.25-6.30.26_copy.pdf" output/source-binaries/oak_park_2025_26.pdf
+      - name: Upload original sources before any software installation
+        uses: actions/upload-artifact@v4
+        with:
+          name: original-district-meal-files-immediate
+          path: output/source-binaries/
+          retention-days: 2
       - name: Install readxl and PDF text tools
         run: |
           sudo apt-get update -qq
