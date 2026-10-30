@@ -1,0 +1,57 @@
+name: Inspect Chino, Davis, Oak Park original meal sources
+
+on:
+  push:
+    branches:
+      - 2026-10-district-denominator-extracts
+    paths:
+      - 'scripts/inspect_district_meal_sources.R'
+      - '.github/workflows/district-meal-source-audit.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  inspect-original-meal-files:
+    runs-on: ubuntu-latest
+    timeout-minutes: 18
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/checkout@v4
+        with:
+          repository: whippedfruit/Feed-California-Kinders
+          path: team
+          persist-credentials: false
+      - name: Install readxl and PDF text tools
+        run: |
+          sudo apt-get update -qq
+          sudo DEBIAN_FRONTEND=noninteractive apt-get install -qq -y r-base-core r-cran-readxl poppler-utils
+      - name: Examine Chino XLS and Davis XLSX directly
+        run: Rscript scripts/inspect_district_meal_sources.R
+      - name: Examine Oak Park PDF text and exact reporting dates
+        run: |
+          mkdir -p output/meal-source-audit
+          pdftotext -layout "team/Oak Park Unified/raw data/Oak Park Meals served by grade 12.20.25-6.30.26_copy.pdf" output/meal-source-audit/oak_park_source.txt
+          head -n 180 output/meal-source-audit/oak_park_source.txt
+          grep -Ein 'Kindergarten|Transitional|Pre-K|TK|Grade|2025|2026|breakfast|lunch|school' output/meal-source-audit/oak_park_source.txt | head -n 90 || true
+      - name: Retain source bytes safely for visual/source audit
+        run: |
+          mkdir -p output/source-binaries
+          cp "team/Chino/July 2025 to March 2026 - Meals by School & Grade.xls" output/source-binaries/chino_2025_26.xls
+          cp "team/Davis Joint Unified/raw data/Davis Joint Unified Meal cleaned_copy.xlsx" output/source-binaries/davis_2025_26.xlsx
+          cp "team/Oak Park Unified/raw data/Oak Park Meals served by grade 12.20.25-6.30.26_copy.pdf" output/source-binaries/oak_park_2025_26.pdf
+      - name: Upload compact source structure audit
+        uses: actions/upload-artifact@v4
+        with:
+          name: district-source-structure
+          path: |
+            output/meal-source-audit/source_structure.txt
+            output/meal-source-audit/oak_park_source.txt
+          retention-days: 30
+      - name: Upload original source copies for source-level verification
+        uses: actions/upload-artifact@v4
+        with:
+          name: district-original-meal-source-files
+          path: output/source-binaries/
+          retention-days: 2
