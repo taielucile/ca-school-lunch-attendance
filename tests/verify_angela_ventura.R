@@ -15,7 +15,24 @@ meal_script <- file.path(team_root,"Ventura Unified","Ventura meal analysis_copy
 final_script <- file.path(team_root,"Ventura Unified","Ventura final analysis_copy.R")
 stopifnot(file.exists(attendance_script),file.exists(meal_script),file.exists(final_script))
 source(attendance_script,local=FALSE)
-source(meal_script,local=FALSE)
+# First test the original, unmodified script. Its current checked-in copy has a stray
+# duplicated top-level block referring to a function-local breakfast_start variable.
+original_meal_error <- tryCatch({
+  source(meal_script,local=FALSE)
+  NA_character_
+},error=function(e) conditionMessage(e))
+if(!is.na(original_meal_error)) {
+  writeLines(original_meal_error,file.path(output_dir,"angela_original_meal_script_error.txt"))
+  if(!grepl("breakfast_start",original_meal_error,fixed=TRUE)) {
+    stop("Unrecognized original meal script error: ",original_meal_error)
+  }
+  lines <- readLines(meal_script,warn=FALSE)
+  stopifnot(length(lines)>=490L,grepl("if (length(breakfast_start)",lines[[379]],fixed=TRUE))
+  # Run an in-memory *audited temporary workaround*, never alter Angela's file.
+  # Removes only duplicated unscoped block (original lines 375 through 435).
+  patched <- paste(lines[-(375:435)],collapse="\n")
+  source(textConnection(patched),local=FALSE)
+}
 stopifnot(all(c("school_name","grade","attendance") %in% names(ADA_clean)),
           all(c("school_name","grade","Breakfast","Lunch") %in% names(ventura_meal)))
 # Execute the original final analysis, suppressing interactive plotting without modifying output figures.
@@ -49,9 +66,10 @@ summary <- data.frame(metric=c("original_ada_rows","original_meal_rows",
  "original_join_rows","aligned_proxy_grade_rows","rows_matching_original_ada",
  "rows_matching_meal_numerator","archived_school_cds_count",
  "original_script_uses_178_days","original_script_assumes_all_TK_K_half_day",
- "model_denominator_import_requires_grade_01_to_1_and_cds_to_name"),
+ "model_denominator_import_requires_grade_01_to_1_and_cds_to_name",
+ "original_meal_script_runs_without_workaround"),
  value=as.character(c(nrow(ADA_clean),nrow(ventura_meal),nrow(ventura_analysis),
- nrow(bridge),actual_coverage,meal_coverage,nrow(ref),old_178,half_day_assumed,TRUE)))
+ nrow(bridge),actual_coverage,meal_coverage,nrow(ref),old_178,half_day_assumed,TRUE,is.na(original_meal_error))))
 write.csv(bridge,file.path(output_dir,"ventura_angela_bridge_proxies_not_measured.csv"),row.names=FALSE,na="")
 write.csv(summary,file.path(output_dir,"angela_integration_summary.csv"),row.names=FALSE)
 print(summary,row.names=FALSE)
