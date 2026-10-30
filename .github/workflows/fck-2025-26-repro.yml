@@ -10,7 +10,7 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: write
+  contents: read
 
 jobs:
   full-source-audit:
@@ -76,39 +76,6 @@ jobs:
           },r
           print('Additional three district extracts passed complete source-count reconciliation.')
           PY
-      - name: Publish additional district extracts to working branch
-        if: ${{ github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name == github.repository && github.event.pull_request.head.ref == '2026-10-district-denominator-extracts' }}
-        uses: actions/github-script@v7
-        with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-          script: |
-            const fs=require('fs');
-            const branch=context.payload.pull_request.head.ref;
-            const targets=[
-              'chino_valley_unified_school_denominator_proxies.csv',
-              'chino_valley_unified_school_grade_proxies.csv',
-              'davis_joint_unified_school_denominator_proxies.csv',
-              'davis_joint_unified_school_grade_proxies.csv',
-              'oak_park_unified_school_denominator_proxies.csv',
-              'oak_park_unified_school_grade_proxies.csv',
-              'additional_meal_district_quality_summary.csv'
-            ];
-            for(const name of targets){
-              const path='results/2025_26/'+name;
-              const content=fs.readFileSync('output/additional/'+name).toString('base64');
-              let sha;
-              try{
-                const old=await github.rest.repos.getContent({...context.repo,path,ref:branch});
-                sha=old.data.sha;
-                if(old.data.content && old.data.content.replace(/\\s/g,'')===content){
-                  core.info('Unchanged '+path);continue;
-                }
-              }catch(e){if(e.status!==404)throw e;}
-              await github.rest.repos.createOrUpdateFileContents({
-                ...context.repo,path,branch,sha,content,
-                message:'Add official 2025-26 school denominators for meal-source district: '+name
-              });
-            }
       - name: Archive additional district extracts
         uses: actions/upload-artifact@v4
         with:
