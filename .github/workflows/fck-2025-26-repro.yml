@@ -1,0 +1,67 @@
+name: FCK 2025-26 full-data reproducibility
+
+on:
+  pull_request:
+    paths:
+      - '.github/workflows/fck-2025-26-repro.yml'
+      - 'scripts/**'
+      - 'tests/**'
+      - 'results/2025_26/**'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  full-source-audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    steps:
+      - name: Checkout denominator repository
+        uses: actions/checkout@v4
+      - name: Checkout shared FCK source repository
+        uses: actions/checkout@v4
+        with:
+          repository: whippedfruit/Feed-California-Kinders
+          path: team
+          persist-credentials: false
+      - name: Python 3.12
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Python workbook dependency
+        run: python -m pip install openpyxl==3.1.5
+      - name: Acquire 2025-26 CDE raw TSVs and confirm exact source hashes
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p data/raw
+          curl -fL --retry 3 --connect-timeout 40 -o data/raw/cdenroll2526.txt \
+            https://www3.cde.ca.gov/demo-downloads/census/cdenroll2526.txt
+          curl -fL --retry 3 --connect-timeout 40 -o data/raw/absenteeismreason26.txt \
+            https://www3.cde.ca.gov/demo-downloads/attendance/absenteeismreason26.txt
+          echo '10d074101bc1aa3e9dc7433200a3825e430e261b1382e5c5f3102d989f4fa149  data/raw/cdenroll2526.txt' | sha256sum -c -
+          echo '59458d5a12a5c5e104633683f50c741e8d3a7e1e477fd12cc69192aee5581c0a  data/raw/absenteeismreason26.txt' | sha256sum -c -
+      - name: Execute unit and data-integrity tests
+        run: python -m unittest discover -s tests -p 'test_*2526.py' -v
+      - name: Rebuild every district from official 2025-26 CDE sources
+        run: python scripts/build_denominators_2526.py data/raw/cdenroll2526.txt data/raw/absenteeismreason26.txt output/full
+      - name: Compare six published district extracts to regenerated results
+        run: python scripts/check_2526_rebuild.py . output/full
+      - name: Inspect original FNS10 workbook and public CBEDS fields
+        run: |
+          python scripts/inspect_fns10_sources.py \
+            "team/Statewide/DR-20260729-160143 EXT_PRA_Penner_SNP_FNS10Meals.xlsx" \
+            "team/Statewide/CA_sites_cbedsora24b.txt" \
+            output/source_schema.json
+      - name: Upload source schema and denominator rebuild as inspectable artifacts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: fck-full-data-provenance
+          path: |
+            output/source_schema.json
+            output/full/district_quality_summary_2025_26.csv
+            output/full/source_manifest.json
+          if-no-files-found: warn
+          retention-days: 30
