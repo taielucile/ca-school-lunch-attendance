@@ -72,3 +72,15 @@ Use repeatable \`--district 'Lodi Unified'\` filters for specific districts. Raw
 The standardized long output uses stable fields: \`school_year\`, \`cds_code\`, \`district_code\`, \`district_name\`, \`school_name\`, \`grade\`, \`census_enrollment\`, \`estimated_ada\`, \`estimated_attended_student_days\`, \`proxy_method\`, and \`status\`. A district meal numerator must match the **same school, grade, meal type and service period** before any meal rate can be computed. A figure must label estimates as proxies. The program in \`scripts/audit_fns10_links.py\` produces **review-only** crosswalk suggestions, not a verified join.
 
 2024–25 statewide FNS10 claims should be linked to **2024–25** school attributes and public denominator files. The 2025–26 outputs here are intended for **2025–26 district-provided meal data**. The 2025–26 CBEDS schedule classifications will be obtained from public files, separately from the Nutrition Services request. Attendance public-records correspondence is a different workstream.
+
+## Long-format regeneration
+
+After running the Python builder, generate one standard long-grade sensitivity file from each output district CSV:
+
+```sh
+python scripts/reshape_district_denominators_2526.py \\
+  output/district_denominators/district_39_68585_school_proxies_2025_26.csv \\
+  output/district_denominators/district_39_68585_school_grade_proxies_2025_26.csv
+```
+
+The companion team repository contains Angela's Ventura R scripts, which use `school_name`, `grade`, and observed `attendance` as fields. These generated long files instead use `grade` and `estimated_ada` deliberately: **do not rename this proxy to observed attendance without an explicit labeled conversion**. Existing source-based figures should remain unchanged until a tested, grade- and period-matched join is implemented.
