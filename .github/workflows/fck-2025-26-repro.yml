@@ -83,6 +83,25 @@ jobs:
           sudo apt-get update -qq
           sudo DEBIAN_FRONTEND=noninteractive apt-get install -y -qq \
             r-base-core r-cran-readxl r-cran-dplyr r-cran-stringr r-cran-purrr r-cran-here r-cran-ggplot2
+      - name: Download checksum-verified 2024-25 CDE sources for legacy R pipeline
+        run: |
+          set -euo pipefail
+          curl -fL --retry 3 --connect-timeout 40 -o data/raw/cdenroll2425.txt \
+            https://www3.cde.ca.gov/demo-downloads/census/cdenroll2425.txt
+          curl -fL --retry 3 --connect-timeout 40 -o data/raw/absenteeismreason25-v2.txt \
+            https://www3.cde.ca.gov/demo-downloads/attendance/absenteeismreason25-v2.txt
+          cp "team/Statewide/CA_sites_cbedsora24b.txt" data/raw/cbedsora24b.txt
+          cp "team/Irvine/extracted data/irvine_k_pk_attendance_2025_11_03_07.csv" data/raw/
+          cp "team/Lodi/extracted data/lodi_kindergarten_enrollment_measures_2025_26.csv" data/raw/
+          echo 'ff65bf6e2c4a0928dc1533106af29716a2cefb71e2e521e5c0e174fa737f8bbc  data/raw/cdenroll2425.txt' | sha256sum -c -
+          echo '07a12d7f3b20b19ba02c6363f87becb5b3c03ee1e87c0aca7ddf5012c72a6bd7  data/raw/absenteeismreason25-v2.txt' | sha256sum -c -
+          echo 'cda8c7e3b0c573506acdda567d83494e93d19ec9ff7a4fd1caa95e08c09faa2f  data/raw/cbedsora24b.txt' | sha256sum -c -
+      - name: Run complete 2024-25 R pipeline and original regression suite
+        run: |
+          mkdir -p output/legacy-r
+          Rscript RUN_ALL.R > output/legacy-r/RUN_ALL.log 2>&1
+          Rscript tests/test_pipeline.R > output/legacy-r/test_pipeline.log 2>&1
+          tail -n 12 output/legacy-r/test_pipeline.log
       - name: Execute Angela original R scripts and validate proxy import bridge
         run: |
           Rscript tests/verify_angela_ventura.R "$PWD/team" \
@@ -99,6 +118,8 @@ jobs:
             output/full/source_manifest.json
             output/full/school_denominator_proxies_2025_26.csv
             output/full/district_39_68585_school_proxies_2025_26.csv
+            output/legacy-r/RUN_ALL.log
+            output/legacy-r/test_pipeline.log
             output/angela/angela_integration_summary.csv
             output/angela/ventura_angela_bridge_proxies_not_measured.csv
           if-no-files-found: warn
