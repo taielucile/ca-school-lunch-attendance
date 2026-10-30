@@ -103,6 +103,46 @@ jobs:
             "team/Statewide/DR-20260729-160143 EXT_PRA_Penner_SNP_FNS10Meals.xlsx" \
             "team/Statewide/CA_sites_cbedsora24b.txt" \
             output/source_schema.json
+      - name: Execute statewide 2024-25 FNS10-CBEDS source audit
+        run: |
+          python scripts/run_fns10_source_audit.py \
+            "team/Statewide/DR-20260729-160143 EXT_PRA_Penner_SNP_FNS10Meals.xlsx" \
+            "team/Statewide/CA_sites_cbedsora24b.txt" \
+            output/fns10 > output/fns10_audit_stdout.json
+          cat output/fns10/fns10_audit_summary.json
+      - name: Publish traceable FNS10 matching review outputs to PR branch
+        if: ${{ github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name == github.repository && github.event.pull_request.head.ref == '2026-10-district-denominator-extracts' }}
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            const targets = {
+              'results/2024_25/fns10_audit_summary.json':'output/fns10/fns10_audit_summary.json',
+              'results/2024_25/fns10_all_site_link_candidates_2024_25.csv':'output/fns10/fns10_all_site_link_candidates_2024_25.csv',
+              'results/2024_25/fns10_unmatched_priority_250.csv':'output/fns10/fns10_unmatched_priority_250.csv',
+              'results/2024_25/cbeds_ambiguous_keys.csv':'output/fns10/cbeds_ambiguous_keys.csv'
+            };
+            const branch=context.payload.pull_request.head.ref;
+            for (const [path,local] of Object.entries(targets)) {
+              let sha;
+              try {
+                const got=await github.rest.repos.getContent({...context.repo,path,ref:branch});
+                sha=got.data.sha;
+              } catch(e) { if(e.status!==404)throw e; }
+              await github.rest.repos.createOrUpdateFileContents({
+                ...context.repo,path,branch,sha,
+                message:'Record FNS10 source-backed review output: '+path,
+                content:fs.readFileSync(local).toString('base64')
+              });
+              core.info('Published '+path);
+            }
+      - name: Upload full FNS10 site linkage audit files
+        uses: actions/upload-artifact@v4
+        with:
+          name: fck-fns10-2024-25-full-linkage-audit
+          path: output/fns10/
+          retention-days: 30
+          if-no-files-found: error
       - name: Copy Ventura source workbook to artifact-safe filename
         run: |
           mkdir -p output/source_safe
