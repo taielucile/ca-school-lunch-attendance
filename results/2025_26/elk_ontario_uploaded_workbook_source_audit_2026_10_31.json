@@ -47,16 +47,6 @@
     "discrepancies_in_total_checks": 0,
     "backup_worksheets_compared_entire_used_range": 32,
     "backup_discrepancies": 0,
-    "whole_report_meal_totals": {
-      "breakfast": 972190,
-      "lunch": 2492558,
-      "supper": 764628
-    },
-    "exited_category_meal_counts": {
-      "breakfast": 22606,
-      "lunch": 65558,
-      "supper": 14848
-    },
     "K_school_month_meal_counts": {
       "breakfast": 90715,
       "lunch": 231040,
@@ -72,7 +62,23 @@
     "unverified_name_variants": 2,
     "school_month_ADA_differences_across_meal_columns": 17,
     "differences_in_ADA_columns": "Supper-column ADA vs Breakfast/Lunch; do not collapse automatically",
-    "status": "month-aligned meal and schoolwide ADA/ADP, but no grade-specific attended student-days"
+    "status": "month-aligned meal and schoolwide ADA/ADP, but no grade-specific attended student-days",
+    "source_printed_totals_under_meal_headings": {
+      "breakfast": 972190,
+      "lunch": 2492558,
+      "supper": 764628
+    },
+    "students_exited_category_values_under_meal_headings": {
+      "breakfast": 22606,
+      "lunch": 65558,
+      "supper": 14848
+    },
+    "exited_category_interpretation": "Printed school totals include a row labeled STUDENTS EXITED. The workbook does not independently define this row as distinct students or reimbursable meals; preserve the label and do not infer either.",
+    "grade_attributed_sums_excluding_students_exited_row": {
+      "breakfast": 949584,
+      "lunch": 2427000,
+      "supper": 749780
+    }
   },
   "participation_rate_ready": false,
   "source_hash_basis": "Uploaded original workbooks, not alternative versions from prior analyses.",
