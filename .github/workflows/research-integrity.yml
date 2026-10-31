@@ -29,3 +29,9 @@ jobs:
             echo "Raw source data must not be committed."
             exit 1
           fi
+      - name: Python 3.12
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Reproduce source-audit and denominator unit checks without remote downloads
+        run: python -m unittest discover -s tests -p 'test_*2526.py' -v
