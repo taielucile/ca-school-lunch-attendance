@@ -52,6 +52,27 @@ class NewWorkbookAuditTest(unittest.TestCase):
         for r in rows:
             self.assertEqual(official[r["candidate_cds_code"]],r["candidate_cde_school_name"])
 
+
+    def test_ontario_monthly_adp_diagnostic(self):
+        """Source ADP discrepancy is not a calculated participation rate."""
+        rows = read_csv("ontario_adp_monthly_consistency_summary_review_only.csv")
+        self.assertEqual(len(rows), 30)
+        self.assertEqual(len({(r["year"],r["month"],r["meal_type"]) for r in rows}), 30)
+        self.assertEqual({r["meal_type"] for r in rows}, {"Breakfast","Lunch","Supper"})
+        self.assertTrue(all(int(r["n_school_months"]) == 32 for r in rows))
+        november = [r for r in rows if r["year"]=="2025" and r["month"]=="Nov"]
+        self.assertEqual(len(november), 3)
+        for r in november:
+            self.assertEqual(int(r["weekday_calendar_max"]),20)
+            self.assertEqual(int(r["n_quotients_gradeonly_above_weekdays_plus_half"]),32)
+            self.assertTrue(25.9 <= float(r["median_grade_only_over_ADP"]) <= 26.1)
+        # Removing STUDENTS EXITED does not resolve the November mismatch.
+        for r in rows:
+            self.assertLessEqual(
+                int(r["n_quotients_gradeonly_above_weekdays_plus_half"]),
+                int(r["n_school_months"])
+            )
+
     def test_audit_manifest(self):
         x=json.loads((DIR/"elk_ontario_uploaded_workbook_source_audit_2026_10_31.json").read_text())
         self.assertEqual(len(x["inputs"]),2)
