@@ -161,3 +161,13 @@ Read `docs/district_denominators_2025_26.md` and `docs/fns10_cde_linkage_review_
 
 
 The active branch includes a [full-source GitHub Actions workflow](.github/workflows/fck-2025-26-repro.yml) that downloads and hashes the official CDE inputs and runs the 2025–26 generator, original FNS10 audit, unit tests, original Ventura R integration harness, and the legacy 2024–25 R suite. A complete successful run is now archived as [GitHub Actions #40997088505](https://github.com/taielucile/ca-school-lunch-attendance/actions/runs/40997088505): the 2024–25 original R pipeline/regression suite passed, the 2025–26 full-source build and six-district reconciliation passed, and 50/50 Ventura school-grade proxy rows joined to Angela's original observed ADA and meal rows after a labeled adapter. See [verified execution report](docs/verified_end_to_end_execution_2026_10_30.md) for exact source hashes, original Angela-script defect, and interpretation limits.
+
+## Additional district meal files (Elk Grove and Ontario-Montclair, October 31)
+
+Two user-provided district Excel workbooks have now been audited directly. Their **source file SHA-256 hashes, worksheet reconciliation checks, meal-period definitions, school/CDS name-candidate ledgers, and remaining measurement limitations** are documented in [the verified source audit](docs/elk_grove_ontario_montclair_new_sources_2026_10_31.md). Source check metrics are in [`results/2025_26/elk_ontario_uploaded_workbook_source_audit_2026_10_31.json`](results/2025_26/elk_ontario_uploaded_workbook_source_audit_2026_10_31.json).
+
+- **Elk Grove:** 43 K meal sites with an additional source grade code `19` that remains **unverified** as transitional kindergarten; 40 normalized exact-name CDS candidates plus 3 review-required name variants. Per-grade attendance *rates* are reported, but not verified matched-period student-days for the July 2025–March 2026 meal window.
+- **Ontario-Montclair:** 26 TK/K elementary meal sites with monthly August 2025–May 2026 quantities; 24 normalized exact-name candidates plus 2 review-required name variants. The attendance data are **schoolwide** monthly ADA/ADP, not TK/K-specific ADA. The workbook has 32 duplicate backup sheets, which are excluded from totals.
+- **No final kindergarten meal participation rates** are produced. The earlier CDE 180-day denominator remains a full-year model and must not be used as though it measured these different service windows.
+
+A read-only workbook audit script is provided at [`scripts/verify_elk_ontario_workbooks_2526.R`](scripts/verify_elk_ontario_workbooks_2526.R); it requires the district-provided Excel files locally (not committed). The accompanying candidate-ledger regression test runs automatically with the existing Python tests.
