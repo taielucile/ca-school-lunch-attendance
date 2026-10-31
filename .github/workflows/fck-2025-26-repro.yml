@@ -1,12 +1,8 @@
 name: FCK 2025-26 full-data reproducibility
 
+# Manual source-level rebuild: CDE occasionally redirects the large TXT downloads.
+# Fast source-independent checks run on every PR in research-integrity.yml.
 on:
-  pull_request:
-    paths:
-      - '.github/workflows/fck-2025-26-repro.yml'
-      - 'scripts/**'
-      - 'tests/**'
-      - 'results/2025_26/**'
   workflow_dispatch:
 
 permissions:
