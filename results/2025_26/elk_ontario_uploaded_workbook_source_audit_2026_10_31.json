@@ -1,0 +1,80 @@
+{
+  "audit_date": "2026-10-31",
+  "inputs": [
+    {
+      "district": "Elk Grove Unified",
+      "filename": "Elk Grove Meal and Attendance Data.xlsx",
+      "sha256": "f30c4a718c339e58ecac96caebc2ce026fd346c698f516de30130ec4bc040603",
+      "reporting_period": "2025-07-01 through 2026-03-31",
+      "source_sheet": "Source data",
+      "attendance_sheet": "Attendance details"
+    },
+    {
+      "district": "Ontario-Montclair",
+      "filename": "Ontario-Montclair Meal and Attendance Data.xlsx",
+      "sha256": "906eb421b5be21ba13051b62a4640fe29ebd350420e4eb97ca266878ee251635",
+      "reporting_period": "2025-08 through 2026-05",
+      "source_sheet": "Source meals",
+      "attendance_sheet": "Source ADA ADP"
+    }
+  ],
+  "elk_grove": {
+    "distinct_meal_source_school_labels": 46,
+    "named_individual_school_worksheets": 44,
+    "detailed_school_grade_rows": 442,
+    "source_printed_total_breakfast": 711424,
+    "source_printed_total_lunch": 2429657,
+    "school_worksheet_totals_checked": 44,
+    "school_worksheet_total_mismatches": 0,
+    "grade_code19_school_rows": 43,
+    "K_school_rows": 43,
+    "grade1_school_rows": 44,
+    "source_K_school_to_CDE_candidates": 43,
+    "exact_normalized_name_candidates": 40,
+    "unverified_name_variants": 3,
+    "CDE_TKK_schools_absent_from_source_K": 2,
+    "meal_grade19_mapping_to_TK": "UNVERIFIED - do not recode without grade codebook",
+    "status": "period-labeled school-grade meal counts and grade attendance rates, but no confirmed same-period attended student-days"
+  },
+  "ontario_montclair": {
+    "named_school_blocks": 32,
+    "elementary_K_TK_school_blocks": 26,
+    "original_grade_school_rows": 245,
+    "grade_month_meal_cells": 7350,
+    "missing_grade_month_meal_cells": 6,
+    "missing_cells_population": "PS supper only; no K/TK/grade-1 missing",
+    "month_and_grand_total_checks": 1056,
+    "discrepancies_in_total_checks": 0,
+    "backup_worksheets_compared_entire_used_range": 32,
+    "backup_discrepancies": 0,
+    "whole_report_meal_totals": {
+      "breakfast": 972190,
+      "lunch": 2492558,
+      "supper": 764628
+    },
+    "exited_category_meal_counts": {
+      "breakfast": 22606,
+      "lunch": 65558,
+      "supper": 14848
+    },
+    "K_school_month_meal_counts": {
+      "breakfast": 90715,
+      "lunch": 231040,
+      "supper": 72039
+    },
+    "TK_school_month_meal_counts": {
+      "breakfast": 53194,
+      "lunch": 123987,
+      "supper": 33984
+    },
+    "elementary_KTK_school_to_CDE_candidates": 26,
+    "exact_normalized_name_candidates": 24,
+    "unverified_name_variants": 2,
+    "school_month_ADA_differences_across_meal_columns": 17,
+    "differences_in_ADA_columns": "Supper-column ADA vs Breakfast/Lunch; do not collapse automatically",
+    "status": "month-aligned meal and schoolwide ADA/ADP, but no grade-specific attended student-days"
+  },
+  "participation_rate_ready": false,
+  "source_hash_basis": "Uploaded original workbooks, not alternative versions from prior analyses.",
+  "caution": "Unverified name-based CDS candidates; annual 180-day CDE proxies do not measure partial-period attendance; meal quantities are not distinct children. Do not mix 2024-25 FNS10 with 2025-26 workbooks."
+}
