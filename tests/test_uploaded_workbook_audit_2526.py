@@ -57,7 +57,7 @@ class NewWorkbookAuditTest(unittest.TestCase):
         self.assertEqual(len(x["inputs"]),2)
         for source in x["inputs"]:
             self.assertEqual(len(source["sha256"]),64)
-        self.assertEqual(x["elk_grove"]["meal_detail_rows"],442)
+        self.assertEqual(x["elk_grove"]["detailed_school_grade_rows"],442)
         self.assertEqual(x["elk_grove"]["source_printed_total_breakfast"],711424)
         self.assertEqual(x["elk_grove"]["source_printed_total_lunch"],2429657)
         self.assertEqual(x["elk_grove"]["grade_code19_school_rows"],43)
