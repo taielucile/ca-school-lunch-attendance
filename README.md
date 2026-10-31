@@ -171,3 +171,9 @@ Two user-provided district Excel workbooks have now been audited directly. Their
 - **No final kindergarten meal participation rates** are produced. The earlier CDE 180-day denominator remains a full-year model and must not be used as though it measured these different service windows.
 
 A read-only workbook audit script is provided at [`scripts/verify_elk_ontario_workbooks_2526.R`](scripts/verify_elk_ontario_workbooks_2526.R); it requires the district-provided Excel files locally (not committed). The accompanying candidate-ledger regression test runs automatically with the existing Python tests.
+
+### Source-period/ADP caveat and reproducibility
+
+An additional [Ontario monthly ADP diagnostic](docs/ontario_monthly_ADP_measurement_consistency_2026_10_31.md) found that November 2025 meal-source totals divided by the matching ADP fields imply approximately **26 days at all 32 school sites**, though November had only **20 weekdays**. The discrepancy remains after excluding the undefined `STUDENTS EXITED` row. **Do not infer actual service days from the quotient**; the school district must define the numerator, ADP divisor and reporting period. Aggregate diagnostics are in [`results/2025_26/ontario_adp_monthly_consistency_summary_review_only.csv`](results/2025_26/ontario_adp_monthly_consistency_summary_review_only.csv).
+
+CI: [Research integrity checks](.github/workflows/research-integrity.yml) execute all source-independent Python regression tests for each pull request. The full CDE and original team-source rebuild workflow is [manual](.github/workflows/fck-2025-26-repro.yml), because the CDE TXT download endpoint occasionally loops redirects (`curl (47)`). A previous successful, checksum-verified full-data run is documented in [the October 30 verification report](docs/verified_end_to_end_execution_2026_10_30.md). Neither skipped remote downloads nor failed redirects are evidence of a passing full rebuild.
