@@ -45,7 +45,9 @@ These are **grade-labeled reported quantities** under each meal-type heading; th
 
 **CDS linkage:** all **26 elementary TK/K meal-source schools** have unique CDE candidates: **24 unique normalized name candidates** and **two aliases requiring confirmation** (`Euclid Elementary` / `Euclid Language Academy`; `Haynes Elementary` / `Richard Haynes Elementary`). The six middle schools have no TK/K Census school in this extract and are not included in the TK/K linkage. See `results/2025_26/ontario_montclair_source_cds_candidates_review_only.csv`. These are candidates, not an authoritative site-to-CDS crosswalk.
 
-**Assessment:** the school/month and meal-type reporting periods are aligned *as labeled* within the workbook, which supports descriptive school-grade meal counts and **schoolwide** ADA/ADP comparisons. It does **not** yield kindergarten-specific attended days or grade-specific participation rates.
+**New measurement finding (31 October):** the additional school/month/meal-type diagnostic finds that monthly meal totals divided by corresponding ADP imply about **26 days for November 2025** at all 32 schools, despite only **20 weekdays** in that month. Removing the undefined `STUDENTS EXITED` category does not resolve the discrepancy. The records therefore do **not** establish that the monthly meal totals and ADP share identical service days, population, or calculation rules. See [the ADP-period consistency diagnostic](ontario_monthly_ADP_measurement_consistency_2026_10_31.md) and its [30-row summary](../results/2025_26/ontario_adp_monthly_consistency_summary_review_only.csv).
+
+**Assessment:** monthly source columns correspond by label, but their actual exposure periods have **not been validated**. The workbook supports descriptive school-grade meal quantities with source labels, **not** kindergarten-specific attended days or validated participation rates.
 
 ## 3. Denominator compatibility and decisions
 
