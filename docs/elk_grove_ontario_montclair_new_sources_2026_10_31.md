@@ -1,21 +1,75 @@
-# Newly received district workbooks — 2026-10-31
+# Elk Grove and Ontario-Montclair: original workbook audit and analysis eligibility
+**Research handoff | 31 October 2026 | school year 2025–26**
 
-Two additional source workbooks were supplied for review:
+## Scope and source provenance
 
-- **Elk Grove Meal and Attendance Data.xlsx** — district-provided meal and attendance workbook. Prior source inspection found school-level breakfast and lunch grade records and a district attendance summary with a July 1, 2025–March 31, 2026 period. Grade code `19` needs source verification before calling it TK.
-- **Ontario-Montclair Meal and Attendance Data.xlsx** — district-provided workbook with school-level grade-specific meal data and monthly **schoolwide** ADA. Previous review identified August 2025–May 2026 attendance coverage, but this is not grade-specific TK/K attendance.
+The **two original uploaded district workbooks** were opened and audited sheet by sheet. This supersedes the preliminary inventory-only note. Counts below are source-reported **meals**, not distinct children or individual meal participation rates.
 
-## Implications for denominator work
+| District | Exact source file | SHA-256 |
+| --- | --- | --- |
+| Elk Grove Unified | `Elk Grove Meal and Attendance Data.xlsx` | `f30c4a718c339e58ecac96caebc2ce026fd346c698f516de30130ec4bc040603` |
+| Ontario-Montclair | `Ontario-Montclair Meal and Attendance Data.xlsx` | `906eb421b5be21ba13051b62a4640fe29ebd350420e4eb97ca266878ee251635` |
 
-These files establish **actual meal-source coverage** for Elk Grove and Ontario-Montclair, correcting the earlier repository inventory that marked them unverified. The 2025–26 school-level CDE denominator extracts already prepared for both districts are useful for linkage review, but are not automatically matched-period denominators.
+Original workbooks were **not committed**. Derived internal school-grade meal data remain in the restricted handoff, not this GitHub branch. This branch contains only audit summaries and **unadjudicated school/CDS name-link candidates**.
 
-Keep meal counts separate from attendance counts, distinguish schoolwide ADA from grade-specific TK/K ADA, verify reporting periods and grade codes, and do not infer participation rates without matching numerator and denominator periods and populations.
+## 1. Elk Grove: school-grade meal records and grade attendance rates
 
-## Required next checks
+The source workbook contains an `Attendance` summary, `Attendance details`, `Source data`, and **44 named school worksheets**. All 44 school tabs identify the same period: **July 1, 2025–March 31, 2026**. Their printed meal totals reconcile to the detailed source rows, including the special **Jessie Baker** sheet, whose three separately labeled elementary/middle/secondary source segments must be combined *only to check the printed worksheet total*, never forced into an elementary-school CDS.
 
-1. Confirm sheet-by-sheet structure, source definitions, grades, dates and totals from the original workbooks; record file hashes.
-2. Produce school-to-CDS review candidate tables, flagging duplicates and nonmatches rather than accepting names automatically.
-3. Assess whether grade-specific meal totals and attendance are contemporaneous at the same school/grade grain.
-4. Revisit the district eligibility summary and Dr. Penner memo with verified source findings.
+The school-grade source has **442 actual detail rows** and a separate printed **TOTAL** row. The latter must **not be summed again**. The correctly reconciled source totals are **711,424 breakfasts** and **2,429,657 lunches**. There are 43 kindergarten rows (`K`), 44 first-grade rows (`1`), and **43 rows with original grade code `19`**.
 
-**Status:** newly received source files noted; source-level reproducibility and matched-period validation remain pending. Do not describe these as completed participation analyses. The private original workbooks are intentionally not committed to this public-derived research repository.
+**Important: `19` is not verified as TK.** All 43 sites with a code-19 meal row also have positive TK enrollment and a TK attendance rate in the workbook's separate attendance section, which makes the interpretation plausible, **but does not supply an authoritative grade-code definition**. Keep the raw `19` label; do not aggregate it with TK counts until confirmed with the district/source-system data dictionary. Source code strings `03; 3` (Ellen Feickert) and `KG; 0` (Miwok Village) are also preserved as reported rather than silently standardized.
+
+`Attendance details` has school-by-grade **enrollment and attendance rates**. For each of the 43 K/code-19 elementary sites, a nonmissing K and a nonmissing TK rate appear. But rates are not annual grade-specific attended student-days, and the exact grade-code and exposure definitions remain unverified. The district's July–March range is **not the full 180-day school year**. Do not divide the July–March meal totals by a 180-day Census-based proxy.
+
+**CDS linkage:** among the 43 meal-source school names with K and code-19 entries, **40 are unique normalized CDE school-name candidates** and **three** require confirmation of middle-initial variants: Charles Mack / Charles E. Mack; James McKee / James A. McKee; Maeola Beitzel / Maeola R. Beitzel. The 2025–26 CDE file has **two additional TK/K-serving entities without corresponding K meal-source rows**, California Montessori Project – Elk Grove Campus and Las Flores High (Alternative); this is **not** proof of zero meal service. See `results/2025_26/elk_grove_unified_source_cds_candidates_review_only.csv`. No name-only link is officially accepted.
+
+**Assessment:** good source for descriptive school-grade meal volume and **potential** additional attendance-check work after grade-code, enrollment measure and matched-period instructional-day verification. **Not yet an identified grade-specific meal participation rate.**
+
+## 2. Ontario-Montclair: monthly grade-specific meals, but schoolwide attendance
+
+The workbook contains `Source meals`, `Source ADA ADP`, an `Attendance` summary (May 2026), **32 current school worksheets**, and **32 backup worksheets**. The full contents of all 32 backups matched their current worksheets; count each school **once**. The school tabs and source headers describe **August 2025–May 2026**.
+
+`Source meals` has **32 school blocks**, comprising **26 elementary schools with both TK and K rows** and six middle schools. It reports Breakfast, Lunch, and Supper **by school, grade and month**. The **245 original school-grade rows** yield 7,350 possible grade-month-meal cells (of which six PS/Supper cells are blank). All **1,056 source school-total column checks** reconcile, with each school's `STUDENTS EXITED` line included in the printed total. The printed workbook totals are **972,190 breakfasts, 2,492,558 lunches, and 764,628 suppers** for all grades and sites. The `STUDENTS EXITED` category contributes **22,606**, **65,558**, and **14,848** of those respective *meal quantities*; they are not distinct students.
+
+Within the 26 elementary sites, the source labels **TK** and **K** separately. Across August–May, it reports:
+
+| Grade | Breakfast meals | Lunch meals | Supper quantities |
+| --- | ---: | ---: | ---: |
+| TK | 53,194 | 123,987 | 33,984 |
+| K | 90,715 | 231,040 | 72,039 |
+
+These numbers are **reported service quantities**, not participation rates. The source label `PS` is retained as preschool and **not reclassified as TK**. All **2,340** targeted TK/K/first-grade × month × meal-type cells are populated; the six blanks elsewhere are PS/Supper, not zeros.
+
+`Source ADA ADP` reports **schoolwide** Enrollment, ADA and meal-type ADP by month, **not TK- or K-specific ADA**. For **17 of 320 school-month pairs**, the ADA column associated with Supper differs by 1–3 from the Breakfast/Lunch ADA columns. These differences are flagged; no column was silently substituted or averaged. The separate May `Attendance` table agrees with the schoolwide May figures for the named schools.
+
+**CDS linkage:** all **26 elementary TK/K meal-source schools** have unique CDE candidates: **24 unique normalized name candidates** and **two aliases requiring confirmation** (`Euclid Elementary` / `Euclid Language Academy`; `Haynes Elementary` / `Richard Haynes Elementary`). The six middle schools have no TK/K Census school in this extract and are not included in the TK/K linkage. See `results/2025_26/ontario_montclair_source_cds_candidates_review_only.csv`. These are candidates, not an authoritative site-to-CDS crosswalk.
+
+**Assessment:** the school/month and meal-type reporting periods are aligned *as labeled* within the workbook, which supports descriptive school-grade meal counts and **schoolwide** ADA/ADP comparisons. It does **not** yield kindergarten-specific attended days or grade-specific participation rates.
+
+## 3. Denominator compatibility and decisions
+
+| Dimension | Elk Grove | Ontario-Montclair |
+| --- | --- | --- |
+| School meal totals by K | Yes | Yes |
+| Explicit source TK meal label | **No — code 19 unverified** | Yes |
+| First-grade meals | Yes | Yes |
+| Grade-specific attendance | Enrollment plus rates, no verified student-day denominator | **No**; monthly schoolwide ADA/ADP only |
+| Period | July 2025–March 2026 | August 2025–May 2026 |
+| Model-based annual 2025–26 CDE proxy | Available, 180-day assumption | Available, 180-day assumption |
+| Exact grade × school × period attendance denominator | **Not established** | **Not established** |
+| Rate-ready? | **No** | **No** |
+
+**Do not use the full-year CDE 180-day estimate as a direct denominator for a partial-year meal numerator.** Nor should an Ontario-Montclair schoolwide ADA measure be reassigned to TK/K. The separate TK, K, and Grade 1 model estimates allocate publicly reported **combined** absence-band days by Census shares and are therefore **sensitivity estimates, not observed ADA**.
+
+## 4. Reproducible artifacts and remaining decisions
+
+- [QA metrics, input hashes and explicit limitations](../results/2025_26/elk_ontario_uploaded_workbook_source_audit_2026_10_31.json)
+- [Elk Grove CDS candidate review table](../results/2025_26/elk_grove_unified_source_cds_candidates_review_only.csv)
+- [Ontario-Montclair CDS candidate review table](../results/2025_26/ontario_montclair_source_cds_candidates_review_only.csv)
+
+For **Elk Grove**, ask the district to define original meal-grade code 19 and to confirm the enrollment/attendance-rate denominators and the number of service/instructional days in July–March. For **Ontario-Montclair**, request TK/K grade-specific average daily attendance or attended student-days by school and month if available, and clarify the Supper-column ADA anomalies. For **both**, obtain official program site/CDS identifiers before accepting the name variants. These are **external-source limitations**; they cannot be repaired with more name matching or an assumption.
+
+The **Nutrition Services 2024–25 FNS10 matching audit** remains a separate effort: 2024–25 whole-site FNS10 quantities cannot be used as the grade-specific numerators for these 2025–26 district comparisons. The attendance-records correspondence is also separate and is not included in the Nutrition Services report.
+
+**Research status:** source-level extraction, reconciliation, name-link candidate generation and reporting-period assessment are complete for both uploaded workbooks. Official grade-code/identity definitions and matched-period grade-specific attendance remain unresolved; no participation-rate estimate is claimed.
