@@ -23,7 +23,7 @@ The 180 days are an assumption. The absence data combine TK and K, so the separa
 - **District meal files:** Checked the school, grade, and date information in the available files, including Elk Grove and Ontario-Montclair. Some records are useful for comparison; others still need clarification before meals and attendance can be combined.
 - **Statewide meal claims:** Reviewed 2024–25 FNS10 breakfast and lunch claims and prepared possible matches between meal-service sites and CDE schools. Those matches still need confirmation. FNS10 does not report kindergarten meals separately.
 
-The [documentation index](docs/README.md) links to the methods, data sources, and individual checks.
+To find a particular output, start with the [results guide](results/README.md), which links to the statewide file, each district extract, Ventura's comparison, and the FNS10 review tables. The [research status](docs/current_status.md) summarizes the latest source-checked findings and corrections (October 31, 2026). The [documentation index](docs/README.md) has the methods and earlier notes.
 
 ## Where to find things
 
@@ -31,8 +31,8 @@ The [documentation index](docs/README.md) links to the methods, data sources, an
 | --- | --- |
 | [`R/`](R/) | Original R analyses, including the Irvine and Lodi work |
 | [`scripts/`](scripts/) | Data preparation and source checks, mostly for 2025–26 |
-| [`results/2024_25/`](results/2024_25/) | FNS10 site-matching review files |
-| [`results/2025_26/`](results/2025_26/) | Attendance estimates, district extracts, and source checks |
+| [`results/2024_25/`](results/2024_25/) | FNS10 site-matching review files; see the [results guide](results/README.md) |
+| [`results/2025_26/`](results/2025_26/) | Attendance estimates, district extracts, and source checks; see the [results guide](results/README.md) |
 | [`docs/`](docs/README.md) | Methods, source notes, validation, and earlier project materials |
 | [`tests/`](tests/) | Tests for data processing and reproducibility |
 
