@@ -25,13 +25,21 @@ cds <- function(df, county, district, school) {
     y <- ifelse(bad, NA_character_, sprintf(paste0("%0",w,"d"), as.integer(x)))
     y
   }, codes, widths)
-  do.call(paste0, pieces)
+  out <- do.call(paste0, pieces)
+  if (anyNA(unlist(pieces)) || any(!grepl("^[0-9]{14}$", out)))
+    stop("Invalid CDS component found before joining; do not use pasted NA strings")
+  out
 }
 e <- read_cde(enroll_path); a <- read_cde(absence_path)
 required(e, c("AggregateLevel","ReportingCategory","CountyCode","DistrictCode","SchoolCode",
  "CountyName","DistrictName","SchoolName","GR_TK","GR_KN"), "Enrollment")
 required(a, c("Aggregate Level","Reporting Category","County Code","District Code","School Code",
  "Total Days Absent","Eligible Cumulative Enrollment"), "Absenteeism")
+if (!("AcademicYear" %in% names(e)) || !("Academic Year" %in% names(a)))
+  stop("Missing school-year fields")
+if (any(e$AcademicYear[e$AggregateLevel=="S" & e$ReportingCategory=="TA"] != "2025-26") ||
+    any(a[["Academic Year"]][a[["Aggregate Level"]]=="S" & a[["Reporting Category"]]=="GRTKKN"] != "2025-26"))
+  stop("Input file contains unexpected school year in relevant source rows")
 e <- e[e$AggregateLevel=="S" & e$ReportingCategory=="TA",,drop=FALSE]
 a <- a[a[["Aggregate Level"]]=="S" & a[["Reporting Category"]]=="GRTKKN",,drop=FALSE]
 if (!nrow(e) || !nrow(a)) stop("Missing school-level TA enrollment or GRTKKN absence rows")
