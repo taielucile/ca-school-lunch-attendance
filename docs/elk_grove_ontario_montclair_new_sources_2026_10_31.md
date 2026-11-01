@@ -75,3 +75,12 @@ For **Elk Grove**, ask the district to define original meal-grade code 19 and to
 The **Nutrition Services 2024–25 FNS10 matching audit** remains a separate effort: 2024–25 whole-site FNS10 quantities cannot be used as the grade-specific numerators for these 2025–26 district comparisons. The attendance-records correspondence is also separate and is not included in the Nutrition Services report.
 
 **Research status:** source-level extraction, reconciliation, name-link candidate generation and reporting-period assessment are complete for both uploaded workbooks. Official grade-code/identity definitions and matched-period grade-specific attendance remain unresolved; no participation-rate estimate is claimed.
+
+
+## Independent source-to-handoff check (31 October)
+
+An additional **full-sheet** audit checked the original uploaded workbook against the internal meal/attendance handoff. Elk Grove's `Attendance details` sheet has populated records through **row 1,156**. Its 43 kindergarten meal-service sites each have nonmissing **K, TK, and first-grade attendance rates**. A previous audit that stopped at row 460 falsely labeled 16 of these schools as missing; that truncated read is invalid and has been superseded. **All 260** targeted Elk Grove grade × meal-type internal handoff rows matched source grade-level enrollment and attendance-rate values exactly.
+
+Ontario-Montclair's **2,340** K/TK/grade-1 × month × meal-type internal handoff records were checked against the source's meal, schoolwide enrollment, ADA and ADP columns. **All 2,340 records matched on all four values**, with unique school-grade-month-meal keys and no source lookup misses. These checks validate *transcription and join mechanics*, not the substantive grade-specific suitability of schoolwide attendance.
+
+Elk Grove's compiled `Source data` includes **PDF page references**; the cited underlying district PDF pages have **not** been separately authenticated in this audit. The uploaded Excel file's hash and internal arithmetic were verified, which is narrower than independent confirmation of the original district source report.
