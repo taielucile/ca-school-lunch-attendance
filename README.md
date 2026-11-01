@@ -1,6 +1,6 @@
 # California School Meals and Attendance
 
-This repository contains the code, data extracts, and notes from my work on Feed California Kinders. I’ve been looking at how California’s public enrollment and absenteeism data can be used to estimate attendance in transitional kindergarten (TK) and kindergarten (K), and how those estimates compare with the records districts have provided.
+This repository contains code, data extracts, and notes from my work on Feed California Kinders. I use California’s public enrollment and absenteeism files to estimate attendance in transitional kindergarten (TK) and kindergarten (K), then compare those estimates with district records where available. I also look at whether the meal records districts provide can be matched by school, grade, and reporting period.
 
 ## Why attendance is difficult to measure
 
@@ -66,4 +66,4 @@ python -m unittest discover -s tests -p 'test_*2526.py' -v
 
 Passing those tests does not replace a check against the complete source files. The [October 30 execution record](docs/verified_end_to_end_execution_2026_10_30.md) and [October 31 source audit](docs/independent_research_integrity_audit_2026_10_31.md) describe what was checked and what remains unresolved.
 
-The distinction to keep in mind when using these files is simple: meal counts are not student counts, meal average daily participation is not school attendance, and modeled attendance is not observed attendance. The school, grade, year, and reporting period must line up before a meal rate can be calculated.
+Meal counts are not student counts. Meal average daily participation is different from school attendance, and modeled attendance is different from recorded attendance. Before calculating a meal rate, the school, grade, and reporting period need to match.
