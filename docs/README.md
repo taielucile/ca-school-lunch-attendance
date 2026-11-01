@@ -10,6 +10,7 @@ Start with the [project overview](../README.md). This page points to the more de
 | [Sources and reporting definitions](sources.md) | CDE and district sources, grade categories, and reporting limits |
 | [Data dictionary](data_dictionary.md) | Variables and their meaning in the research files |
 | [Research decisions](decisions.md) | Changes in approach and the reasons behind them |
+| [Repository workflow](repository_workflow.md) | How this individually maintained research repository is organized, checked, and updated |
 | [Original-data requirements](../data/README.md) | Where source files belong and what is needed to rerun analyses |
 
 ## Current source checks and findings
