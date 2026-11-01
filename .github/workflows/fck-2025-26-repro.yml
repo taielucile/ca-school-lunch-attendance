@@ -1,12 +1,8 @@
 name: FCK 2025-26 full-data reproducibility
 
+# Manual source-level rebuild: CDE occasionally redirects the large TXT downloads.
+# Fast source-independent checks run on every PR in research-integrity.yml.
 on:
-  pull_request:
-    paths:
-      - '.github/workflows/fck-2025-26-repro.yml'
-      - 'scripts/**'
-      - 'tests/**'
-      - 'results/2025_26/**'
   workflow_dispatch:
 
 permissions:
@@ -60,6 +56,29 @@ jobs:
           python scripts/reshape_district_denominators_2526.py \
             output/full/district_39_68585_school_proxies_2025_26.csv \
             output/full/lodi_complete_school_grade_proxies_2025_26.csv
+      - name: Build missing meal-source district school and grade extracts
+        run: |
+          python scripts/extract_additional_meal_districts_2526.py \
+            output/full/school_denominator_proxies_2025_26.csv \
+            output/additional
+          python - <<'PY'
+          import csv
+          p='output/additional/additional_meal_district_quality_summary.csv'
+          with open(p,newline='') as f: r={x['district']:x for x in csv.DictReader(f)}
+          assert {k:(int(v['school_rows']),int(v['tk_k_proxies_calculable'])) for k,v in r.items()} == {
+            'Chino Valley Unified':(24,24),
+            'Davis Joint Unified':(11,9),
+            'Oak Park Unified':(3,3)
+          },r
+          print('Additional three district extracts passed complete source-count reconciliation.')
+          PY
+      - name: Archive additional district extracts
+        uses: actions/upload-artifact@v4
+        with:
+          name: fck-additional-meal-district-extracts
+          path: output/additional/
+          if-no-files-found: error
+          retention-days: 30
       - name: Compare six published district extracts to regenerated results
         continue-on-error: true
         run: python scripts/check_2526_rebuild.py . output/full

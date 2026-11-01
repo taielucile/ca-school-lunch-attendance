@@ -62,3 +62,12 @@ Full candidate and unmatched files are in [`results/2024_25/`](../results/2024_2
 ## Decision before merging
 
 Technical execution has passed; **substantive data interpretation and identity decisions are still needed**. Do not merge or publish a statewide kindergarten meal participation rate, reclassify ambiguous FNS10 names as verified schools, or treat the grade-level proxies as measured ADA. Keep this pull request draft until the PI and downstream analyst review intended use, particularly independent-study/charter schools, service periods, and the school schedule classifications.
+
+
+## Post-run independent integrity check (31 October 2026)
+
+The original Ventura ADA workbook was subsequently read directly (not only via the archived comparison) and all 17 matched observed ADA values were confirmed; Homestead's separate 1.04 ADA is excluded from the 17-school population. Independent raw-TSV arithmetic for **6,261** Census records reproduced the statewide 2025–26 P1 estimates to floating-point precision. The missing records consist of **274 suppressed GRTKKN values and 70 absent GRTKKN records**; these are not zeros. See `docs/district_denominators_2025_26.md` for details.
+
+The Elk Grove and Ontario workbooks were directly compared to internal handoff rows. Elk Grove's attendance sheet runs through row 1,156, and all 43 K meal sites had matching K/TK attendance rates. Ontario's 2,340 target handoff records match the original source values for meals, enrollment, ADA and ADP. These checks **do not** validate school-program identifiers, attendance-rate definitions, grade code 19, or participation rates.
+
+Historical CI success verifies the code and specified source snapshot, not the inferential identification of a statewide kindergarten participation rate. Current pull-request checks are source-independent; full source downloads can fail from external redirects without indicating a data discrepancy.
