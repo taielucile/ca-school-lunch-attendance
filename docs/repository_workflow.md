@@ -1,8 +1,6 @@
 # Repository workflow
 
-This repository documents Taiel Lucile's research for Feed California Kinders, including data preparation, analysis, and source checks.
-
-The code, derived files, and notes document analyses carried out for the project. Original district records and raw CDE source files are stored separately.
+This repository contains Taiel Lucile's data preparation, analyses, and source checks for Feed California Kinders. Original district records and raw California Department of Education (CDE) files are stored separately.
 
 ## Before using a result
 
