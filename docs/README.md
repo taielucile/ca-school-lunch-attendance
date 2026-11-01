@@ -1,6 +1,6 @@
 # Documentation guide
 
-Start with the [project overview](../README.md). This page points to the more detailed records behind the results. It separates **current methods and checks** from **earlier meeting materials**, which may reflect the project's status at a different date.
+Start with the [project overview](../README.md). This page points to the more detailed records behind the results. It separates current methods and checks from earlier meeting materials, which may reflect the project's status at a different date.
 
 ## Research question, data, and definitions
 
@@ -10,7 +10,7 @@ Start with the [project overview](../README.md). This page points to the more de
 | [Sources and reporting definitions](sources.md) | CDE and district sources, grade categories, and reporting limits |
 | [Data dictionary](data_dictionary.md) | Variables and their meaning in the research files |
 | [Research decisions](decisions.md) | Changes in approach and the reasons behind them |
-| [Repository workflow](repository_workflow.md) | How this individually maintained research repository is organized, checked, and updated |
+| [Repository workflow](repository_workflow.md) | How the research files are organized, checked, and updated |
 | [Original-data requirements](../data/README.md) | Where source files belong and what is needed to rerun analyses |
 
 ## Current source checks and findings
@@ -27,11 +27,11 @@ Start with the [project overview](../README.md). This page points to the more de
 | [Chino, Davis, and Oak Park meal-source assessment](original_meal_source_eligibility_2026_10_30.md) | What each original file contains and whether it could support grade-specific comparisons |
 | [2024–25 FNS10 school-name matching](fns10_cde_linkage_review_2026_10.md) | Matching rules, exact-name candidates, ambiguous records, and the need for source identifiers |
 
-An **exact school-name candidate** is not the same as a confirmed meal-service site-to-school match. Similarly, an **estimated attendance value** is not a district's observed TK/K attended-days total.
+An exact school-name candidate is not a confirmed meal-service site-to-school match. An estimated attendance value is also not a district's observed TK/K attended-days total.
 
 ## Earlier analyses and working notes
 
-These documents remain available because they explain how the study developed. **Check their dates and later source reviews before using their conclusions as current findings.**
+These documents remain available because they explain how the study developed. Check their dates and later source reviews before using their conclusions as current findings.
 
 | Document | Subject |
 | --- | --- |
@@ -49,6 +49,6 @@ These documents remain available because they explain how the study developed. *
 
 ## Using the results
 
-The [2024–25 FNS10 outputs](../results/2024_25/) are **meal-site matching review files**. The [2025–26 outputs](../results/2025_26/) are primarily **CDE-derived attendance estimates and district source checks**. They should not be combined into a kindergarten participation rate: the statewide records refer to different school years, and the FNS10 claims do not identify kindergarten meals separately.
+The [2024–25 FNS10 outputs](../results/2024_25/) are meal-site matching review files. The [2025–26 outputs](../results/2025_26/) are primarily CDE-derived attendance estimates and district source checks. They should not be combined into a kindergarten participation rate: the statewide records refer to different school years, and the FNS10 claims do not identify kindergarten meals separately.
 
-Before reusing a result, check its **school year, school/grade population, source identifier, reporting period, denominator definition, and missing values**. The latest [integrity audit](independent_research_integrity_audit_2026_10_31.md) explains which important comparisons have been independently checked and which still require district documentation.
+Before reusing a result, check its school year, school/grade population, source identifier, reporting period, denominator definition, and missing values. The latest [integrity audit](independent_research_integrity_audit_2026_10_31.md) explains which important comparisons have been independently checked and which still require district documentation.
