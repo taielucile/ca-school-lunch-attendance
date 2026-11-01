@@ -1,6 +1,6 @@
 # California School Meals and Attendance
 
-Research code, derived data, and documentation for **Feed California Kinders**.
+Research code, derived data, and documentation maintained by **Taiel Lucile** for work on **Feed California Kinders**. This is an individual research repository that project colleagues can consult, not the team's shared workspace.
 
 ## What we're studying
 
@@ -87,4 +87,4 @@ The Python checks test code and retained review files; they do **not** replace a
 
 Keep original data separate from derived outputs, retain school identifiers as **text** (including leading zeroes), and check the **school year, grade, and reporting period** before joining files. Missing or suppressed attendance values should remain missing—not be treated as zero. School-name matches are candidates until supported by source identifiers.
 
-See [contribution guidance](CONTRIBUTING.md) and the [research decision log](docs/decisions.md) before changing calculations or interpretations.
+See the [repository workflow notes](docs/repository_workflow.md) and [research decision log](docs/decisions.md) for how the analyses are checked and documented.
