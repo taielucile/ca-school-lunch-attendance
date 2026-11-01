@@ -60,6 +60,28 @@ for (tab in tabs) {
   check_eq(sum(numeric_or_na(records[[3]]),na.rm=TRUE),nval(printed[[2]]),paste(tab,"Breakfast"))
   check_eq(sum(numeric_or_na(records[[4]]),na.rm=TRUE),nval(printed[[3]]),paste(tab,"Lunch"))
 }
+# Regression guard: consume the ENTIRE attendance-details sheet, not a fixed
+# top-of-sheet slice. The 2025-26 source has nonempty rows through row 1156.
+att_detail <- readtext(elkfile, "Attendance details")
+if(nrow(att_detail)<1156L)
+  stop("Elk attendance sheet appears truncated (expected source rows through 1156)")
+k_meal_sites <- unique(as.character(detail[[1]][detail[[2]]=="K"]))
+check_eq(length(k_meal_sites),43,"Elk K meal-source schools")
+for(school in k_meal_sites) {
+  for(grade in c("K","TK","1")) {
+    matched <- att_detail[
+      !is.na(att_detail[[1]]) & att_detail[[1]]==school &
+      !is.na(att_detail[[2]]) & att_detail[[2]]==grade,
+      ,drop=FALSE]
+    check_eq(nrow(matched),1,paste("Elk source attendance school/grade",school,grade))
+    if(is.na(numeric_or_na(matched[[4]])) ||
+       !is.finite(numeric_or_na(matched[[4]]))) {
+      stop("Missing or invalid Elk attendance rate for ",school," / ",grade)
+    }
+  }
+}
+met$elk_attendance_sheet_full_row_coverage <- nrow(att_detail)
+met$elk_K_meal_sites_with_K_TK_and_first_grade_rates <- length(k_meal_sites)
 met$elk_meal_detail_rows <- nrow(detail)
 met$elk_school_worksheets_checked <- length(tabs)
 met$elk_breakfast_meals <- 711424
