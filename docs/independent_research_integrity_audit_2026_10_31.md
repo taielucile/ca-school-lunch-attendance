@@ -76,7 +76,7 @@ This audit directly rechecked the **specific CDE source bytes, original archived
 
 This is a **deep focused audit of consequential evidence**; it is not a claim of mathematical certainty for every file in two changing repositories. Source-level tests used the exact files identified above and are reproducible from retained scripts and summaries. It did not independently authenticate every underlying district PDF, resolve program-site identity aliases, independently execute the modified legacy R code, or produce grade-level attended-day measures that the sources do not contain.
 
-**Before sending to Dr. Penner:** use the corrected source-language and distinguish who performed the data extraction. The early 27-school Lodi CSV was generated during the assistant-assisted workflow and later rebuilt by GitHub Actions. Avoid saying that you personally discovered and corrected your own independent coding error. A concise, accurate statement is that the **full-source recheck surfaced an incomplete preliminary Lodi extract, now corrected**.
+**Describing the Lodi correction:** The initial 27-school file came from a preliminary automated extraction; the complete 35-school version was subsequently rebuilt through GitHub Actions. The source coverage check established the omission. Report that **the full-source recheck found an incomplete preliminary Lodi extract, now corrected**, rather than presenting the correction as a separate manual discovery.
 
 **Before merging PR #10:** review the source claims and committed unit-test checks; independently run the modified R source-audit script with the private uploads if it is to be represented as executable-verified. Do not silently merge a still-draft research handoff.
 
