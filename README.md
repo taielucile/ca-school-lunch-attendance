@@ -1,78 +1,55 @@
 # California School Meals and Attendance
 
-Research code, derived data, and documentation maintained by Taiel Lucile for the Feed California Kinders project.
+This repository contains code, data extracts, and notes from my work on Feed California Kinders. I use California’s public enrollment and absenteeism files to estimate attendance in transitional kindergarten (TK) and kindergarten (K), then compare those estimates with district records where available. I also look at whether the meal records districts provide can be matched by school, grade, and reporting period.
 
-## What we're studying
+## Why attendance is difficult to measure
 
-We are examining how school meal records can be compared with student attendance in California public schools, with a focus on transitional kindergarten (TK) and kindergarten (K).
+California publishes Census Day enrollment and annual absence totals, but the public files do not give us the total number of days each TK/K student was expected to attend. Enrollment on one day is not the same as enrollment throughout the year.
 
-One challenge is that the public California Department of Education (CDE) data do not report the exact annual school-by-grade attendance measure we need. We can estimate combined TK/K attendance from Census Day enrollment and reported absences, but an estimate is not the same as recorded days attended.
-
-The project compares these estimates with district attendance records where possible and checks whether meal records refer to the same schools, grades, and reporting periods. A statewide kindergarten meal participation rate has not yet been established.
-
-## Current work
-
-| Data and period | What we've done | What remains uncertain |
-| --- | --- | --- |
-| 2024–25 CDE enrollment and absenteeism | Compared two ways of estimating combined TK/K annual attendance in Irvine and Lodi. | Neither method measures each student's actual expected attendance days. |
-| 2025–26 CDE enrollment and absenteeism | Built school-level TK/K estimates statewide. Among 6,165 records without administrative placeholder school codes, 5,912 have enough data for an estimate. | Calculation coverage is not validation against observed attendance; some records represent nontraditional programs. |
-| 2025–26 Ventura district records | Compared estimated TK/K average daily attendance with the district's reported attendance at 17 matched schools. | Results from one district cannot establish which estimate works best statewide. |
-| 2025–26 district meal and attendance files | Reviewed available school, grade, and reporting-period information, including Elk Grove and Ontario-Montclair. | Grade definitions, school identifiers, and attendance periods do not always line up with meal counts. |
-| 2024–25 statewide FNS10 meal claims | Reconciled source meal counts and prepared school-name matching candidates for review. | Exact-name candidates are not confirmed site identifiers, and FNS10 does not identify kindergarten meals separately. |
-
-Current as of October 31, 2026. See the [documentation guide](docs/README.md) for detailed findings, source versions, and subsequent updates.
-
-## How the attendance estimate works
-
-The main public-data calculation is:
+The main estimate used here is:
 
 ```text
-Estimated daily TK/K attendance
-  = TK/K Census Day enrollment − (reported TK/K absent days ÷ 180)
+Estimated TK/K average daily attendance
+    = Census Day TK/K enrollment − (TK/K absence days / 180)
 ```
 
-Here, 180 is an assumed number of instructional days, not a verified count for every school. The publicly reported absence total combines TK and kindergarten. Separate TK, K, and first-grade estimates in some output files divide combined-grade absences using enrollment shares; they are model-based estimates, not observed grade-specific attendance.
+The 180 days are an assumption. The absence data combine TK and K, so the separate grade estimates in some files also require an assumption about how absences are distributed between grades. None of these calculations should be mistaken for recorded grade-level attendance.
 
-These terms are not interchangeable:
+## Work in the repository
 
-- **Meal count:** number of meals reported, not number of individual students.
-- **Average daily attendance (ADA):** average number of students attending per day for the population and period specified by the source.
-- **Estimated attendance:** an approximation calculated from enrollment and absences, subject to the assumptions above.
-- **Meal average daily participation (ADP):** a meal-program measure; it is not school attendance.
+- **2024–25:** Compared Census-based and cumulative-enrollment-based attendance estimates for Irvine and Lodi. Both depend on assumptions about how long students were enrolled.
+- **2025–26:** Built school-level attendance estimates from California Department of Education (CDE) enrollment and absenteeism files. The [district notes](docs/district_denominators_2025_26.md) explain which schools have usable data and how missing records are handled.
+- **Ventura:** Compared the 2025–26 estimate with reported TK/K average daily attendance for 17 matched schools. The [Ventura review](docs/ventura_tkk_ada_validation_2026-10.md) includes the school-by-school results.
+- **District meal files:** Checked the school, grade, and date information in the available files, including Elk Grove and Ontario-Montclair. Some records are useful for comparison; others still need clarification before meals and attendance can be combined.
+- **Statewide meal claims:** Reviewed 2024–25 FNS10 breakfast and lunch claims and prepared possible matches between meal-service sites and CDE schools. Those matches still need confirmation. FNS10 does not report kindergarten meals separately.
 
-Details and limitations are in the [denominator methods note](docs/denominator_method_note.md).
+The [documentation index](docs/README.md) links to the methods, data sources, and individual checks.
 
-## Find your way around
+## Where to find things
 
-| Location | Contents |
+| Folder | Contents |
 | --- | --- |
-| [`R/`](R/) and [`RUN_ALL.R`](RUN_ALL.R) | Main 2024–25 R workflow and district checks |
-| [`scripts/`](scripts/) | 2025–26 processing, source checks, and school-name review tools |
-| [`results/2024_25/`](results/2024_25/) | Statewide FNS10 matching candidates and audit summaries |
-| [`results/2025_26/`](results/2025_26/) | CDE-based school attendance estimates, district extracts, and review tables |
-| [`docs/`](docs/README.md) | Methods, data sources, validation, research decisions, and past notes |
-| [`tests/`](tests/) | Checks for reproducibility and data integrity |
+| [`R/`](R/) | Original R analyses, including the Irvine and Lodi work |
+| [`scripts/`](scripts/) | Data preparation and source checks, mostly for 2025–26 |
+| [`results/2024_25/`](results/2024_25/) | FNS10 site-matching review files |
+| [`results/2025_26/`](results/2025_26/) | Attendance estimates, district extracts, and source checks |
+| [`docs/`](docs/README.md) | Methods, source notes, validation, and earlier project materials |
+| [`tests/`](tests/) | Tests for data processing and reproducibility |
 
-Source workbooks and raw CDE files are stored separately. See [data requirements](data/README.md) and [source documentation](docs/sources.md).
+The original CDE and district files are kept outside the repository. Their filenames and uses are listed in [data/README.md](data/README.md).
 
-## Reproduce the work
+## Running the analyses
 
-Use the original files listed in [`data/README.md`](data/README.md), placed in `data/raw/`. The R workflow also uses `dplyr`, `readr`, and `stringr` for its Lodi module.
-
-2024–25 R workflow and regression checks:
+With the required original files in `data/raw/`, the 2024–25 R workflow and tests can be run with:
 
 ```sh
 Rscript RUN_ALL.R
 Rscript tests/test_pipeline.R
 ```
 
-Source-independent 2025–26 Python checks:
+The Lodi R module also requires the `dplyr`, `readr`, and `stringr` packages.
 
-```sh
-python -m unittest discover -s tests -p 'test_*2526.py' -v
-```
-
-Rebuild 2025–26 public CDE school estimates:
+For the 2025–26 CDE extract:
 
 ```sh
 python scripts/build_denominators_2526.py \
@@ -81,10 +58,12 @@ python scripts/build_denominators_2526.py \
   output/2025_26
 ```
 
-The Python checks test code and retained review files; they do not replace a full run on the original source data. The [research-integrity workflow](.github/workflows/research-integrity.yml) runs source-independent checks on pull requests. The [full-source workflow](.github/workflows/fck-2025-26-repro.yml) runs separately when source access is available. The [October 30 execution report](docs/verified_end_to_end_execution_2026_10_30.md) records a successful full-source run, and the [October 31 integrity audit](docs/independent_research_integrity_audit_2026_10_31.md) documents independent source checks and remaining limits.
+The Python tests that do not require the original source files can be run separately:
 
-## Working with these files
+```sh
+python -m unittest discover -s tests -p 'test_*2526.py' -v
+```
 
-Keep original data separate from derived outputs, retain school identifiers as text (including leading zeroes), and check the school year, grade, and reporting period before joining files. Missing or suppressed attendance values should remain missing—not be treated as zero. School-name matches are candidates until supported by source identifiers.
+Passing those tests does not replace a check against the complete source files. The [October 30 execution record](docs/verified_end_to_end_execution_2026_10_30.md) and [October 31 source audit](docs/independent_research_integrity_audit_2026_10_31.md) describe what was checked and what remains unresolved.
 
-See the [repository workflow notes](docs/repository_workflow.md) and [research decision log](docs/decisions.md) for how the analyses are checked and documented.
+Meal counts are not student counts. Meal average daily participation is different from school attendance, and modeled attendance is different from recorded attendance. Before calculating a meal rate, the school, grade, and reporting period need to match.
