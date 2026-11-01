@@ -1,14 +1,14 @@
 # Documentation
 
-These are the source notes, methods, and earlier analyses behind the [repository overview](../README.md). Dates are included because some of the working notes were written before later source checks or corrections.
+These notes accompany the [repository overview](../README.md). For a specific output, start with the [results guide](../results/README.md). For the latest checked figures and corrections, see [research status](current_status.md). Older notes are kept with their original dates.
 
 ## Methods and data
 
 - [Attendance denominator methods](denominator_method_note.md) — why enrollment and absence records cannot give an exact annual TK/K attendance denominator.
 - [Data sources](sources.md) — CDE files, district records, and relevant reporting definitions.
 - [Data dictionary](data_dictionary.md) — names and meanings of the variables used in the analyses.
-- [Original files needed to run the code](../data/README.md) — source filenames and where to put them.
-- [Research decisions](decisions.md) — decisions about measures, comparisons, and how to handle uncertain records.
+- [Original files needed to run the code](../data/README.md) — CDE downloads, district source filenames, and what each workflow needs.
+- [Research decisions](decisions.md) — dated decisions, including approaches revisited in later work. Check [research status](current_status.md) before relying on older entries.
 - [Working notes](repository_workflow.md) — how extracts and calculations are checked.
 
 ## Attendance estimates and district records
@@ -36,4 +36,4 @@ These are the source notes, methods, and earlier analyses behind the [repository
 
 The [September memo](penner_memo_2026-09-24.md), [October meeting outline](presentation_outline_2026-10-15.md), [October handoff](october_2026_handoff.md), and [original memo outline](memo_outline.md) are retained as records of the work at those points in time. Other background files include the [focus-school audit](focus_school_audit.md), [Irvine/Lodi file dictionary](irvine_lodi_school_file_data_dictionary.md), and [stability-rate analysis](october_2026_stability_reproduction.md).
 
-The [previous long-form README](archive/README_october_2026.md) is archived here as well. For a figure that appears in more than one document, check the source version and the later audit before relying on it.
+The [previous long-form README](archive/README_october_2026.md) is archived here as well. For a figure that appears in more than one document, use the source version and corrections recorded in the [October 31 audit](independent_research_integrity_audit_2026_10_31.md).
