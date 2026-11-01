@@ -29,7 +29,7 @@ python scripts/build_denominators_2526.py \
 
 This writes a statewide school file, per-district school files, a district quality summary, and a source manifest to the chosen output folder. The script uses combined TK/K absence counts and an assumed 180-day year. It does not retrieve observed grade-specific attendance or any meal data.
 
-The files already committed in [`results/2025_26/`](../results/README.md#202526-attendance-estimates) also include district-specific selections, school/grade reshaping, Ventura comparisons, and workbook-review outputs. Those require additional processing beyond this single command. See the [district extract notes](../docs/district_denominators_2025_26.md) and [full-source execution record](../docs/verified_end_to_end_execution_2026_10_30.md).
+The files already committed in [`results/2025_26/`](../results/README.md#district-files) also include district-specific selections, school/grade reshaping, Ventura comparisons, and workbook-review outputs. Those require additional processing beyond this single command. See the [district extract notes](../docs/district_denominators_2025_26.md) and [full-source execution record](../docs/verified_end_to_end_execution_2026_10_30.md).
 
 ## Earlier R workflow
 
