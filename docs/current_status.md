@@ -1,6 +1,6 @@
 # Research status
 
-Last source check: October 31, 2026. The notes below reflect that review, not a new analysis. The [source audit](independent_research_integrity_audit_2026_10_31.md) has the full evidence and file versions.
+Last source check: October 31, 2026. CDE means California Department of Education. The notes below reflect that review, not a new analysis. The [source audit](independent_research_integrity_audit_2026_10_31.md) has the full evidence and file versions.
 
 ## Where the work stands
 
