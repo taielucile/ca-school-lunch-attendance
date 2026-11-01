@@ -1,6 +1,8 @@
 # Data dictionary
 
-This dictionary distinguishes observed source variables from derived flags and assumption-dependent proxies.
+This dictionary covers variables used mainly in the original 2024–25 R workflow. For the newer 2025–26 statewide and district CSVs, see the [2025–26 file guide](reading_2025_26_files.md); those outputs use different column names.
+
+The definitions below distinguish source variables from calculated values and assumptions.
 
 | Variable | Type | Meaning |
 |---|---|---|
