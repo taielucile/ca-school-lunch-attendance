@@ -1,6 +1,6 @@
 # Find a result
 
-The links below open the actual files, not just the folders they sit in. CSV files can be viewed on GitHub or downloaded for use in a spreadsheet. For column definitions, see [how to read the 2025–26 files](../docs/reading_2025_26_files.md).
+The links below open the actual files, not just the folders they sit in. CSV files can be viewed on GitHub or downloaded for use in a spreadsheet. CDE refers to the California Department of Education. For column definitions, see [how to read the 2025–26 files](../docs/reading_2025_26_files.md).
 
 ## The files people are most likely to need
 
