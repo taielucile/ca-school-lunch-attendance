@@ -1,12 +1,13 @@
 # Documentation
 
-These notes accompany the [repository overview](../README.md). For a specific output, start with the [results guide](../results/README.md). For the latest checked figures and corrections, see [research status](current_status.md). Older notes are kept with their original dates.
+Looking for a file? Use the [results guide](../results/README.md). Want to know what's been checked and what still needs work? Start with [research status](current_status.md). The rest of this page links to the methods and supporting notes.
 
 ## Methods and data
 
 - [Attendance denominator methods](denominator_method_note.md) — why enrollment and absence records cannot give an exact annual TK/K attendance denominator.
 - [Data sources](sources.md) — CDE files, district records, and relevant reporting definitions.
-- [Data dictionary](data_dictionary.md) — names and meanings of the variables used in the analyses.
+- [Guide to the 2025–26 CSVs](reading_2025_26_files.md) — which file to open, what the main columns mean, and how to read missing values.
+- [Earlier data dictionary](data_dictionary.md) — variables used mainly in the original 2024–25 R workflow; column names differ from the newer CSVs.
 - [Original files needed to run the code](../data/README.md) — CDE downloads, district source filenames, and what each workflow needs.
 - [Research decisions](decisions.md) — dated decisions, including approaches revisited in later work. Check [research status](current_status.md) before relying on older entries.
 - [Working notes](repository_workflow.md) — how extracts and calculations are checked.
