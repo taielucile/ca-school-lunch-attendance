@@ -1,69 +1,50 @@
 # California School Meals and Attendance
 
-This repository contains code, data extracts, and notes from my work on Feed California Kinders. I use California’s public enrollment and absenteeism files to estimate attendance in transitional kindergarten (TK) and kindergarten (K), then compare those estimates with district records where available. I also look at whether the meal records districts provide can be matched by school, grade, and reporting period.
+My research files for Feed California Kinders. I use California enrollment and absence records to estimate attendance in transitional kindergarten (TK) and kindergarten (K), and compare those estimates with district attendance and school meal records.
 
-## Why attendance is difficult to measure
+## Start here
 
-California publishes Census Day enrollment and annual absence totals, but the public files do not give us the total number of days each TK/K student was expected to attend. Enrollment on one day is not the same as enrollment throughout the year.
+| Looking for… | Open |
+| --- | --- |
+| The latest findings and corrections | [Research status](docs/current_status.md) |
+| The statewide 2025–26 school attendance estimates | [Statewide CSV](results/2025_26/statewide_school_denominator_proxies.csv) |
+| Attendance estimates for a particular district | [District file list](results/README.md#district-files) |
+| A comparison with actual district-reported attendance | [Ventura's 17-school comparison](results/2025_26/ventura_17_school_ada_validation.csv) |
+| The 2024–25 statewide meal-claim matching work | [FNS10 files and notes](results/README.md#202425-statewide-meal-claims) |
+| What the CSV columns mean | [Guide to the 2025–26 files](docs/reading_2025_26_files.md) |
 
-The main estimate used here is:
+The [results guide](results/README.md) explains what each file contains. For methods, source records, and earlier analyses, use the [documentation index](docs/README.md).
+
+## The attendance question
+
+California publishes enrollment counts and school absence totals, but not the exact annual school-by-grade attended days needed for this work. Census Day enrollment is a count on one day, not a record of how long each student was enrolled.
+
+For combined TK/K, the main estimate is:
 
 ```text
-Estimated TK/K average daily attendance
-    = Census Day TK/K enrollment − (TK/K absence days / 180)
+Estimated students attending per day
+  = Census Day TK/K enrollment − (TK/K days absent ÷ 180)
 ```
 
-The 180 days are an assumption. The absence data combine TK and K, so the separate grade estimates in some files also require an assumption about how absences are distributed between grades. None of these calculations should be mistaken for recorded grade-level attendance.
+The 180-day school year is an assumption. The public absence figures combine TK and K. Some files also estimate TK, K, and grade 1 separately by allocating the combined absence totals across grades; those numbers are not observed grade-specific attendance.
 
-## Work in the repository
+The Ventura comparison tests how the combined TK/K estimates compare with one district's reported attendance. It does not establish which method is closest in every district.
 
-- **2024–25:** Compared Census-based and cumulative-enrollment-based attendance estimates for Irvine and Lodi. Both depend on assumptions about how long students were enrolled.
-- **2025–26:** Built school-level attendance estimates from California Department of Education (CDE) enrollment and absenteeism files. The [district notes](docs/district_denominators_2025_26.md) explain which schools have usable data and how missing records are handled.
-- **Ventura:** Compared the 2025–26 estimate with reported TK/K average daily attendance for 17 matched schools. The [Ventura review](docs/ventura_tkk_ada_validation_2026-10.md) includes the school-by-school results.
-- **District meal files:** Checked the school, grade, and date information in the available files, including Elk Grove and Ontario-Montclair. Some records are useful for comparison; others still need clarification before meals and attendance can be combined.
-- **Statewide meal claims:** Reviewed 2024–25 FNS10 breakfast and lunch claims and prepared possible matches between meal-service sites and CDE schools. Those matches still need confirmation. FNS10 does not report kindergarten meals separately.
+## Meal records
 
-To find a particular output, start with the [results guide](results/README.md), which links to the statewide file, each district extract, Ventura's comparison, and the FNS10 review tables. The [research status](docs/current_status.md) summarizes the latest source-checked findings and corrections (October 31, 2026). The [documentation index](docs/README.md) has the methods and earlier notes.
+I also examine whether the meal records can be matched to the same schools, grades, and reporting periods as the attendance data. The 2024–25 statewide FNS10 records contain meals claimed by service site, not kindergarten meals or the number of individual students served. The school-name links in this repository are candidates for review, not confirmed matches.
 
-## Where to find things
+There is not yet a statewide kindergarten meal participation rate from these records. See [research status](docs/current_status.md) for the unresolved definitions and source requests.
 
-| Folder | Contents |
-| --- | --- |
-| [`R/`](R/) | Original R analyses, including the Irvine and Lodi work |
-| [`scripts/`](scripts/) | Data preparation and source checks, mostly for 2025–26 |
-| [`results/2024_25/`](results/2024_25/) | FNS10 site-matching review files; see the [results guide](results/README.md) |
-| [`results/2025_26/`](results/2025_26/) | Attendance estimates, district extracts, and source checks; see the [results guide](results/README.md) |
-| [`docs/`](docs/README.md) | Methods, source notes, validation, and earlier project materials |
-| [`tests/`](tests/) | Tests for data processing and reproducibility |
+## Files and code
 
-The original CDE and district files are kept outside the repository. Their filenames and uses are listed in [data/README.md](data/README.md).
+- [Results](results/README.md) — statewide and district CSVs, Ventura, FNS10, and file checks.
+- [Documentation](docs/README.md) — methods, source audits, decisions, and earlier notes.
+- [Source files and how to run the analyses](data/README.md) — what to download or obtain, where the inputs go, and the commands.
+- [R code](R/) and [RUN_ALL.R](RUN_ALL.R) — the original 2024–25 analysis.
+- [Python and R scripts](scripts/) — 2025–26 extracts, source checks, and matching.
+- [Tests](tests/) — checks for processing and reproducibility.
 
-## Running the analyses
+Raw CDE and district files are kept separately. The committed results are derived files; they do not replace the original sources.
 
-With the required original files in `data/raw/`, the 2024–25 R workflow and tests can be run with:
-
-```sh
-Rscript RUN_ALL.R
-Rscript tests/test_pipeline.R
-```
-
-The Lodi R module also requires the `dplyr`, `readr`, and `stringr` packages.
-
-For the 2025–26 CDE extract:
-
-```sh
-python scripts/build_denominators_2526.py \
-  data/raw/cdenroll2526.txt \
-  data/raw/absenteeismreason26.txt \
-  output/2025_26
-```
-
-The Python tests that do not require the original source files can be run separately:
-
-```sh
-python -m unittest discover -s tests -p 'test_*2526.py' -v
-```
-
-Passing those tests does not replace a check against the complete source files. The [October 30 execution record](docs/verified_end_to_end_execution_2026_10_30.md) and [October 31 source audit](docs/independent_research_integrity_audit_2026_10_31.md) describe what was checked and what remains unresolved.
-
-Meal counts are not student counts. Meal average daily participation is different from school attendance, and modeled attendance is different from recorded attendance. Before calculating a meal rate, the school, grade, and reporting period need to match.
+*Research status and source verification last reviewed October 31, 2026.*
