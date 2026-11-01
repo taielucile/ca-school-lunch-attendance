@@ -34,7 +34,14 @@
     "unverified_name_variants": 3,
     "CDE_TKK_schools_absent_from_source_K": 2,
     "meal_grade19_mapping_to_TK": "UNVERIFIED - do not recode without grade codebook",
-    "status": "period-labeled school-grade meal counts and grade attendance rates, but no confirmed same-period attended student-days"
+    "status": "period-labeled school-grade meal counts and grade attendance rates, but no confirmed same-period attended student-days",
+    "attendance_detail_sheet_last_nonblank_row": 1156,
+    "attendance_K_meal_sites_with_matching_K_rate": 43,
+    "attendance_K_meal_sites_with_matching_TK_rate": 43,
+    "attendance_K_meal_sites_with_matching_grade1_rate": 43,
+    "internal_handoff_rows_crosschecked_against_complete_attendance_source": 260,
+    "internal_handoff_attendance_and_enrollment_mismatches": 0,
+    "source_sheet_completeness_warning": "Attendance details extends through row 1156; reading first 460 rows incorrectly suggests 16 missing schools. Always import entire sheet."
   },
   "ontario_montclair": {
     "named_school_blocks": 32,
@@ -82,5 +89,6 @@
   },
   "participation_rate_ready": false,
   "source_hash_basis": "Uploaded original workbooks, not alternative versions from prior analyses.",
-  "caution": "Unverified name-based CDS candidates; annual 180-day CDE proxies do not measure partial-period attendance; meal quantities are not distinct children. Do not mix 2024-25 FNS10 with 2025-26 workbooks."
+  "caution": "Unverified name-based CDS candidates; annual 180-day CDE proxies do not measure partial-period attendance; meal quantities are not distinct children. Do not mix 2024-25 FNS10 with 2025-26 workbooks.",
+  "source_provenance_limit": "Elk Grove workbook includes PDF page references; underlying district report PDF pages were not separately authenticated here. Direct source arithmetic is verified at the uploaded workbook level."
 }
