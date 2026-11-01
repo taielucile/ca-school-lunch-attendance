@@ -1,19 +1,21 @@
-# Repository workflow
+# Working with the data
 
-This repository contains Taiel Lucile's data preparation, analyses, and source checks for Feed California Kinders. Original district records and raw California Department of Education (CDE) files are stored separately.
+I keep the original CDE and district files separate from the code and derived tables in this repository. The [source notes](sources.md) and [file list](../data/README.md) identify what each analysis uses.
 
-## Before using a result
+## Checking an extract
 
-1. Check the full source. Verify the school year, source version, eligible schools, and grades. Make sure an extract includes every qualifying source record, not just the records successfully retrieved.
-2. Check the output. Reconcile school identifiers, row counts, missing values, joins, and totals against the complete original files. Passing code tests alone does not establish that an extract is complete.
-3. Check what the measure means. Distinguish observed attendance from model-based estimates, meal quantities from individual students, and meal average daily participation (ADP) from student average daily attendance (ADA). Confirm that comparisons use matching grades and reporting periods.
+For school-level files, I compare the list of County-District-School (CDS) codes with the complete source before using the results. I also check the number of records, missing or suppressed values, and calculated totals. A successful script run is not enough to show that every school was included.
 
-The 180-day attendance calculation is an assumption, not an observed attendance-day count for every student or school. Public absenteeism files combine TK and K. Separate grade estimates in the output involve additional assumptions.
+The source year and reporting period matter just as much as the arithmetic. The public CDE absence totals combine TK and kindergarten. The 180-day attendance estimate uses an assumed calendar, and separate grade estimates allocate the combined absence total. I keep those estimates labeled rather than treating them as recorded attendance.
 
-## Maintaining the analysis
+## Linking meals and attendance
 
-Substantive changes to calculations, source processing, school matching, or reported findings are made on a separate branch and reviewed before merging. The record of a change should state what changed, the input version, the checks performed, and any remaining uncertainty.
+Meal records and attendance records need to refer to the same school, grade, and period. Meal counts are quantities served or claimed, depending on the file; they are not counts of individual students. Meal average daily participation (ADP) is also different from student average daily attendance (ADA).
 
-Keep original and restricted source files out of Git. Preserve suppressed and missing values rather than treating them as zero. School-name matching produces review candidates, not confirmed identities.
+Where a district file has school names but no matching CDS code, I keep possible matches in review tables until the identity can be checked. Missing records stay missing unless the source makes clear that they mean zero.
 
-The [research decision log](decisions.md) records important methodological choices. The [documentation guide](README.md) links to current results and their supporting source checks.
+## Keeping track of changes
+
+For changes to a calculation or source file, I record the version used, what changed, and how the new output was checked. The [decision log](decisions.md) records choices that affect interpretation. Earlier notes remain available when a later source check changes a result.
+
+The [October 31 source audit](independent_research_integrity_audit_2026_10_31.md) is the most recent detailed check of the files discussed here.
