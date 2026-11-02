@@ -2,6 +2,12 @@
 
 My research files for Feed California Kinders. I use California enrollment and absence records to estimate attendance in transitional kindergarten (TK) and kindergarten (K), and compare those estimates with district attendance and school meal records.
 
+## New to the project?
+
+**[Start with the new researcher guide](docs/START_HERE.md).** It explains the research question, what the files can and cannot establish, a ten-minute tour, and specific unanswered questions where a new RA could contribute. For how to propose and document changes, see [Contributing](CONTRIBUTING.md).
+
+**Current status:** Analyses and source checks are in progress. The latest reviewed interpretation is dated October 31, 2026; there is **no verified statewide TK/K meal participation rate**. This repository is **private**, so new collaborators need GitHub access before they can use these links.
+
 ## Start here
 
 | Looking for… | Open |
@@ -39,6 +45,8 @@ There is not yet a statewide kindergarten meal participation rate from these rec
 ## Files and code
 
 - [Results](results/README.md) — statewide and district CSVs, Ventura, FNS10, and file checks.
+- [New researcher guide](docs/START_HERE.md) — research orientation and specific places to help.
+- [Contribution guide](CONTRIBUTING.md) — review process and a short research handoff template.
 - [Documentation](docs/README.md) — methods, source audits, decisions, and earlier notes.
 - [Source files and how to run the analyses](data/README.md) — what to download or obtain, where the inputs go, and the commands.
 - [R code](R/) and [RUN_ALL.R](RUN_ALL.R) — the original 2024–25 analysis.
