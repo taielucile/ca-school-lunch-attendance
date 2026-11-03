@@ -1,15 +1,15 @@
 # Documentation index
 
-The files here document the attendance-denominator estimates, source checks, interpretations, and earlier decisions. **Start with the short reading path below.** Historical notes are retained for transparency but may include findings later corrected by original-source review.
+Research documentation includes methods, source verification, district analyses, and historical decisions. Subsequent audits may supersede earlier results.
 
-## Read first
+## Overview and reference
 
 | Need | Open |
 | --- | --- |
-| A plain-language introduction | **[Reader's guide](START_HERE.md)** |
+| Research overview | **[Reader's guide](START_HERE.md)** |
 | Current verified findings and unresolved questions | **[Research status](current_status.md)** |
 | Statewide/district CSVs | [Results index](../results/README.md) |
-| How data files become estimates | [Calculation map](repository_workflow.md) |
+| Source-to-output map | [Calculation map](repository_workflow.md) |
 | Definitions for 2025–26 CSV fields | [2025–26 file guide](reading_2025_26_files.md) |
 | The denominator assumptions and limitations | [Denominator method note](denominator_method_note.md) |
 | Raw data sources and commands | [Input guide](../data/README.md) |
@@ -22,7 +22,7 @@ The files here document the attendance-denominator estimates, source checks, int
 - [Statewide ADA comparison](statewide_ada_comparison_2026-10.md) — district-level comparison, not school-level TK/K validation.
 - [Earlier 2024–25 data dictionary](data_dictionary.md) and [Irvine/Lodi file dictionary](irvine_lodi_school_file_data_dictionary.md) — supporting variable definitions.
 
-## Meal source reviews — not final participation rates
+## Meal-source analyses
 
 - [District meal-source coverage](meal_source_district_coverage_audit_2026_10_30.md) — available files and reporting periods.
 - [Elk Grove and Ontario-Montclair workbooks](elk_grove_ontario_montclair_new_sources_2026_10_31.md) — grade labels, measures, and candidate school names.
@@ -40,4 +40,4 @@ The files here document the attendance-denominator estimates, source checks, int
 - [Older meeting and handoff notes](october_2026_handoff.md), [September memo](penner_memo_2026-09-24.md), [presentation outline](presentation_outline_2026-10-15.md), and [memo outline](memo_outline.md) — historical working material.
 - [Additional focus-school audit](focus_school_audit.md), [stability analysis](october_2026_stability_reproduction.md), and [archived long-form README](archive/README_october_2026.md).
 
-If an older page disagrees with a new page, compare the original-source version and consult the [October 31 source audit](independent_research_integrity_audit_2026_10_31.md). [Return to repository home](../README.md).
+The [October 31 source audit](independent_research_integrity_audit_2026_10_31.md) records revisions that supersede earlier notes.
