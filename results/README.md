@@ -1,12 +1,8 @@
-# Find a result
+# Results index
 
-**First visit?** Read the [five-minute guide](../docs/START_HERE.md) to understand the research question and the difference between observed attendance, calculated estimates, and possible school-name matches. Then return here to open the actual files. No code or software setup is required to browse these results.
+Statewide and district outputs are organized below by research question. The [2025–26 variable guide](../docs/reading_2025_26_files.md) defines the file fields; the [research status](../docs/current_status.md) records source checks and corrections.
 
-**Suggested first file:** [Statewide 2025–26 school estimates](2025_26/statewide_school_denominator_proxies.csv). Read its columns with the [field guide](../docs/reading_2025_26_files.md), and check the [current research status](../docs/current_status.md) before interpreting or citing a figure.
-
-The links below open the actual files, not just the folders they sit in. CSV files can be viewed on GitHub or downloaded for use in a spreadsheet. CDE refers to the California Department of Education. For column definitions, see [how to read the 2025–26 files](../docs/reading_2025_26_files.md).
-
-## The files people are most likely to need
+## Selected results
 
 | Question | File | What it tells you |
 | --- | --- | --- |
@@ -16,14 +12,14 @@ The links below open the actual files, not just the folders they sit in. CSV fil
 | Where are the 2024–25 meal-claim matching results? | [FNS10 school-name candidates](2024_25/fns10_all_site_link_candidates_2024_25.csv) | Possible links between meal-service sites and CDE schools; not confirmed links |
 | What is the latest checked interpretation? | [Research status](../docs/current_status.md) | Corrections, source checks, and questions still open as of October 31, 2026 |
 
-For a particular district, use the next table. The [October 31 source audit](../docs/independent_research_integrity_audit_2026_10_31.md) explains which results were checked against original files.
+The [October 31 source audit](../docs/independent_research_integrity_audit_2026_10_31.md) records the original-source checks.
 
 ## District files
 
 These nine districts have two types of files from the 2025–26 CDE attendance data:
 
-- **Combined TK/K** gives one row per school with the combined enrollment and attendance estimate. This is the simpler file to start with.
-- **Separate TK, K, and grade 1** gives grade rows calculated by dividing group absence totals in proportion to enrollment. These are modeled figures, not recorded attendance for each grade.
+- **Combined TK/K:** school-level enrollment and attendance estimates.
+- **Separate TK, K, and grade 1:** grade-level estimates based on allocation of grouped absence totals by enrollment shares.
 
 | District | Combined TK/K by school | Separate grade estimates |
 | --- | --- | --- |
@@ -43,7 +39,7 @@ The statewide school file contains 6,261 CDE records with positive TK/K Census e
 
 ## Coverage and source checks
 
-These help answer whether a file is complete enough to use, rather than whether an attendance estimate is accurate:
+The following files summarize extraction coverage and missingness, rather than estimation accuracy:
 
 - [All-district school counts and missing estimates](2025_26/all_district_quality_summary.csv)
 - [Selected district extract counts](2025_26/district_extract_quality_summary.csv)
@@ -53,7 +49,7 @@ For the underlying methods and the original sources, see [2025–26 district not
 
 ## Ventura: reported versus estimated attendance
 
-Use the [17-school Ventura comparison CSV](2025_26/ventura_17_school_ada_validation.csv), not the regular Ventura school estimate file, to examine the difference between district-reported attendance and the two estimates. The [Ventura notes](../docs/ventura_tkk_ada_validation_2026-10.md) explain the comparison; the [October 31 audit](../docs/independent_research_integrity_audit_2026_10_31.md) records the subsequent check against the original district workbook.
+The [17-school Ventura comparison](2025_26/ventura_17_school_ada_validation.csv) reports district TK/K average daily attendance alongside both public-data estimates. See the [Ventura validation note](../docs/ventura_tkk_ada_validation_2026-10.md) and [October 31 source audit](../docs/independent_research_integrity_audit_2026_10_31.md).
 
 ## District meal-file reviews
 
@@ -79,4 +75,4 @@ The [FNS10 method notes](../docs/fns10_cde_linkage_review_2026_10.md) explain wh
 
 The 2024–25 FNS10 claims and 2025–26 attendance estimates are from different school years. They cannot be divided to obtain a kindergarten meal participation rate. Even within the same year, the meal and attendance records must cover the same school, grade, and dates.
 
-To rerun the attendance extracts, see [source files and commands](../data/README.md). The [October 30 execution record](../docs/verified_end_to_end_execution_2026_10_30.md) gives the original source versions used in the verified run.
+Source files, commands, and verified run details are in the [reproduction guide](../data/README.md) and [October 30 execution record](../docs/verified_end_to_end_execution_2026_10_30.md).
