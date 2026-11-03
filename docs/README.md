@@ -1,40 +1,43 @@
-# Documentation
+# Documentation index
 
-Looking for a file? Use the [results guide](../results/README.md). Want to know what's been checked and what still needs work? Start with [research status](current_status.md). The rest of this page links to the methods and supporting notes.
+The files here document the attendance-denominator estimates, source checks, interpretations, and earlier decisions. **Start with the short reading path below.** Historical notes are retained for transparency but may include findings later corrected by original-source review.
 
-## Methods and data
+## Read first
 
-- [Attendance denominator methods](denominator_method_note.md) — why enrollment and absence records cannot give an exact annual TK/K attendance denominator.
-- [Data sources](sources.md) — CDE files, district records, and relevant reporting definitions.
-- [Guide to the 2025–26 CSVs](reading_2025_26_files.md) — which file to open, what the main columns mean, and how to read missing values.
-- [Earlier data dictionary](data_dictionary.md) — variables used mainly in the original 2024–25 R workflow; column names differ from the newer CSVs.
-- [Original files needed to run the code](../data/README.md) — CDE downloads, district source filenames, and what each workflow needs.
-- [Research decisions](decisions.md) — dated decisions, including approaches revisited in later work. Check [research status](current_status.md) before relying on older entries.
-- [Working notes](repository_workflow.md) — how extracts and calculations are checked.
+| Need | Open |
+| --- | --- |
+| A plain-language introduction | **[Reader's guide](START_HERE.md)** |
+| Current verified findings and unresolved questions | **[Research status](current_status.md)** |
+| Statewide/district CSVs | [Results index](../results/README.md) |
+| How data files become estimates | [Calculation map](repository_workflow.md) |
+| Definitions for 2025–26 CSV fields | [2025–26 file guide](reading_2025_26_files.md) |
+| The denominator assumptions and limitations | [Denominator method note](denominator_method_note.md) |
+| Raw data sources and commands | [Input guide](../data/README.md) |
 
-## Attendance estimates and district records
+## Attendance estimates and district checks
 
-- [2025–26 attendance estimates](district_denominators_2025_26.md) — the statewide CDE extract, district tables, missing records, and the 180-day assumption.
-- [Ventura](ventura_tkk_ada_validation_2026-10.md) — comparison with the district's TK/K attendance records.
-- [Which districts have meal files?](meal_source_district_coverage_audit_2026_10_30.md) — the available records and their date ranges.
-- [Elk Grove and Ontario-Montclair](elk_grove_ontario_montclair_new_sources_2026_10_31.md) — workbook checks, grade labels, and school-name matching.
-- [Ontario-Montclair monthly figures](ontario_monthly_ADP_measurement_consistency_2026_10_31.md) — the unresolved difference between monthly meal totals and reported average daily participation.
-- [Chino, Davis, and Oak Park](original_meal_source_eligibility_2026_10_30.md) — what their files contain and what comparisons they may allow.
+- [2025–26 district denominator methods](district_denominators_2025_26.md) — statewide records, missingness, and construction of estimates.
+- [Ventura TK/K attendance validation](ventura_tkk_ada_validation_2026-10.md) — comparison with 17 schools' district-reported ADA.
+- [Irvine/Lodi validation report](validation_report.md) — earlier attendance and enrollment checks.
+- [Statewide ADA comparison](statewide_ada_comparison_2026-10.md) — district-level comparison, not school-level TK/K validation.
+- [Earlier 2024–25 data dictionary](data_dictionary.md) and [Irvine/Lodi file dictionary](irvine_lodi_school_file_data_dictionary.md) — supporting variable definitions.
 
-## 2024–25 work
+## Meal source reviews — not final participation rates
 
-- [FNS10 site matching](fns10_cde_linkage_review_2026_10.md) — proposed links between statewide meal-claim sites and CDE school records. These are not confirmed site identifiers.
-- [Irvine and Lodi validation](validation_report.md) — the original enrollment and attendance comparisons.
-- [Statewide district ADA comparison](statewide_ada_comparison_2026-10.md) — district-level results, not school-level TK/K attendance validation.
-- [Irvine meal-record check](meal_numerator_audit.md) — a short-period comparison with unresolved missing meal rows.
+- [District meal-source coverage](meal_source_district_coverage_audit_2026_10_30.md) — available files and reporting periods.
+- [Elk Grove and Ontario-Montclair workbooks](elk_grove_ontario_montclair_new_sources_2026_10_31.md) — grade labels, measures, and candidate school names.
+- [Ontario-Montclair monthly ADP](ontario_monthly_ADP_measurement_consistency_2026_10_31.md) — unresolved reconciliation.
+- [Chino, Davis, and Oak Park sources](original_meal_source_eligibility_2026_10_30.md) — source comparability.
+- [FNS10 candidate site matches](fns10_cde_linkage_review_2026_10.md) — name-based possibilities, not verified CDS identities.
+- [Irvine meal numerator audit](meal_numerator_audit.md) — short-period counts and missing rows.
 
-## Source checks
+## Evidence, decisions, historical notes
 
-- [October 31 integrity audit](independent_research_integrity_audit_2026_10_31.md) — independent source comparisons, corrections, and limits.
-- [October 30 full-source run](verified_end_to_end_execution_2026_10_30.md) — which original files and tests were used.
+- [Source inventory](sources.md) — provenance and reporting definitions.
+- [October 31 independent audit](independent_research_integrity_audit_2026_10_31.md) — source checks and corrections.
+- [October 30 reproducibility record](verified_end_to_end_execution_2026_10_30.md) — source hashes, tests, and workflow logs.
+- [Research decision log](decisions.md) — dated choices; defer to [current status](current_status.md) for later corrections.
+- [Older meeting and handoff notes](october_2026_handoff.md), [September memo](penner_memo_2026-09-24.md), [presentation outline](presentation_outline_2026-10-15.md), and [memo outline](memo_outline.md) — historical working material.
+- [Additional focus-school audit](focus_school_audit.md), [stability analysis](october_2026_stability_reproduction.md), and [archived long-form README](archive/README_october_2026.md).
 
-## Earlier notes
-
-The [September memo](penner_memo_2026-09-24.md), [October meeting outline](presentation_outline_2026-10-15.md), [October handoff](october_2026_handoff.md), and [original memo outline](memo_outline.md) are retained as records of the work at those points in time. Other background files include the [focus-school audit](focus_school_audit.md), [Irvine/Lodi file dictionary](irvine_lodi_school_file_data_dictionary.md), and [stability-rate analysis](october_2026_stability_reproduction.md).
-
-The [previous long-form README](archive/README_october_2026.md) is archived here as well. For a figure that appears in more than one document, use the source version and corrections recorded in the [October 31 audit](independent_research_integrity_audit_2026_10_31.md).
+If an older page disagrees with a new page, compare the original-source version and consult the [October 31 source audit](independent_research_integrity_audit_2026_10_31.md). [Return to repository home](../README.md).
