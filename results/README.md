@@ -1,5 +1,9 @@
 # Find a result
 
+**First visit?** Read the [five-minute guide](../docs/START_HERE.md) to understand the research question and the difference between observed attendance, calculated estimates, and possible school-name matches. Then return here to open the actual files. No code or software setup is required to browse these results.
+
+**Suggested first file:** [Statewide 2025–26 school estimates](2025_26/statewide_school_denominator_proxies.csv). Read its columns with the [field guide](../docs/reading_2025_26_files.md), and check the [current research status](../docs/current_status.md) before interpreting or citing a figure.
+
 The links below open the actual files, not just the folders they sit in. CSV files can be viewed on GitHub or downloaded for use in a spreadsheet. CDE refers to the California Department of Education. For column definitions, see [how to read the 2025–26 files](../docs/reading_2025_26_files.md).
 
 ## The files people are most likely to need
