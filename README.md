@@ -1,60 +1,56 @@
 # California school meals and attendance
 
-**Attendance denominator estimates and source checks for Feed California Kinders**
+**Attendance denominator analysis for [Feed California Kinders](https://github.com/whippedfruit/Feed-California-Kinders)**
 
-This repository documents one part of the [Feed California Kinders project](https://github.com/whippedfruit/Feed-California-Kinders): using California school enrollment and absence records to estimate how many transitional kindergarten (TK) and kindergarten (K) students attend school each day, and checking those estimates against district records when possible.
+This repository documents school-level attendance denominator estimates for transitional kindergarten (TK) and kindergarten (K) in California. It combines California Department of Education (CDE) enrollment and absenteeism records with district attendance and meal data to assess what can be measured, estimated, and compared across sources.
 
-**Why this matters:** Comparing school meals with attendance requires a denominator that represents the same children, schools, and time periods as the meal records. Public statewide enrollment and absence files do not directly supply annual TK/K attended days by school and grade. The calculations here are therefore **estimates, not observed annual attendance**.
+## Research scope
 
-This is a **research record for readers**, not a collaboration or task-assignment hub. You can follow the findings and calculations without running any code. The repository is currently **private**, so GitHub access is required to browse it.
+School meal participation analyses depend on denominators aligned with the same schools, grades, and reporting periods as meal records. Statewide public CDE files report Census Day enrollment and combined TK/K absences, but not duration-weighted annual attended days by school and grade. The analyses therefore construct attendance proxies, assess their coverage, and compare them with district-reported attendance where compatible records are available.
 
-## Find what you need
+## Research files
 
-| I want to… | Open |
+| Resource | Contents |
 | --- | --- |
-| Understand the project and see an example | **[Start here: reader's guide](docs/START_HERE.md)** |
-| Know what is verified, corrected, or unresolved | [Current research status](docs/current_status.md) |
-| Find the statewide or a district CSV | **[Results and file index](results/README.md)** |
-| Understand CSV columns and missing values | [2025–26 file guide](docs/reading_2025_26_files.md) |
-| Trace a calculation from source to result | [Calculation map](docs/repository_workflow.md) |
-| Understand denominator assumptions | [Method note](docs/denominator_method_note.md) |
-| Find source data and run commands | [Data and reproduction guide](data/README.md) |
+| [Project overview](docs/START_HERE.md) | Research scope, analytical approach, and Ventura example |
+| [Results](results/README.md) | Statewide and district estimates, validation files, and meal-source reviews |
+| [Research status](docs/current_status.md) | Source-checked findings, corrections, and unresolved questions |
+| [2025–26 variable guide](docs/reading_2025_26_files.md) | File structure, fields, and missingness |
+| [Denominator methods](docs/denominator_method_note.md) | Measurement assumptions and sensitivity specifications |
+| [Calculation map](docs/repository_workflow.md) | Links between source files, scripts, checks, and outputs |
+| [Documentation index](docs/README.md) | District analyses, source audits, and earlier work |
+| [Source files and reproduction](data/README.md) | Input versions and commands |
 
-## The basic calculation
-
-For the **2025–26 combined TK/K** estimate:
+## Main 2025–26 attendance estimate
 
 ```text
-Estimated students attending per day
-= TK/K Census Day enrollment − (combined TK/K days absent ÷ 180)
+Estimated TK/K average daily attendance
+    = TK/K Census Day enrollment − (combined TK/K days absent / 180)
 ```
 
-The 180-day year is an **assumption**, not the verified calendar or enrollment duration of every student. Census enrollment counts students on one day. The alternative uses eligible cumulative enrollment, which also does not measure how many days each student was enrolled. Some files allocate combined absence totals across TK, K, and first grade: those **grade-specific estimates are modeled**, not reported attendance.
+The 180-day term is an assumed school-year benchmark; Census enrollment does not account for individual enrollment duration. Alternative specifications use cumulative enrollment or allocate grouped absences to grades. The [method note](docs/denominator_method_note.md) describes these choices and their limitations.
 
-The [reader's guide](docs/START_HERE.md#how-to-read-an-estimate) includes a worked example.
+## Source-checked findings
 
-## What the current results support
+As of the October 31, 2026 source review:
 
-- **Statewide, 2025–26:** After excluding administrative placeholder school codes, 6,165 school-level records have positive TK/K Census enrollment; 5,912 have enough absence information for the combined estimate.
-- **Ventura:** The 17-school comparison tests the estimates against district-reported TK/K average daily attendance. It does **not** establish statewide accuracy.
-- **Meal records:** The separate 2024–25 FNS10 work creates potential meal-site-to-school name matches for review, not confirmed links or kindergarten-specific meal counts.
+- **Statewide:** 6,165 non-placeholder school records had positive TK/K Census enrollment; 5,912 supported the combined attendance estimate.
+- **Ventura:** [17 matched schools](results/2025_26/ventura_17_school_ada_validation.csv) have district-reported TK/K average daily attendance for comparison with the Census- and cumulative-based estimates.
+- **Meal records:** The [2024–25 FNS10 analysis](results/README.md#202425-statewide-meal-claims) produces candidate meal-site/school links, not confirmed kindergarten-specific meal counts or a statewide kindergarten meal-participation rate.
 
-**No statewide kindergarten meal-participation rate has been established from these sources.** Meal counts and attendance denominators must align by school, grade, dates, and definition before being combined.
+See [research status](docs/current_status.md) and the [October 31 source audit](docs/independent_research_integrity_audit_2026_10_31.md) for corrections and evidentiary scope.
 
-These claims reflect the [October 31, 2026 source review](docs/current_status.md). This navigation was revised November 3, 2026; no new analysis is implied.
-
-## Repository layout
+## Code and outputs
 
 | Location | Contents |
 | --- | --- |
-| [`results/`](results/README.md) | Committed CSVs for statewide and selected districts, validation, and source audits |
-| [`docs/`](docs/README.md) | Reader's guide, methodology, decisions, and dated audit notes |
-| [`data/`](data/README.md) | Source-file inventory and input instructions; original CDE and district files are **not** committed |
-| [`scripts/`](scripts/) | Python and R programs for recent extracts and checks |
-| [`R/`](R/) and [`RUN_ALL.R`](RUN_ALL.R) | Earlier R analysis workflow |
-| [`tests/`](tests/) | Reproduction and integrity checks |
-| [`output/`](output/) | Directories for local reruns; the committed reviewed files are in `results/` |
+| [`results/`](results/README.md) | Committed derived CSV and JSON files |
+| [`scripts/`](scripts/) | 2025–26 extraction, verification, and matching scripts |
+| [`R/`](R/) and [`RUN_ALL.R`](RUN_ALL.R) | Earlier 2024–25 analysis |
+| [`tests/`](tests/) | Integrity and regression checks |
+| [`data/`](data/README.md) | Source inventory and required input filenames |
+| [`docs/`](docs/README.md) | Methods, district notes, audits, and historical decisions |
 
-The [documentation index](docs/README.md) separates current explanations from historical working notes. Older findings are retained for traceability, but the [current status](docs/current_status.md) and dated source audits take precedence for corrected results.
+Original CDE and district inputs are managed separately. Committed `results/` files and new local `output/` runs should be compared using the documented source versions and processing steps.
 
-*Original district materials may be held separately in project files and require permission; this repository does not redistribute restricted source workbooks.*
+*Findings last source-checked October 31, 2026.*
