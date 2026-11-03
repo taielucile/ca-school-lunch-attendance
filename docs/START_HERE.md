@@ -1,84 +1,51 @@
-# Start here: reader's guide
+# Research overview
 
-This guide introduces the attendance-denominator work in [Feed California Kinders](https://github.com/whippedfruit/Feed-California-Kinders). You do not need R or Python to inspect the results. The code and source inventories are here if you want to trace or reproduce a calculation.
+This work examines attendance denominators for transitional kindergarten (TK) and kindergarten (K) within [Feed California Kinders](https://github.com/whippedfruit/Feed-California-Kinders), with attention to the comparability of school attendance and meal records.
 
-## The research question
+## Research question
 
-To study school meal participation, we need to know how many students were **in school during the meal reporting period**. For transitional kindergarten (TK) and kindergarten (K), California's statewide public records do not directly provide annual school-by-grade days attended.
+What do California's enrollment and absenteeism records establish about school-level TK/K attendance, and how closely do public-data estimates correspond to district-reported attendance?
 
-This repository documents what can be estimated from school enrollment and absence records, how the estimates compare with directly reported district attendance where available, and why some meal datasets cannot yet be combined with those denominators.
+The distinction matters because meal analyses require numerators and denominators aligned by school, grade, and reporting period. Public statewide records do not provide school-by-grade annual attended student-days directly.
 
-It does **not** claim to measure the number of children eating school meals statewide or establish a causal relationship between meals and attendance.
+## Analytical approach
 
-## A five-minute tour
+1. Extract school-level Census enrollment and grouped absence measures from CDE records.
+2. Construct combined TK/K attendance estimates under explicit calendar and enrollment assumptions.
+3. Assess record coverage, suppression, and source consistency; examine alternative denominator specifications.
+4. Compare estimates with district attendance where available and separately audit the scope and linkability of meal records.
 
-| Step | Read | Learn |
-| --- | --- | --- |
-| 1 | [Current research status](current_status.md) | What is supported, corrected, or uncertain |
-| 2 | [Results index](../results/README.md) | Which CSV answers which question |
-| 3 | [Statewide 2025–26 estimates](../results/2025_26/statewide_school_denominator_proxies.csv) | School-level Census enrollment, absences, and attendance estimates |
-| 4 | [Ventura 17-school comparison](../results/2025_26/ventura_17_school_ada_validation.csv) | Constructed estimates versus district-reported attendance |
-| 5 | [Calculation map](repository_workflow.md) | How sources, code, checks, and results connect |
+The [calculation map](repository_workflow.md) identifies the scripts and outputs, and the [denominator method note](denominator_method_note.md) discusses the measurement assumptions.
 
-For definitions of the output fields, use the [2025–26 file guide](reading_2025_26_files.md).
+## Ventura comparison
 
-## How to read an estimate
-
-The main calculation uses **combined TK/K** enrollment and absence records:
-
-```text
-Estimated students attending per day
-= TK/K Census Day enrollment − (TK/K total days absent ÷ 180)
-```
-
-**Illustration, not an actual school's result:** If 60 TK/K students were enrolled on Census Day and the combined absence record shows 540 days absent, the estimate is `60 − 540/180 = 57` students attending per day. Multiplying by 180 gives an **estimated** 10,260 attended student-days.
-
-This is not directly measured annual attendance. Census Day enrollment is a point-in-time snapshot; some students enter or leave during the school year. The 180-day calendar is assumed. CDE's absence figures also combine TK and K, so separate grade estimates require allocation assumptions.
-
-| Label | What it means |
-| --- | --- |
-| **Observed** | A number recorded in an original source, such as district-reported average daily attendance (ADA) |
-| **Estimated / proxy** | A constructed attendance measure relying on enrollment and a day-count assumption |
-| **Grade-allocated estimate** | A modeled TK, K, or grade 1 number made by allocating grouped absence totals according to enrollment shares |
-| **Candidate school match** | A name-based possible link that has not been verified with a stable identifier |
-| **Missing / suppressed** | Unavailable data, **not zero** |
-
-The [method note](denominator_method_note.md) explains the difference between Census and cumulative-enrollment estimates.
-
-## One concrete comparison: Ventura
-
-The October 31 source check covers **17 matched schools**:
+The October 31, 2026 source check includes 17 matched Ventura schools:
 
 | Measure | Sum of average daily students |
 | --- | ---: |
-| District-reported combined TK/K ADA | **1,179.14** |
+| District-reported TK/K ADA | 1,179.14 |
 | Census-based estimate | 1,186.06 |
 | Cumulative-enrollment estimate | 1,236.06 |
 
-The Census-based estimate is closer in this set of schools, **not necessarily across California**. These are average daily students, **not meals, unique meal recipients, or annual attended student-days**. See the [CSV](../results/2025_26/ventura_17_school_ada_validation.csv) and [Ventura notes](ventura_tkk_ada_validation_2026-10.md).
+In this matched set, the Census-based estimate is closer to district-reported attendance. The comparison is district-specific and does not establish statewide performance. See the [comparison file](../results/2025_26/ventura_17_school_ada_validation.csv) and [validation note](ventura_tkk_ada_validation_2026-10.md).
 
-## What you should not conclude
+## Measurement boundaries
 
-- A statewide kindergarten meal-participation rate has **not** been established.
-- The statewide CDE-derived figures are **not** actual annual TK/K ADA or grade-specific attended days.
-- The 180-day assumption is **not** verified for every school or student.
-- FNS10 service-site name matches are **not** confirmed school identities.
-- 2024–25 meal-claim totals cannot be divided by 2025–26 attendance estimates to produce a meaningful participation rate.
+The principal 2025–26 measure is `TK/K Census enrollment − combined TK/K absence days / 180`. The 180-day benchmark is assumed; Census enrollment and cumulative enrollment capture different populations and neither records individual enrollment duration. Separately reported TK, K, or grade 1 estimates allocate absences from broader grade groups rather than observing grade-specific attendance directly.
 
-## Where to read next
+The FNS10 meal claims are service-site meal totals, not kindergarten-specific student counts. Proposed name-based site matches remain unverified. The 2024–25 meal claims and 2025–26 attendance estimates also cover different school years, so these files do not establish a statewide kindergarten meal-participation rate.
 
-| Question | Best starting point |
+## Research materials
+
+| Resource | Contents |
 | --- | --- |
-| I want a district's CSV | [District file index](../results/README.md#district-files) |
-| What do the columns mean? | [2025–26 guide](reading_2025_26_files.md) |
-| Why was this denominator chosen? | [Denominator methods](denominator_method_note.md) |
-| What code generated the outputs? | [Calculation map](repository_workflow.md) |
-| Which original files are needed? | [Source and run instructions](../data/README.md) |
-| Were earlier numbers corrected? | [Current status](current_status.md), [October 31 audit](independent_research_integrity_audit_2026_10_31.md) |
-| What do the other documents cover? | [Documentation index](README.md) |
+| [Current status](current_status.md) | Verified results, revisions, and open measurement questions |
+| [Results index](../results/README.md) | Statewide and district tables, validation, and source-review outputs |
+| [2025–26 variable guide](reading_2025_26_files.md) | File structure and field definitions |
+| [Denominator method note](denominator_method_note.md) | Estimands, proxy specifications, and sensitivity analysis |
+| [Calculation map](repository_workflow.md) | Source-to-output relationships |
+| [Original sources and commands](../data/README.md) | Inputs and reproduction instructions |
+| [October 31 audit](independent_research_integrity_audit_2026_10_31.md) | Source checks and corrected claims |
+| [Documentation index](README.md) | District studies and historical notes |
 
-**Common abbreviations:** CDE = California Department of Education; TK = transitional kindergarten; K = kindergarten; CDS = county-district-school identifier (keep as text); ADA = student average daily attendance; ADP = meal average daily participation; FNS10 = school meal claim records.
-
-**Access:** The repository is currently private. The original district workbooks and project source files may require separate access. This documentation is intended to be browsed as a research record, not to assign tasks to other contributors.
-
-*Source findings last reviewed October 31, 2026; reader navigation revised November 3, 2026.*
+*Analytical status based on the October 31, 2026 source review.*
