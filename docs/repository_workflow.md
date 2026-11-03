@@ -1,8 +1,6 @@
-# Calculation map: from source files to results
+# Calculation map: sources, methods, and outputs
 
-This page explains how the analysis is organized so a reader can **trace a result to its source and calculation**. It is not a contribution workflow.
-
-## From original source to estimate
+## Attendance extraction
 
 ```text
 California enrollment file + CDE Absenteeism by Reason file
@@ -21,9 +19,9 @@ California enrollment file + CDE Absenteeism by Reason file
       reported ADA when comparable data exist
 ```
 
-A meal-claim count is not an attendance measure. The separate meal-site and meal-file checks do not automatically produce participation rates.
+Meal-site linkage and meal-file comparability are assessed in separate analyses.
 
-## Find the code behind the output
+## Scripts and outputs
 
 | Output | Code / method | Open the results |
 | --- | --- | --- |
@@ -33,9 +31,9 @@ A meal-claim count is not an attendance measure. The separate meal-site and meal
 | Original 2024–25 analysis | [`RUN_ALL.R`](../RUN_ALL.R) and [`R/`](../R/) | [Source guide](../data/README.md#earlier-r-workflow) and [method note](denominator_method_note.md) |
 | FNS10 site matching candidates | [`scripts/audit_fns10_links.py`](../scripts/audit_fns10_links.py) and [linkage audit](fns10_cde_linkage_review_2026_10.md) | [2024–25 candidate file index](../results/README.md#202425-statewide-meal-claims) |
 
-**Important:** The standalone Python script produces its own output filenames in the folder you choose. The committed named-district results also involve separate extraction, reshaping, and source-review steps. Running just that Python script does **not** regenerate every committed result.
+The standalone Python script generates the statewide output and district files with its own naming scheme. The committed selected-district results include additional extraction, reshaping, and source-review steps.
 
-## Keep these units distinct
+## Measurement definitions
 
 | Quantity | What it represents |
 | --- | --- |
@@ -51,13 +49,11 @@ A meal-claim count is not an attendance measure. The separate meal-site and meal
 
 See the [2025–26 dictionary](reading_2025_26_files.md) for exact field names.
 
-## Verification and limits
+## Validation and provenance
 
-1. **Source and population:** Check the school-year and 14-digit CDS identifier against the original files. An initial Lodi extract missed eight schools and was later corrected.
-2. **Missingness:** Preserve suppressed and missing absence records as missing. A calculation that runs successfully is not necessarily a valid population estimate.
-3. **Reproducibility:** [Source filenames and SHA-256 values](../data/README.md) identify the versions used for the 2025–26 extract; the [October 30 execution record](verified_end_to_end_execution_2026_10_30.md) documents tests.
-4. **External checks:** The [Ventura 17-school comparison](ventura_tkk_ada_validation_2026-10.md) checks a limited district subset; it does not establish statewide accuracy.
-5. **Corrections:** The [October 31 integrity audit](independent_research_integrity_audit_2026_10_31.md) identifies corrected Lodi and Elk Grove claims.
-6. **Interpretation:** Never divide meal counts by an unmatched attendance proxy or equate schoolwide ADA with TK/K ADA.
+- **Coverage:** School-year and county-district-school (CDS) identifiers are reconciled with the source files. The [October 31 integrity audit](independent_research_integrity_audit_2026_10_31.md) documents corrections to the Lodi extract and Elk Grove source review.
+- **Missingness:** Suppressed and unavailable absence values remain missing in derived estimates.
+- **Reproducibility:** The [source inventory](../data/README.md) records filenames and SHA-256 hashes, and the [October 30 execution record](verified_end_to_end_execution_2026_10_30.md) documents verified runs.
+- **External comparison:** The [Ventura validation](ventura_tkk_ada_validation_2026-10.md) covers 17 matched schools and does not establish statewide accuracy.
+- **Comparability:** Meal and attendance measures are evaluated by school, grade, reporting period, and unit before constructing a participation measure.
 
-For a read-only tour, go back to the [reader's guide](START_HERE.md). For commands, go to the [data source guide](../data/README.md).
