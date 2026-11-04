@@ -1,0 +1,47 @@
+{
+  "date": "2026-11-04",
+  "population": "1830 uniquely name-matched 2024-25 FNS10 sponsor/site pairs without a same-name district/sponsor key",
+  "n": 1830,
+  "claimed_lunch_meals": 91838125,
+  "claimed_breakfast_meals": 53013647,
+  "name_classification_counts": {
+    "multi_site_sponsor_identity_unverified": 412,
+    "shortened_or_expanded_district_name": 1221,
+    "self_named_sponsor": 69,
+    "single_site_sponsor_identity_unverified": 128
+  },
+  "name_classification_lunch_meals": {
+    "multi_site_sponsor_identity_unverified": 17012377,
+    "shortened_or_expanded_district_name": 67278858,
+    "self_named_sponsor": 2783896,
+    "single_site_sponsor_identity_unverified": 4762994
+  },
+  "also_same_cds_in_2024_25_cbeds": 1801,
+  "same_CDS_also_assigned_to_another_exact_or_cross_pair": 0,
+  "positive_tkk_in_2025_26_cde_enrollment": 1284,
+  "positive_tkk_by_sponsor_pattern": {
+    "multi_site_sponsor_identity_unverified": 217,
+    "shortened_or_expanded_district_name": 936,
+    "single_site_sponsor_identity_unverified": 83,
+    "self_named_sponsor": 48
+  },
+  "positive_tkk_lunch_meals_by_sponsor_pattern": {
+    "multi_site_sponsor_identity_unverified": 10134593,
+    "shortened_or_expanded_district_name": 50502406,
+    "single_site_sponsor_identity_unverified": 3300726,
+    "self_named_sponsor": 2310446
+  },
+  "review_priorities": {
+    "P2: TK/K, confirm operator": 296,
+    "P4: not positive TK/K in 2025-26 file": 546,
+    "P1: TK/K, sponsor-name lead": 982,
+    "P3: TK/K, resolve history/collision": 6
+  },
+  "current_directory_school_status": {
+    "Active": 1779,
+    "Closed": 51
+  },
+  "sponsor_groups": 607,
+  "methodology": "Used 2024-25 CBEDS fallback candidate and 2026 directory candidate for temporal school-name/ID cross-check; used 2025-26 TK/K Census enrollment only to prioritize review, never as meal participation denominator. Sponsor-district prefix and sponsor=site checks are heuristics, not official affiliation.",
+  "no_acceptance": "All 1830 entries remain unreviewed, because name uniqueness and group patterns do not independently verify a CNIPS meal-site/CDS link."
+}
