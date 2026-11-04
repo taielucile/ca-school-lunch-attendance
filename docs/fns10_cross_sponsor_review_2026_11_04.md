@@ -28,6 +28,19 @@ The **California CDE CNIPS FAQ** explains that sponsor names need not match CNIP
 
 **Example:** The Santa Clarita Vlly Sch Food Svs Agency JPA appears as an official CDE Joint Powers Authority (https://sd.cde.ca.gov/SchoolDirectory/details?cdscode=19407090000000). Its 2024 food procurement documentation lists multiple member districts (https://docs.isitesoftware.com/snaf-assets%2Fdistrict%2Fsantaclaritavsfsa%2Ffiles%2FBids%2F24-25%2FRFP%202007%2FGold%20Star%20Proposal%20and%20Executed%20Contract.pdf). A sponsor-to-school-district mismatch may be a legitimate administrative structure, **not an incorrect school match**.
 
+## First external-source review (November 4)
+
+The automated candidate files are preserved as **unreviewed** snapshots; subsequent manual decisions are in a separate [review ledger](../results/2024_25/fns10_sponsor_manual_review_ledger_2026_11_04.csv).
+
+- **Santa Clarita JPA:** All **30** unique-school-name candidate sites (including **29** with 2025–26 TK/K enrollment) belong, according to the directory, to the **four districts named in the agency's 2024–25 RFP**: Castaic, Newhall, Saugus and Sulphur Springs. This corroborates the *sponsor's multi-district organizational relationship*, not any individual meal-site ID.
+- **Modesto City:** **24** candidate sites appear under **Modesto City Elementary / Modesto City High**, which the Modesto City Schools website confirms are two districts in the same organization (**12** have 2025–26 positive TK/K enrollment). Their source sponsor label 'Modesto City' is consistent with the umbrella name, but still lacks a program-site key.
+- **Chula Vista:** **40** candidate sites (all with 2025–26 positive TK/K enrollment) are under CDE's **Chula Vista Elementary** district. This supports the abbreviated district-name interpretation, but the FNS10 sponsor-to-CNIPS linkage has not been independently checked.
+- **Definite false automated candidate:** FNS10 sponsor **'Fullerton'**, site **'Golden Hill Elementary'**, was automatically assigned **CDS 37683380108266**, which the CDE directory places in **San Diego Unified**. Fullerton has **Golden Hill School for Creative & Performing Arts**, **CDS 30665066028054**, a more plausible *unconfirmed alternative*. The San Diego CDS is **rejected for this Fullerton record**. This illustrates why even a statewide-unique name can misidentify a school when the sponsor/district is not checked.
+
+These checks document organizational plausibility for **94** cross-sponsor candidate pairs and reject **one** wrong CDS. **None of the 94 site identities has been accepted as an authoritative nutrition-site-to-CDS match.**
+
+The **29 candidates without concordant 2024–25 CBEDS and 2026 CDS suggestions** remain a high-risk review stratum, not an invitation to replace historical school identities with the latest similarly named campus. For historical results, prioritize source-year school identity and the original FNS10 sponsor/site record.
+
 ## Actionable review order
 
 1. Start with positive-TK/K candidate schools whose source sponsor either **names the school** or appears to be a **shortened district name**, and whose 2024–25 CBEDS and 2026 directory CDS candidates agree. This gives a manageable first review group.
