@@ -15,6 +15,21 @@
 
 Names were normalized for case, diacritics, punctuation, and common district suffixes. Unique exact matches were separated from ambiguous exact matches. When no exact match existed, candidate names were ranked first **inside the matching district** using a weighted similarity measure (55% normalized edit similarity, 45% token Dice similarity). High-scoring review candidates require score at least 0.90 and a margin of at least 0.05 over runner-up. Cross-sponsor matches were ranked separately and **never treated as confirmed links**, even with an identical school name. The 2026 directory includes closed and merged entries; records opened after June 2025 or closed before July 2024 were screened out when dates were available, with missing dates retained.
 
+## Fuzzy and cross-sponsor review queues
+
+- **11** high-scoring within-district fuzzy proposals and **7** high-scoring statewide fuzzy proposals where the sponsor/district identity does not agree: **18 review suggestions, zero accepted links**. Together these 18 sponsor/site pairs account for **889,833 claimed lunches** (about 0.16% of all statewide lunches).
+- **875** other within-district fuzzy suggestions scored below the conservative acceptance-for-review threshold (of these, 11 scored at least 0.85 and 32 at least 0.80); they are retained for manual screening, not counted as matched.
+- **1,830** sponsor/site pairs have a school name that is unique statewide after normalization but **no matching district-name block**. Another **369** have multiple statewide schools with the same normalized name. These are *cross-sponsor identity problems*, not established school links. They may be more important to adjudicate than squeezing the similarity threshold.
+- High name similarity can still be false: **River Islands Technology Academy** was suggested as **River Islands Technology Academy II**. Treat suffixes, campus numbers, and multi-site operators as identity warnings.
+- Many high-scoring fuzzy suggestions reflect truncated names or minor typos; their score does not identify the correct CDS independently.
+
+### Recommended review order
+
+1. Reconcile the **75 new exact candidate pairs** and **83 lost exact candidates** against earlier records, keeping the historical 2024–25 school identity as the reference.
+2. Validate school identity for high-volume **cross-sponsor unique-name** candidates before treating them as school matches.
+3. Review the 18 strong fuzzy suggestions by sponsor/site context, especially distinguishing alternate campus suffixes, then lower-scoring within-district suggestions in descending meal-volume order.
+4. Record accepted/rejected decisions with source evidence; do not assign all candidates automatically.
+
 ## Important limits
 
 Neither exact nor fuzzy matching establishes that a nutrition service site is a single school. The directory is updated dynamically and its 2026 names/statuses may not represent 2024–25. The resulting candidates need a review ledger, especially when sponsors operate multiple schools or meal-service sites. FNS10 claims count meals, not distinct students or TK/K meals. Do not compute kindergarten meal participation from these schoolwide claims.
