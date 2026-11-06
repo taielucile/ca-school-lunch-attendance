@@ -1,38 +1,36 @@
-<PARSED TEXT FOR SHEET: 1 / 1 TABS
-TAB NAME: 09_outputs_lodi_coverage_audit.csv>
-index,cde_school,cds_code,meal_workbook,attendance_proxy_available,reason
-0,Lois E. Borchardt Elementary,39685850100560,yes,yes,matched
-1,Ansel Adams,39685850102632,yes,yes,matched
-2,Ellerth E. Larson Elementary,39685850108209,yes,yes,matched
-3,Manlio Silva Elementary,39685850108217,yes,yes,matched
-4,George Lincoln Mosher,39685850111286,yes,yes,matched
-5,Woodbridge,39685850111419,yes,yes,matched
-6,Podesta Ranch Elementary,39685850116608,yes,yes,matched
-7,Rio Valley Charter,39685850122580,no,yes,not in meal workbook
-8,Valley Robotics Academy,39685850139261,yes,yes,matched
-9,Independence,39685853930344,no,no,suppressed absence data
-10,Davis Elementary,39685856042055,yes,yes,matched
-11,Erma B. Reese Elementary,39685856042071,yes,yes,matched
-12,George Washington Elementary,39685856042097,yes,yes,matched
-13,Lakewood Elementary,39685856042139,yes,yes,matched
-14,Lawrence Elementary,39685856042147,yes,yes,matched
-15,Leroy Nichols Elementary,39685856042154,yes,yes,matched
-16,Live Oak Elementary,39685856042170,yes,yes,matched
-17,Lockeford Elementary,39685856042188,yes,yes,matched
-18,Clyde W. Needham Elementary,39685856042204,yes,yes,matched
-19,Vinewood Elementary,39685856042295,yes,yes,matched
-20,Heritage Elementary,39685856097760,yes,yes,matched
-21,Victor Elementary,39685856098057,yes,yes,matched
-22,Oakwood Elementary,39685856100341,yes,yes,matched
-23,Parklane Elementary,39685856100366,yes,yes,matched
-24,Creekside Elementary,39685856104038,yes,yes,matched
-25,Clairmont Elementary,39685856104426,yes,yes,matched
-26,Wagner-Holt Elementary,39685856108807,yes,yes,matched
-27,Beckman Elementary,39685856108856,yes,yes,matched
-28,Westwood Elementary,39685856109839,yes,yes,matched
-29,Sutherland Elementary,39685856110944,yes,yes,matched
-30,John Muir Elementary,39685856111983,yes,yes,matched
-31,Aspire Vincent Shalvey Academy,39685856116594,no,yes,not in meal workbook
-32,Joe Serna Jr. Charter,39685856117675,yes,yes,matched
-33,Aspire River Oaks Charter,39685856118921,no,yes,not in meal workbook
-34,Julia Morgan Elementary,39685856120059,yes,yes,matched
+"cde_school","cds_code","meal_workbook","attendance_proxy_available","reason"
+"Lois E. Borchardt Elementary","39685850100560","yes","yes","matched"
+"Ansel Adams","39685850102632","yes","yes","matched"
+"Ellerth E. Larson Elementary","39685850108209","yes","yes","matched"
+"Manlio Silva Elementary","39685850108217","yes","yes","matched"
+"George Lincoln Mosher","39685850111286","yes","yes","matched"
+"Woodbridge","39685850111419","yes","yes","matched"
+"Podesta Ranch Elementary","39685850116608","yes","yes","matched"
+"Rio Valley Charter","39685850122580","no","yes","not in meal workbook"
+"Valley Robotics Academy","39685850139261","yes","yes","matched"
+"Independence","39685853930344","no","no","suppressed absence data"
+"Davis Elementary","39685856042055","yes","yes","matched"
+"Erma B. Reese Elementary","39685856042071","yes","yes","matched"
+"George Washington Elementary","39685856042097","yes","yes","matched"
+"Lakewood Elementary","39685856042139","yes","yes","matched"
+"Lawrence Elementary","39685856042147","yes","yes","matched"
+"Leroy Nichols Elementary","39685856042154","yes","yes","matched"
+"Live Oak Elementary","39685856042170","yes","yes","matched"
+"Lockeford Elementary","39685856042188","yes","yes","matched"
+"Clyde W. Needham Elementary","39685856042204","yes","yes","matched"
+"Vinewood Elementary","39685856042295","yes","yes","matched"
+"Heritage Elementary","39685856097760","yes","yes","matched"
+"Victor Elementary","39685856098057","yes","yes","matched"
+"Oakwood Elementary","39685856100341","yes","yes","matched"
+"Parklane Elementary","39685856100366","yes","yes","matched"
+"Creekside Elementary","39685856104038","yes","yes","matched"
+"Clairmont Elementary","39685856104426","yes","yes","matched"
+"Wagner-Holt Elementary","39685856108807","yes","yes","matched"
+"Beckman Elementary","39685856108856","yes","yes","matched"
+"Westwood Elementary","39685856109839","yes","yes","matched"
+"Sutherland Elementary","39685856110944","yes","yes","matched"
+"John Muir Elementary","39685856111983","yes","yes","matched"
+"Aspire Vincent Shalvey Academy","39685856116594","no","yes","not in meal workbook"
+"Joe Serna Jr. Charter","39685856117675","yes","yes","matched"
+"Aspire River Oaks Charter","39685856118921","no","yes","not in meal workbook"
+"Julia Morgan Elementary","39685856120059","yes","yes","matched"
