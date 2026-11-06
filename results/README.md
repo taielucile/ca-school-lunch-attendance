@@ -40,7 +40,7 @@ The statewide school file contains 6,261 CDE records with positive TK/K Census e
 
 ### Lodi 2025–26 kindergarten meal review
 
-The [Lodi 31-school review](../studies/lodi_2025_26/README.md) combines kindergarten-labeled meal counts from the district workbook with **modeled**, not observed, kindergarten attendance days. It includes [school calculations](../studies/lodi_2025_26/outputs/lodi_31_school_k_meal_attendance_review.csv), a [school figure](../studies/lodi_2025_26/outputs/lodi_k_meals_per_100_estimated_attendance_days.svg), the [draft district report](../studies/lodi_2025_26/district_review/REPORT.md), and [R reproduction](../studies/lodi_2025_26/code/reproduce_lodi_2025_26.R). These meal-to-day ratios are not validated percentages of kindergarten students receiving meals.
+The [Lodi 31-school review](../studies/lodi_2025_26/README.md) combines kindergarten-labeled meal counts from the district workbook with **modeled**, not observed, kindergarten attendance days. The analysis handoff provides [school-level calculations](../studies/lodi_2025_26/outputs/lodi_31_school_k_meal_attendance_review.csv), a [coverage audit](../studies/lodi_2025_26/outputs/lodi_coverage_audit.csv), [source snapshots](../studies/lodi_2025_26/inputs/) and [tested R reproduction](../studies/lodi_2025_26/code/reproduce_lodi_2025_26.R). The report and visualizations are Angela's deliverables. These meal-to-day ratios are not validated percentages of kindergarten students receiving meals.
 
 ## Coverage and source checks
 

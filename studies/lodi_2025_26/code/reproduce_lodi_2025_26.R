@@ -141,30 +141,6 @@ stopifnot(abs(sum(attended)-287174.3372854)<1e-4)
 stopifnot(abs(100*sum(b)/sum(attended)-24.607700210262735)<1e-7)
 stopifnot(abs(100*sum(l)/sum(attended)-70.91128055694587)<1e-7)
 
-# District-facing figure; K only because Preschool is not a verified TK category.
-ord <- order(review$lunch_per_100_attended_days, decreasing=FALSE)
-sites <- review$cde_school[ord]
-short <- sub(' Elementary$', '', sites)
-short <- sub(' Elementary School$', '', short)
-png(file.path(output_dir,'lodi_k_meals_per_100_estimated_attendance_days.png'),
-    width=1800,height=1700,res=170)
-par(mar=c(5.4,14,4,1.5), cex=0.9)
-y <- seq_along(ord)
-x1 <- review$breakfast_per_100_attended_days[ord]
-x2 <- review$lunch_per_100_attended_days[ord]
-plot(NA, xlim=c(0,107),ylim=c(.5, N+.5), xlab='Meals per 100 estimated kindergarten attendance days',
-     ylab='',yaxt='n', main='Lodi Unified | Kindergarten meals and estimated attendance, 2025-26',axes=FALSE)
-axis(1, at=seq(0,100,20));axis(2,at=y,labels=short,las=2,cex.axis=.73,tick=FALSE)
-abline(v=seq(0,100,20),col='grey92',lwd=.8)
-abline(v=100,col='grey45',lty=2)
-segments(x1,y,x2,y,col='grey78',lwd=1.3)
-points(x1,y,pch=17,col='#3073A2',cex=.95)
-points(x2,y,pch=16,col='#CC6E3F',cex=.95)
-legend('bottomright',legend=c('Breakfast','Lunch'),pch=c(17,16),
-       col=c('#3073A2','#CC6E3F'),bty='n',horiz=TRUE)
-mtext('Denominator: modeled K attendance days, not K pupils or observed K attendance.',
-      side=1,line=3.7,cex=.69)
-box(bty='l')
-dev.off()
+# Figure design and reporting are handled separately; this script produces analysis-ready tables.
 cat('OK: ', N,' matched schools; K breakfasts=',sum(b), ', lunches=',sum(l),
     '; K attended-days=',round(sum(attended)), '\n',sep='')

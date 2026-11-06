@@ -16,7 +16,7 @@ OK: 31 matched schools; K breakfasts=70667, lunches=203639; K attended-days=2871
 PASS: 31 school joins, 35 source schools, meals, K denominator and ratios verified.
 ```
 
-The pipeline reads three preserved source CSV snapshots, reconciles the school lists and attendance allocation, checks fixed source totals, writes school-level and aggregate CSV files, and draws the PNG figure. The output was checked against the earlier independently calculated Python results; numerical school measures agreed (minor text-formatting differences in integer-like decimal cells only).
+The pipeline reads three preserved source CSV snapshots, reconciles the school lists and attendance allocation, checks fixed source totals, and writes school-level, coverage, and aggregate CSV tables. On November 6, 2026, the analysis-only R script and independent test were rerun after removing figure generation; both passed. Final figure creation and reporting belong to Angela. The output was checked against the earlier independently calculated Python results; numerical school measures agreed (minor text-formatting differences in integer-like decimal cells only).
 
 **Not tested:** `--meal-xlsx` direct import of the original district workbook using `readxl`. The original workbook was inspected separately and its 31 rows and printed K grand totals were reconciled; the tested R workflow reads the preserved audited meal CSV snapshot.
 

@@ -1,5 +1,5 @@
 #!/usr/bin/env Rscript
-# Independent R verification for Lodi handoff; run after reproduce_lodi_2025_26.R.
+# Independent R verification of Lodi analysis inputs and outputs; run after reproduction.
 args <- commandArgs(trailingOnly=TRUE)
 root <- if (length(args)) normalizePath(args[[1]]) else dirname(dirname(normalizePath(sub('^--file=', '', grep('^--file=', commandArgs(),value=TRUE)[1]))))
 input_dir <- file.path(root, 'inputs')
@@ -26,5 +26,5 @@ stopifnot(sum(num(join$tk_census)) == 853)
 stopifnot(abs(sum(num(join$estimated_k_attended_days))-287174.3372854)<1e-3)
 stopifnot(abs(num(summary$breakfasts_per_100_attended_days)-24.607700210262735)<1e-7)
 stopifnot(abs(num(summary$lunches_per_100_attended_days)-70.91128055694587)<1e-7)
-stopifnot(file.exists(file.path(output_dir,'lodi_k_meals_per_100_estimated_attendance_days.png')))
+
 cat('PASS: 31 school joins, 35 source schools, meals, K denominator and ratios verified.\n')
