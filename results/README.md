@@ -37,6 +37,11 @@ The Lodi file is the corrected version with 35 TK/K-serving school records (34 c
 
 The statewide school file contains 6,261 CDE records with positive TK/K Census enrollment. Excluding 96 administrative placeholder codes leaves 6,165, of which 5,912 have a calculable estimate. The calculation assumes 180 instructional days; the public absence file combines TK and K. These are not observed attended days. See [field definitions and exclusions](../docs/reading_2025_26_files.md).
 
+
+### Lodi 2025–26 kindergarten meal review
+
+The [Lodi 31-school review](../studies/lodi_2025_26/README.md) combines kindergarten-labeled meal counts from the district workbook with **modeled**, not observed, kindergarten attendance days. It includes [school calculations](../studies/lodi_2025_26/outputs/lodi_31_school_k_meal_attendance_review.csv), a [school figure](../studies/lodi_2025_26/outputs/lodi_k_meals_per_100_estimated_attendance_days.svg), the [draft district report](../studies/lodi_2025_26/district_review/REPORT.md), and [R reproduction](../studies/lodi_2025_26/code/reproduce_lodi_2025_26.R). These meal-to-day ratios are not validated percentages of kindergarten students receiving meals.
+
 ## Coverage and source checks
 
 The following files summarize extraction coverage and missingness, rather than estimation accuracy:
