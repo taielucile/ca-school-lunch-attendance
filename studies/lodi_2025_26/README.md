@@ -1,12 +1,12 @@
 # Lodi Unified: 2025–26 kindergarten analysis handoff
 
-**Prepared for Angela's reporting and visualization work.** This folder provides verified, school-level meal counts and modeled kindergarten attendance denominators. It does **not** contain or claim to finalize a district report or published figures.
+Verified source extracts, matched school-level meal counts, modeled kindergarten attendance estimates, and R checks for the Lodi analysis. Angela is preparing the district report and visualizations.
 
 ## Start here
 
 | File | Use |
 | --- | --- |
-| [Handoff for Angela](HANDOFF_FOR_ANGELA.md) | Key outputs, variable meanings, checks and issues to resolve before writing or plotting |
+| [Handoff for Angela](HANDOFF_FOR_ANGELA.md) | Analysis files, reconciled results, and measurement notes |
 | [31-school analysis table](outputs/lodi_31_school_k_meal_attendance_review.csv) | One row per matched school with meal totals, denominator components and meal-to-day ratios |
 | [District summary](outputs/lodi_k_summary_2025_26.csv) | Totals and ratios calculated as pooled totals, not unweighted school averages |
 | [Coverage audit](outputs/lodi_coverage_audit.csv) | 31 included and 4 excluded CDE records |
