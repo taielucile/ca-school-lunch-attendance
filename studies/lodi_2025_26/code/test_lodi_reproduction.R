@@ -17,6 +17,26 @@ stopifnot(setequal(join$source_school,elig$school))
 stopifnot(setequal(join$source_school,meals$source_school))
 stopifnot(setequal(join$cds_code,state$cds_code[state$school_name %in% join$cde_school]))
 stopifnot(sum(coverage$meal_workbook=='yes')==31L, sum(coverage$meal_workbook=='no')==4L)
+stopifnot(identical(coverage$reason[coverage$cde_school=='Independence'],
+                    'not in meal workbook; absence data suppressed'))
+stopifnot(all(coverage$reason[coverage$meal_workbook=='yes']=='matched'))
+# Verify each published school value independently from the input snapshots.
+src <- state[match(join$cds_code, state$cds_code),,drop=FALSE]
+raw_meals <- meals[match(join$source_school, meals$source_school),,drop=FALSE]
+stopifnot(!anyNA(src$cds_code), !anyNA(raw_meals$source_school))
+k <- as.numeric(src$k_census_enrollment)
+tk <- as.numeric(src$tk_census_enrollment)
+a <- as.numeric(src$tk_k_total_absence_days)
+days <- as.numeric(src$instructional_days_assumed)
+model_days <- (k-a/days*k/(k+tk))*days
+stopifnot(all(is.finite(model_days)),all(model_days>0))
+stopifnot(max(abs(as.numeric(join$estimated_k_attended_days)-model_days))<1e-6)
+stopifnot(identical(as.numeric(join$k_breakfast_meals),as.numeric(raw_meals$breakfast_k)))
+stopifnot(identical(as.numeric(join$k_lunch_meals),as.numeric(raw_meals$lunch_k)))
+stopifnot(max(abs(as.numeric(join$breakfast_per_100_attended_days)-
+                  100*as.numeric(raw_meals$breakfast_k)/model_days))<5.1e-6)
+stopifnot(max(abs(as.numeric(join$lunch_per_100_attended_days)-
+                  100*as.numeric(raw_meals$lunch_k)/model_days))<5.1e-6)
 stopifnot(!anyNA(join$estimated_k_attended_days), all(as.numeric(join$estimated_k_attended_days)>0))
 num <- function(x) suppressWarnings(as.numeric(x))
 stopifnot(sum(num(join$k_breakfast_meals)) == 70667)
