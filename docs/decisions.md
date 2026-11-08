@@ -147,12 +147,12 @@ Andrew requested a memo detailing the alternative approaches and the differences
 
 ---
 
-## 2026-11-05 — Lodi kindergarten-specific analysis handoff
+## 2026-11-08 — Lodi kindergarten-only working comparison
 
-**Scope:** Lodi's kindergarten-labeled breakfast and lunch counts are being prepared for Angela's figures and district report. The data preparation uses a kindergarten-only **modeled** attendance denominator constructed by assigning combined public TK/K absence days to kindergarten in proportion to the school's TK/K Census enrollment.
+**Analytical status:** The Lodi handoff pairs kindergarten-labeled breakfast and lunch counts with a **modeled** kindergarten attendance denominator. The model allocates publicly reported combined TK/K absences to kindergarten using kindergarten's share of school TK/K Census enrollment, with a 180-day assumption.
 
-**Reason:** The numerator is labeled Kindergarten, while the public absenteeism file only reports TK/K jointly. The Lodi-specific Census-based allocation was retained for the descriptive comparison, consistent with the team's recent Ventura discussion. This is a working model, not measured kindergarten attendance and not evidence that the Census approach is uniformly more accurate in Lodi.
+**Why this comparison exists:** The source meal counts are labeled Kindergarten, while the available public absence data are not grade-specific. This allocation permits a descriptive comparison but introduces assumptions about enrollment exposure and grade-level absence patterns. It has **not** been established as a validated attendance measure or a team-approved replacement for the earlier combined TK/K denominator.
 
-**Relationship to the September decision:** The earlier choice to use combined TK/K as the main public-data denominator remains historically valid for that analysis. The Lodi kindergarten comparison has a different numerator and therefore uses an explicitly additional grade-allocation assumption. It does **not** replace the combined TK/K analysis across the repository.
+**Relationship to September:** The September choice of combined TK/K as the primary public-data analysis unit remains a separate, earlier decision. This kindergarten-only handoff does not revise that decision.
 
-**Remaining limitations:** School-by-kindergarten attended days, precise meal workbook service dates, and grade-field definitions remain unresolved. See [the Lodi study handoff](../studies/lodi_2025_26/HANDOFF_FOR_ANGELA.md) and [source QA](../studies/lodi_2025_26/internal/QA_AND_OPEN_QUESTIONS.md). Report writing and visualization are handled separately by Angela.
+**Outstanding:** The meal workbook's exact service dates, kindergarten attendance days, and grade labels remain unresolved. The figures are meals per **modeled kindergarten attendance day**, not verified participation percentages. See [Lodi handoff](../studies/lodi_2025_26/HANDOFF_FOR_ANGELA.md) and [QA notes](../studies/lodi_2025_26/internal/QA_AND_OPEN_QUESTIONS.md).
