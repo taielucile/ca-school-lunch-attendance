@@ -144,3 +144,15 @@ Andrew requested a memo detailing the alternative approaches and the differences
 **Decision:** Retain the 180-day construction as the common comparison benchmark, but correct school-specific calendar documentation using official calendars. Aspire River Oaks' 2024–25 calendar lists 175 weekday instructional days and one Saturday School day; Vincent Shalvey's official family calendar supports a manually counted 184 weekdays; Joe Serna's calendar supports 180 weekdays. These counts inform a limited sensitivity check and do not identify student-specific attendance exposure. Keep Rio Valley in the denominator universe but separate it from the primary campus-based meal sample absent evidence about its meal-serving site and target population.
 
 **Meal-data decision:** Record the Irvine November 3–7, 2025 meal extraction as provisional. The report totals reconcile, but 70 possible school-grade-day-meal slots have no row. Treat them as zero only as an explicit assumption until report semantics are confirmed. Keep breakfast and lunch separate and describe rates as meals per attending student-day.
+
+---
+
+## 2026-11-05 — Lodi kindergarten-specific analysis handoff
+
+**Scope:** Lodi's kindergarten-labeled breakfast and lunch counts are being prepared for Angela's figures and district report. The data preparation uses a kindergarten-only **modeled** attendance denominator constructed by assigning combined public TK/K absence days to kindergarten in proportion to the school's TK/K Census enrollment.
+
+**Reason:** The numerator is labeled Kindergarten, while the public absenteeism file only reports TK/K jointly. The Lodi-specific Census-based allocation was retained for the descriptive comparison, consistent with the team's recent Ventura discussion. This is a working model, not measured kindergarten attendance and not evidence that the Census approach is uniformly more accurate in Lodi.
+
+**Relationship to the September decision:** The earlier choice to use combined TK/K as the main public-data denominator remains historically valid for that analysis. The Lodi kindergarten comparison has a different numerator and therefore uses an explicitly additional grade-allocation assumption. It does **not** replace the combined TK/K analysis across the repository.
+
+**Remaining limitations:** School-by-kindergarten attended days, precise meal workbook service dates, and grade-field definitions remain unresolved. See [the Lodi study handoff](../studies/lodi_2025_26/HANDOFF_FOR_ANGELA.md) and [source QA](../studies/lodi_2025_26/internal/QA_AND_OPEN_QUESTIONS.md). Report writing and visualization are handled separately by Angela.
