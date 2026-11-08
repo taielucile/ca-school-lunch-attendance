@@ -114,14 +114,24 @@ review <- data.frame(
   preschool_lunch_meals=meals$lunch_preschool,
   stringsAsFactors=FALSE
 )
+# Known audited-source invariants apply to both the snapshot and the XLSX route.
+# Do not silently accept a modified workbook without reviewing its provenance.
+stopifnot(sum(b)==70667, sum(l)==203639)
+stopifnot(sum(k_enrolled)==1763, sum(tk_enrolled)==853)
+stopifnot(abs(sum(attended)-287174.3372854)<1e-4)
+stopifnot(abs(100*sum(b)/sum(attended)-24.607700210262735)<1e-7)
+stopifnot(abs(100*sum(l)/sum(attended)-70.91128055694587)<1e-7)
+
 write.csv(review, file.path(output_dir, 'lodi_31_school_k_meal_attendance_review.csv'), row.names=FALSE, na='')
 
 coverage <- data.frame(
   cde_school=state$school_name, cds_code=state$cds_code,
   meal_workbook=ifelse(state$key %in% meals$key, 'yes', 'no'),
   attendance_proxy_available=ifelse(state$flag_missing_tkk_estimate=='yes', 'no', 'yes'),
-  reason=ifelse(state$key %in% meals$key,'matched',
-                ifelse(state$flag_missing_tkk_estimate=='yes','suppressed absence data','not in meal workbook'))
+  reason=ifelse(state$key %in% meals$key, 'matched',
+                ifelse(state$flag_missing_tkk_estimate == 'yes',
+                       'not in meal workbook; absence data suppressed',
+                       'not in meal workbook'))
 )
 write.csv(coverage, file.path(output_dir,'lodi_coverage_audit.csv'),row.names=FALSE)
 
@@ -133,13 +143,6 @@ summary <- data.frame(
   lunches_per_100_attended_days=100*sum(l)/sum(attended)
 )
 write.csv(summary,file.path(output_dir,'lodi_k_summary_2025_26.csv'),row.names=FALSE)
-# Known audited-source invariants apply to both the snapshot and the XLSX route.
-# Do not silently accept a modified workbook without reviewing its provenance.
-stopifnot(sum(b)==70667, sum(l)==203639)
-stopifnot(sum(k_enrolled)==1763, sum(tk_enrolled)==853)
-stopifnot(abs(sum(attended)-287174.3372854)<1e-4)
-stopifnot(abs(100*sum(b)/sum(attended)-24.607700210262735)<1e-7)
-stopifnot(abs(100*sum(l)/sum(attended)-70.91128055694587)<1e-7)
 
 # Figure design and reporting are handled separately; this script produces analysis-ready tables.
 cat('OK: ', N,' matched schools; K breakfasts=',sum(b), ', lunches=',sum(l),
