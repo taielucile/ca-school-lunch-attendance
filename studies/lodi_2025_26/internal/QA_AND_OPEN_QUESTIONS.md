@@ -1,32 +1,33 @@
-# Lodi 2025–26: internal QA and open questions
+# Lodi 2025–26 | Source and methods QA
 
-**For research-team review, not part of the district-facing report.** This note is stored separately from `district_review/` and must not be attached to a district message by default. This repository is public, so the label “internal” describes intended use, not access control.
+Research-team source audit. This repository is public; this file is not access-restricted. The study contains analysis outputs, not a district report or a visualization deliverable.
 
-## Verified on November 6, 2026
+## Checks completed November 8, 2026
 
-- Original Lodi meal workbook has 31 distinct schools in each of its Breakfast and Lunch sheets; names match across sheets and exactly match the kindergarten eligibility extract’s 31 schools.
-- All 31 meals schools matched the corrected 2025–26 CDE school extract. Four additional CDE schools not in the meal workbook were excluded from both numerator and denominator: Rio Valley Charter, Independence, Aspire Vincent Shalvey Academy, and Aspire River Oaks Charter. Independence has suppressed attendance inputs, but that does not affect any matched school.
-- Kindergarten breakfast cells sum to **70,667** and lunch cells to **203,639**, reconciling to workbook printed grand totals.
-- Across the 31 matched schools, kindergarten Census enrollment is **1,763** and TK Census enrollment is **853**. Estimated K ADA totals **1,595.413**, or **287,174.337 modeled attended K student-days** under 180 assumed days.
-- The source-specific K allocation formula was checked school-by-school: `K_Census − (TKK_absence_days / 180) × K_Census / (TK_Census + K_Census)`.
-- Breakfasts and lunches per 100 modeled K attendance days are respectively **24.6077** and **70.9113**, from total meals divided by total modeled days. School ratios span **4.10–68.78** and **35.91–97.12**, respectively.
-- The reorganized base-R script and independent R checks passed from the standalone input snapshots. The directly imported XLSX route (`--meal-xlsx`) has not been execution-tested; it requires `readxl` and dependencies.
+- The original Lodi workbook, Git blob `f71fc0f26933011f14a05586f67a475aedccc643`, contains 31 school records in both Breakfast and Lunch. All 62 kindergarten meal values agree with the preserved extract at the school level. Grade counts reconcile to every school's total. Grand kindergarten totals are **70,667 breakfasts** and **203,639 lunches**.
+- Workbook total meal counts across all grades and Preschool are 669,234 breakfasts and 1,850,382 lunches; school totals reconcile to both figures. The workbook reports rounded kindergarten meal ADP values of 393 and 1,131, consistent with the respective totals divided by 180.
+- The independent eligibility source and the meal workbook contain the same 31 school names; the 31 name keys match uniquely to the corrected 35-school CDE extract. Four CDE records are not in the meal workbook: Rio Valley Charter, Independence, Aspire Vincent Shalvey Academy, and Aspire River Oaks Charter. These are excluded from the analysis numerator and denominator.
+- A November 4, 2026 CDE directory export separately confirms all **35 CDS codes, school names, and Lodi Unified district assignments** in the state extract. This does not independently verify the meal workbook's site identities: the workbook has school names but no CDS codes.
+- The state source snapshot agrees with all 35 rows of the current source extract in `results/2025_26/lodi_unified_school_denominator_proxies.csv`. Numeric formatting such as `39` versus `39.0` is the only difference in those fields. The eligibility snapshot has identical data rows to its current upstream file.
+- Using the preserved input rows, independent calculations return K Census enrollment **1,763**, TK Census enrollment **853**, modeled K ADA **1,595.412985**, modeled K attended student-days **287,174.337285**, and pooled breakfast/lunch ratios **24.607700** and **70.911281 per 100 modeled days**. All 31 published school rows match after rounding.
+- The R reproduction and separate tests passed on the CSV snapshot route, as recorded in `R_VERIFICATION.md`; the independent computation was rerun for this audit. The `readxl` direct-import route has not been tested.
 
-## Limits that must accompany interpretation
+## Limits and unresolved source definitions
 
-- A meal count is a meal transaction, not a unique student or a student headcount.
-- Census enrollment is a snapshot; attendance days are modeled, not measured kindergarten days. The model allocates TK/K absences by Census shares, assumes 180 days and does not use enrollment durations or actual service calendars.
-- Meal service days and attendance-source reporting dates may not align exactly.
-- The workbook’s `Preschool` category is not verified as TK, and is not added to K.
-- The kindergarten-filtered eligibility extract’s `Highest Eligible` and `Last Day` both total **3,481**, versus K Census enrollment 1,763. Definitions need confirmation. These figures are used only for school-list checks, never as attendance denominators.
-- Neither the school ratios nor the district ratio is a validated meal take-up percentage; no causal explanation or significance test is supported.
+- **Attendance exposure.** The model uses 180 days and school Census enrollment as an annual enrollment stock, then proportionally allocates combined TK/K absences to K. Neither expected attendance days nor actual K attended days are available at the school level in these inputs.
+- **Population mismatch.** CDE's absenteeism file is organized around *eligible cumulative enrollment*, excluding some short-duration/nonattending/exempt students; its absence measure and the Census enrollment snapshot are not necessarily the same population. See [CDE file definitions](https://www.cde.ca.gov/ds/ad/fsabr.asp). The size and direction of any resulting error in this K proxy cannot be determined from these files.
+- **Timing.** The original meal workbook does not print a service-date range. Its ADP calculations are consistent with a 180-day divisor, but do not independently establish the covered service dates. The [2025–26 district calendar](https://resources.finalsite.net/images/v1736443433/lodiusdnet/fsjjkrvfjsh0bwpqtvlh/LodiUSD_InstructionalCalendar_2025-26.pdf) is July 29, 2025–May 29, 2026 for the modified traditional schedule; a school-specific calendar check may matter for other sites.
+- **Grades.** Kindergarten meals are explicitly labeled in the workbook. `Preschool` is a separate category, not established as TK. The workbook's schoolwide Enrollment and Average Daily Attendance fields cannot validate K attendance.
+- **Eligibility report discrepancy.** The independent kindergarten eligibility extract's `Highest Eligible` and `Last Day` columns each total **3,481**. They exceed K Census enrollment (1,763) at all 31 schools, by ratios ranging from 1.30 to 3.18. Their definitions and grade scope remain unresolved; they are not used in the model.
+- **Small-school sensitivity.** Valley Robotics Academy has 12 K Census pupils, TK Census zero, and 13 reported TK/K absent days; its low lunch ratio is computed correctly but sensitive to the attendance-exposure assumptions. This is a review flag, not proof of a source error.
+- **Measure meaning.** A meal count is a count of meals, not distinct pupils. Ratios per modeled student-day are not validated meal-participation percentages. These results support description, not causal explanations of school differences.
 
-## District clarification questions, for a separate conversation
+## Follow-up questions
 
-1. What grades and exact service dates are counted in the meal workbook’s `Kindergarten` and `Preschool` fields?
-2. Are the meal counts reimbursable meals or another transaction measure? Are noninstructional-day meals included?
-3. Can Lodi provide school-by-kindergarten attended student-days (or at least K average daily attendance plus applicable calendar/service days) to check the modeled denominator?
-4. How are `Highest Eligible`, `Last Day`, and schoolwide `Highest Enrollment` defined?
-5. Does the observed variation match local breakfast/lunch service arrangements, or could school-level coding/reporting differ?
+1. Which dates and grades does the district meal workbook cover, and do `Preschool` and `Kindergarten` have consistent definitions across all schools?
+2. What exactly do the kindergarten eligibility report's `Highest Eligible` and `Last Day` measures count?
+3. Are kindergarten attended student-days or grade-specific ADA available for the same service dates?
+4. Do any schools in the matched set use different calendars or meal-reporting periods?
+5. Are the recorded meals reimbursements, served meals, or another transaction definition?
 
-These questions are **not** part of the separate CDE Nutrition Services statewide FNS10 request or the attendance-records correspondence.
+These questions concern the Lodi handoff, not the separate CDE Nutrition Services FNS10 work or attendance-records correspondence.
