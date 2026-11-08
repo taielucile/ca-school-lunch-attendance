@@ -43,7 +43,7 @@ The kindergarten attendance denominator is **modeled attended student-days**, no
 Modeled K ADA = K Census − (TK/K absent days / 180) × K Census / (K Census + TK Census)
 ```
 
-The [CDE absenteeism file definitions](https://www.cde.ca.gov/ds/ad/fsabr.asp) describe an *eligible cumulative enrollment* reporting population, with exclusions for some short-duration and exempt enrollments. Census enrollment is a different population measure. The model does not recover actual kindergarten attendance days or each student's enrollment duration. The [research decision log](../../docs/decisions.md) distinguishes this Lodi-specific kindergarten allocation from the earlier combined TK/K analysis.
+The [CDE absenteeism file definitions](https://www.cde.ca.gov/ds/ad/fsabr.asp) describe an *eligible cumulative enrollment* reporting population, with exclusions for some short-duration and exempt enrollments. Across the 31 schools, eligible cumulative TK/K enrollment is 2,794 versus TK/K Census enrollment of 2,616. These are different populations and cannot be treated as interchangeable. The model does not recover actual kindergarten attendance days or each student's enrollment duration. The [research decision log](../../docs/decisions.md) distinguishes this Lodi-specific kindergarten allocation from the earlier combined TK/K analysis.
 
 The workbook records **meals**, not distinct children. Its `Preschool` field remains separate because that grade label has not been established as TK. The eligibility report's `Highest Eligible` and `Last Day` fields are used for school-list checks, not attendance denominators. The resulting meal-to-day ratios are descriptive and are not verified percentages of children eating breakfast or lunch.
 
