@@ -1,10 +1,10 @@
 # Memo outline: TK/K attendance denominator approaches in Irvine and Lodi
 
-**Status:** Superseded by the completed working memo in `docs/penner_memo_2026-09-24.md`.
+**Status:** Superseded by the [September working memo](penner_memo_2026-09-24.md). [Current research status](../current_status.md)
 
 This file is retained as a record of the memo's initial structure. It should not be used as the current statement of results or methodological conclusions.
 
-The current memo incorporates:
+The September memo covers:
 
 - the 2024–25 Irvine/Lodi comparison of Census and eligible-cumulative denominator constructions;
 - the 2025–26 Irvine district attendance validation;
@@ -15,7 +15,7 @@ The current memo incorporates:
 
 See also:
 
-- `docs/validation_report.md`
-- `docs/denominator_method_note.md`
-- `docs/decisions.md`
-- `docs/presentation_outline_2026-10-15.md`
+- [validation_report.md](../validation_report.md)
+- [denominator_method_note.md](../denominator_method_note.md)
+- [decisions.md](../decisions.md)
+- [presentation_outline_2026-10-15.md](presentation_outline_2026-10-15.md)

@@ -1,5 +1,7 @@
 # October 2026 research handoff
 
+**Archived october research handoff.** This handoff predates the October 30 reproducibility run and the October 31 source audit. Its earlier Ventura and testing statuses are superseded. [Current research status](../current_status.md)
+
 The repository's executable `RUN_ALL.R` currently ends with `R/09_lodi_enrollment_triangulation.R`. It does **not** run the statewide 930-district ADA comparison or the Ventura 17-school validation. These analyses are documented here as **reported external results**, pending original input/code recovery and independent reproduction.
 
 | Workstream | Geography / period | Unit | Status | Documentation |

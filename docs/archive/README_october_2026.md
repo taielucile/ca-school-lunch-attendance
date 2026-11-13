@@ -110,8 +110,8 @@ A separate audit of the Lodi Kindergarten eligibility report identified `Highest
 - `docs/validation_report.md` — regression benchmarks and district-validation results
 - `docs/decisions.md` — research decision log
 - `docs/sources.md` — source provenance and interpretation
-- `docs/penner_memo_2026-09-24.md` — current collaborator memo
-- `docs/presentation_outline_2026-10-15.md` — meeting walkthrough
+- [September collaborator memo](penner_memo_2026-09-24.md)
+- [October 15 meeting walkthrough](presentation_outline_2026-10-15.md)
 
 ## October 2026 stability audit
 
@@ -132,7 +132,7 @@ The October research handoff records two **reported, not independently rerun in 
 - **Statewide 2024–25 district ADA alignment:** 930 of 937 district records retained after excluding seven all-charter districts without the benchmark B-1 ADA line. The TK/K–3 aggregate Census-minus-absence proxy gap was reported as +0.26%; 56%, 75%, and 90% of districts were within 1%, 2%, and 5%, respectively. This is district-level alignment, **not** school-level TK/K validation. See [statewide methods and exclusions](../../docs/statewide_ada_comparison_2026-10.md).
 - **Ventura 2025–26 combined TK/K ADA validation:** 17 matched schools; observed TK/K ADA 1,179.14 versus absence-adjusted Census proxy 1,186.06 (+0.59%), cumulative proxy 1,236.06 (+4.83%), and unadjusted Census 1,263.00 (+7.11%). This is one district/year and does not establish a statewide preferred estimator. See [Ventura methods and caveats](../../docs/ventura_tkk_ada_validation_2026-10.md).
 
-See the [October handoff and reproduction checklist](../../docs/october_2026_handoff.md). Original statewide/Ventura source files and scripts are not in this repository, so these results remain reported pending independent reproduction. The separate stability audit is included in merged [PR #5](https://github.com/taielucile/ca-school-lunch-attendance/pull/5); its standalone module still needs a run in an R-enabled environment.
+See the [October handoff and reproduction checklist](october_2026_handoff.md). Original statewide/Ventura source files and scripts are not in this repository, so these results remain reported pending independent reproduction. The separate stability audit is included in merged [PR #5](https://github.com/taielucile/ca-school-lunch-attendance/pull/5); its standalone module still needs a run in an R-enabled environment.
 
 ## Next analysis
 

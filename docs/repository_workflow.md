@@ -26,6 +26,7 @@ Meal-site linkage and meal-file comparability are assessed in separate analyses.
 | Output | Code / method | Open the results |
 | --- | --- | --- |
 | 2025–26 statewide combined TK/K estimate | [`scripts/build_denominators_2526.py`](../scripts/build_denominators_2526.py); [input and command](../data/README.md#202526-cde-attendance-estimates) | [Statewide CSV](../results/2025_26/statewide_school_denominator_proxies.csv) |
+| 2025–26 Lodi kindergarten meal review | [Base R reconstruction and tests](../studies/lodi_2025_26/README.md#run-the-analysis) | [School-level calculations and coverage](../studies/lodi_2025_26/README.md#start-here) |
 | 2025–26 selected districts and grade allocations | [`R/11_district_denominator_extracts_2526.R`](../R/11_district_denominator_extracts_2526.R) and [`scripts/reshape_district_denominators_2526.py`](../scripts/reshape_district_denominators_2526.py) | [District file list](../results/README.md#district-files) |
 | Ventura observed-versus-estimated ADA | [`scripts/reproduce_ventura_2526.py`](../scripts/reproduce_ventura_2526.py) and [validation note](ventura_tkk_ada_validation_2026-10.md) | [17-school comparison](../results/2025_26/ventura_17_school_ada_validation.csv) |
 | Original 2024–25 analysis | [`RUN_ALL.R`](../RUN_ALL.R) and [`R/`](../R/) | [Source guide](../data/README.md#earlier-r-workflow) and [method note](denominator_method_note.md) |

@@ -144,3 +144,15 @@ Andrew requested a memo detailing the alternative approaches and the differences
 **Decision:** Retain the 180-day construction as the common comparison benchmark, but correct school-specific calendar documentation using official calendars. Aspire River Oaks' 2024–25 calendar lists 175 weekday instructional days and one Saturday School day; Vincent Shalvey's official family calendar supports a manually counted 184 weekdays; Joe Serna's calendar supports 180 weekdays. These counts inform a limited sensitivity check and do not identify student-specific attendance exposure. Keep Rio Valley in the denominator universe but separate it from the primary campus-based meal sample absent evidence about its meal-serving site and target population.
 
 **Meal-data decision:** Record the Irvine November 3–7, 2025 meal extraction as provisional. The report totals reconcile, but 70 possible school-grade-day-meal slots have no row. Treat them as zero only as an explicit assumption until report semantics are confirmed. Keep breakfast and lunch separate and describe rates as meals per attending student-day.
+
+---
+
+## 2026-11-08 — Lodi kindergarten-only working comparison
+
+**Analytical status:** The Lodi handoff pairs kindergarten-labeled breakfast and lunch counts with a **modeled** kindergarten attendance denominator. The model allocates publicly reported combined TK/K absences to kindergarten using kindergarten's share of school TK/K Census enrollment, with a 180-day assumption.
+
+**Why this comparison exists:** The source meal counts are labeled Kindergarten, while the available public absence data are not grade-specific. This allocation permits a descriptive comparison but introduces assumptions about enrollment exposure and grade-level absence patterns. It has **not** been established as a validated attendance measure or a team-approved replacement for the earlier combined TK/K denominator.
+
+**Relationship to September:** The September choice of combined TK/K as the primary public-data analysis unit remains a separate, earlier decision. This kindergarten-only handoff does not revise that decision.
+
+**Outstanding:** The meal workbook's exact service dates, kindergarten attendance days, and grade labels remain unresolved. The figures are meals per **modeled kindergarten attendance day**, not verified participation percentages. See [Lodi handoff](../studies/lodi_2025_26/HANDOFF_FOR_ANGELA.md) and [QA notes](../studies/lodi_2025_26/internal/QA_AND_OPEN_QUESTIONS.md).

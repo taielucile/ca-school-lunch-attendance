@@ -1,5 +1,7 @@
 # October 15 research meeting: quick walkthrough
 
+**Archived october 15 presentation outline.** This outline records what was presented on October 15. Subsequent source checks are documented in the current research status. [Current research status](../current_status.md)
+
 ## 1. What I was trying to build
 
 The denominator for school-level TK/K meal take-up is student-days attended, not enrollment alone.

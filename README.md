@@ -15,6 +15,7 @@ School meal participation analyses depend on denominators aligned with the same 
 | [Project overview](docs/START_HERE.md) | Research scope, analytical approach, and Ventura example |
 | [Results](results/README.md) | Statewide and district estimates, validation files, and meal-source reviews |
 | [Research status](docs/current_status.md) | Source-checked findings, corrections, and unresolved questions |
+| [Lodi 2025–26 kindergarten meal review](studies/lodi_2025_26/README.md) | Verified 31-school tables, source snapshots, R reproduction, and QA for Angela's reporting and visualization |
 | [2025–26 variable guide](docs/reading_2025_26_files.md) | File structure, fields, and missingness |
 | [Denominator methods](docs/denominator_method_note.md) | Measurement assumptions and sensitivity specifications |
 | [Calculation map](docs/repository_workflow.md) | Links between source files, scripts, checks, and outputs |
@@ -32,11 +33,12 @@ The 180-day term is an assumed school-year benchmark; Census enrollment does not
 
 ## Source-checked findings
 
-As of the October 31, 2026 source review:
+The statewide attendance and Ventura figures below come from the October 31, 2026 source review. The Lodi and meal-linkage entries incorporate the November follow-ups.
 
 - **Statewide:** 6,165 non-placeholder school records had positive TK/K Census enrollment; 5,912 supported the combined attendance estimate.
 - **Ventura:** [17 matched schools](results/2025_26/ventura_17_school_ada_validation.csv) have district-reported TK/K average daily attendance for comparison with the Census- and cumulative-based estimates.
-- **Meal records:** The [2024–25 FNS10 analysis](results/README.md#202425-statewide-meal-claims) produces candidate meal-site/school links, not confirmed kindergarten-specific meal counts or a statewide kindergarten meal-participation rate.
+- **Lodi:** Across 31 matched schools, the district workbook records 70,667 kindergarten breakfasts and 203,639 lunches. The [Lodi handoff](studies/lodi_2025_26/README.md) compares these counts with modeled kindergarten attendance days. The workbook's meal service dates remain unverified.
+- **Statewide meal claims:** The [2024–25 FNS10 review](results/README.md#202425-statewide-meal-claims) uses the November 4 CDE directory and a manual review ledger to evaluate possible meal-site-to-school links. Statewide claims cover meals across grades.
 
 See [research status](docs/current_status.md) and the [October 31 source audit](docs/independent_research_integrity_audit_2026_10_31.md) for corrections and evidentiary scope.
 
@@ -53,4 +55,4 @@ See [research status](docs/current_status.md) and the [October 31 source audit](
 
 Original CDE and district inputs are managed separately. Committed `results/` files and new local `output/` runs should be compared using the documented source versions and processing steps.
 
-*Findings last source-checked October 31, 2026.*
+The [research archive](docs/archive/README.md) contains superseded handoffs, earlier memos, and the previous README.

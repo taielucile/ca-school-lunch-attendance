@@ -48,4 +48,4 @@ The FNS10 meal claims are service-site meal totals, not kindergarten-specific st
 | [October 31 audit](independent_research_integrity_audit_2026_10_31.md) | Source checks and corrected claims |
 | [Documentation index](README.md) | District studies and historical notes |
 
-*Analytical status based on the October 31, 2026 source review.*
+The [Lodi handoff](../studies/lodi_2025_26/README.md) documents the November school-level kindergarten meal review. The [results index](../results/README.md#202425-statewide-meal-claims) links to the November 4 statewide meal-site matching review.

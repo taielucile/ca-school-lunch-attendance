@@ -1,5 +1,7 @@
 # Memo: Public-data approaches to TK/K attendance denominators in Irvine and Lodi
 
+**Archived september memo.** This memo records the 2024–25 proxy comparison and the early 2025–26 district checks as of September 24. For subsequent Lodi work and the verified Ventura comparison, see the current research status. [Current research status](../current_status.md)
+
 **To:** Andrew Penner  
 **From:** Taiel Lucile  
 **Date:** September 24, 2026  

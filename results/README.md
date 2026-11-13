@@ -10,7 +10,7 @@ Statewide and district outputs are organized below by research question. The [20
 | How do those estimates compare with district attendance? | [Ventura: 17 schools](2025_26/ventura_17_school_ada_validation.csv) | Estimated and district-reported TK/K average daily attendance (ADA) |
 | Which schools have enough data for an estimate? | [School counts by district](2025_26/all_district_quality_summary.csv) | How many CDE school records have usable TK/K estimates |
 | Where are the 2024–25 meal-claim matching results? | [FNS10 school-name candidates](2024_25/fns10_all_site_link_candidates_2024_25.csv) | Possible links between meal-service sites and CDE schools; not confirmed links |
-| What is the latest checked interpretation? | [Research status](../docs/current_status.md) | Corrections, source checks, and questions still open as of October 31, 2026 |
+| What is the latest checked interpretation? | [Research status](../docs/current_status.md) | Source checks and open questions through the November 11 Lodi follow-up |
 
 The [October 31 source audit](../docs/independent_research_integrity_audit_2026_10_31.md) records the original-source checks.
 
@@ -36,6 +36,11 @@ These nine districts have two types of files from the 2025–26 CDE attendance d
 The Lodi file is the corrected version with 35 TK/K-serving school records (34 calculable estimates). The earlier 27-school version omitted eight schools.
 
 The statewide school file contains 6,261 CDE records with positive TK/K Census enrollment. Excluding 96 administrative placeholder codes leaves 6,165, of which 5,912 have a calculable estimate. The calculation assumes 180 instructional days; the public absence file combines TK and K. These are not observed attended days. See [field definitions and exclusions](../docs/reading_2025_26_files.md).
+
+
+### Lodi 2025–26 kindergarten meal review
+
+The [Lodi 31-school review](../studies/lodi_2025_26/README.md) combines kindergarten-labeled meal counts from the district workbook with **modeled**, not observed, kindergarten attendance days. The analysis handoff provides [school-level calculations](../studies/lodi_2025_26/outputs/lodi_31_school_k_meal_attendance_review.csv), a [coverage audit](../studies/lodi_2025_26/outputs/lodi_coverage_audit.csv), [source snapshots](../studies/lodi_2025_26/inputs/) and [tested R reproduction](../studies/lodi_2025_26/code/reproduce_lodi_2025_26.R). The report and visualizations are Angela's deliverables. These meal-to-day ratios are not validated percentages of kindergarten students receiving meals.
 
 ## Coverage and source checks
 
@@ -68,6 +73,14 @@ FNS10 contains breakfast and lunch claims by meal-service site, not a separate k
 - [Claim totals and matching summary](2024_25/fns10_audit_summary.json) — source counts and the matching method's results.
 - [250 unmatched pairs prioritized by lunch volume](2024_25/fns10_unmatched_priority_250.csv) — review list, not a random sample.
 - [Ambiguous CDE school-name keys](2024_25/cbeds_ambiguous_keys.csv) — cases that cannot be settled by normalized names alone.
+
+### November 4 directory and cross-sponsor reviews
+
+- [Directory comparison](2024_25/fns10_pubschls_2026_11_04_all_candidates_review_only.csv) and [priority queue](2024_25/fns10_pubschls_2026_11_04_review_priority_500.csv) — district-and-school name candidates and fuzzy suggestions for review.
+- [Cross-sponsor candidates](2024_25/fns10_cross_sponsor_1830_categorized_2026_11_04.csv) and [TK/K review priorities](2024_25/fns10_cross_sponsor_tkk_review_priority_2026_11_04.csv) — automated candidate snapshots.
+- [Manual review ledger](2024_25/fns10_sponsor_manual_review_ledger_2026_11_04.csv) — evidence on sponsor relationships and the rejected Fullerton-to-San Diego school link. Apply these decisions when reading the earlier candidate tables.
+
+See the [directory audit](../docs/fns10_pubschls_2026_11_04_comparison.md) and [cross-sponsor audit](../docs/fns10_cross_sponsor_review_2026_11_04.md) for the matching rules and evidence.
 
 The [FNS10 method notes](../docs/fns10_cde_linkage_review_2026_10.md) explain why two matching methods produced different totals. None of these name matches should be treated as a verified school identity without further review.
 
