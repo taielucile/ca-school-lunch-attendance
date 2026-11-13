@@ -31,13 +31,11 @@ tk_map <- c(
 )
 
 school_ids <- unique(cbeds$cds_code[!is.na(cbeds$cds_code)])
+rows_by_school <- split(seq_len(nrow(cbeds)), cbeds$cds_code)
 
 classify_program <- function(id, map) {
-  z <- cbeds[
-    cbeds$cds_code == id &
-      cbeds$Description %in% names(map) &
-      truth(cbeds$Value), "Description"
-  ]
+  school <- cbeds[rows_by_school[[id]], , drop = FALSE]
+  z <- school$Description[school$Description %in% names(map) & truth(school$Value)]
   z <- unique(z)
   if (length(z) == 0) return(NA_character_)
   if (length(z) > 1) stop("Conflicting CBEDS program classifications for ", id)
@@ -45,9 +43,8 @@ classify_program <- function(id, map) {
 }
 
 get_cbeds_value <- function(id, description) {
-  z <- unique(cbeds[
-    cbeds$cds_code == id & cbeds$Description == description, "Value"
-  ])
+  school <- cbeds[rows_by_school[[id]], , drop = FALSE]
+  z <- unique(school$Value[school$Description == description])
   z <- z[!is.na(z) & trimws(z) != ""]
   if (length(z) == 0) return(NA_character_)
   if (length(z) > 1) stop("Conflicting CBEDS values for ", id, ": ", description)

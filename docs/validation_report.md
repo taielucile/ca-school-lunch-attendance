@@ -122,3 +122,6 @@ All 11 R modules, `RUN_ALL.R`, and `tests/test_pipeline.R` parsed successfully u
 Earlier documentation cited a successful October 25 pipeline run and linked `analysis/2026-10-25` in the Feed California Kinders repository at commit [7d6c3824b4beb3fcc89f9d4ff2eb6908da38a443](https://github.com/whippedfruit/Feed-California-Kinders/tree/7d6c3824b4beb3fcc89f9d4ff2eb6908da38a443). That path is absent from the cited commit tree, so the log and its claimed output checks could not be verified from that source. Treat the prior pass claim as unverified until the execution record is restored or the suite is rerun with the exact inputs.
 
 The separate `R/10_stability_audit.R` module remains outside the runner and the test suite. It requires both `sr2425-v3.txt` and the generated school comparison CSV; neither is available in this workspace.
+
+
+The [November 12 source-backed rerun](october_2026_stability_reproduction.md#november-12-source-backed-r-rerun) passed the full R pipeline, frozen regression suite, and separate stability audit. It also identifies the later team commit that contains the October 25 logs.

@@ -6,7 +6,15 @@ A meal-per-student-day measure requires meal counts and attendance aligned by da
 
 ## Irvine five-day source audit
 
-The companion [Feed California Kinders repository](https://github.com/whippedfruit/Feed-California-Kinders/tree/7d6c3824b4beb3fcc89f9d4ff2eb6908da38a443/Irvine) contains daily Meals Served PDFs for November 3–7, 2025 and the K/PK attendance source PDFs. I extracted the school-grade-session rows from the five daily reports and matched the district labels to the existing attendance CSV. This was a manual PDF-to-text extraction and audit in the verification workspace: the source PDFs are in the companion repository, but this repository does not yet contain a parser or derived school-day-grade numerator file. The reported aggregates therefore cannot yet be rebuilt from this repository alone. IUSD states that its Pre-Kindergarten (PK) replaced the former Transitional Kindergarten (TK) program, supporting the PK/TK alignment for this district.
+The [team source snapshot](https://github.com/whippedfruit/Feed-California-Kinders/tree/50d75bbaf1d5565014f5e7303de154ec9e198eaf/Irvine) contains the five daily Meals Served PDFs and the K/PK attendance extract. The [Irvine audit script](../scripts/audit_irvine_meal_reports.py) parses the PDFs with Poppler's `pdftotext`, reconciles all-grade report totals, joins K/PK rows by school, grade, and date, and writes a sensitivity summary. IUSD states that its Pre-Kindergarten (PK) replaced the former Transitional Kindergarten (TK) program, supporting the label mapping while leaving the export population to be confirmed.
+
+From this repository's root, with the team snapshot available locally:
+
+```sh
+python scripts/audit_irvine_meal_reports.py /path/to/team/Irvine \
+  '/path/to/team/Irvine/extracted data/irvine_k_pk_attendance_2025_11_03_07.csv' \
+  output/tables/irvine_five_day_meal_report_audit.csv
+```
 
 **Extraction checks**
 
@@ -31,6 +39,15 @@ Accordingly, retain the zero-row and quantity/unit assumptions below until the r
 | Combined matched campuses | 14,099 | 2,678 | 18.99% | 4,023 | 28.53% |
 
 These figures treat absent report rows as zero quantities. They are short-window descriptive estimates for November 3–7, 2025, not annual meal take-up rates. The matched-campus denominator excludes IUSD Virtual Academy and includes all 28 PK/TK attendance sites.
+
+### Sensitivity to omitted meal rows
+
+| Combined campus sample | Report quantity | Attendance days across all slots | Attendance days on slots with a report row | Quantity per 100 attendance days across all slots | Quantity per 100 attendance days on reported slots |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| Breakfast | 2,678 | 14,099 | 10,937 | 18.99 | 24.49 |
+| Lunch | 4,023 | 14,099 | 13,634 | 28.53 | 29.51 |
+
+The all-slot calculation assumes the unlisted quantities are zero. The reported-slot calculation changes the population to the school-grade-date combinations with a row for that meal. It cannot recover the full-sample rate if omitted quantities are missing. Both calculations use recorded daily attendance and retain the November 3–7 window.
 
 ## Checks needed before treating these as results
 

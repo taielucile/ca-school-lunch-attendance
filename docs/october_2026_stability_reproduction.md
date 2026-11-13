@@ -4,13 +4,13 @@ Maintainer/contributor: Taiel Lucile. Analysis is part of the Feed California Ki
 
 ## Inputs and provenance
 
-The original 2024–25 attendance comparison is produced by this repository's `RUN_ALL.R`, using `cdenroll2425.txt`, `absenteeismreason25-v2.txt`, and `cbedsora24b.txt` (and three additional inputs for the later Irvine and Lodi modules; see root README). Generated outputs and raw files are intentionally ignored by Git.
+The original 2024–25 attendance comparison is produced by this repository's `RUN_ALL.R`, using `cdenroll2425.txt`, `absenteeismreason25-v2.txt`, and `cbedsora24b.txt` (and three additional inputs for the later Irvine and Lodi modules; see the [source guide](../data/README.md#earlier-r-workflow)). Generated outputs and raw files are intentionally ignored by Git.
 
 Additional CDE input: `sr2425-v3.txt`, 2024–25 Stability Rate download. The audit selects **school** aggregate level (`S`), combined TK/K (`GRTKKN`), Irvine Unified and Lodi Unified, excluding pseudo school codes `0000000` and `0000001`. It requires an exact 64-school CDS identifier match with the existing attendance comparison.
 
 ## Commands (from repository root)
 
-1. Obtain original inputs listed in the root README and put them in `data/raw/`. Do not commit raw district files without permission.
+1. Obtain original inputs listed in the [source guide](../data/README.md#earlier-r-workflow) and put them in `data/raw/`. Do not commit raw district files without permission.
 2. `Rscript RUN_ALL.R` and `Rscript tests/test_pipeline.R` to rebuild and test the upstream attendance work.
 3. Put the original CDE Stability Rate TSV at `data/raw/sr2425-v3.txt`.
 4. `Rscript R/10_stability_audit.R` to extract, join, validate, and write:
@@ -38,3 +38,20 @@ The stability release's 245-calendar-day window is **not** 245 instructional day
 ## Verification history and limits
 
 The 2024–25 stability TSV (354,000 rows) was independently read in R 4.5.0, and its 64 extracted records were cross-checked with a separate Python extraction. The 64-school join and four correlations were independently reproduced in R and Python using the saved attendance comparison CSV. The entire `RUN_ALL.R` pipeline was **not rerun in the verification workspace** because its six original raw inputs were not accessible there; the repository documents an earlier local successful run. Do not claim a new end-to-end run until those inputs are supplied and tests pass.
+
+
+## November 12 source-backed R rerun
+
+Ran `Rscript RUN_ALL.R`, `Rscript tests/test_pipeline.R`, and `Rscript R/10_stability_audit.R` using R 4.5.0, dplyr 1.1.4, readr 2.1.5, and stringr 1.5.1. The full workflow completed, the frozen regression and integrity checks passed, and the stability audit reproduced the 64-school join, 63-school correlation sample, and all four expected correlations. The CBEDS module indexes rows by school before applying the same program and calendar field checks.
+
+The seven input hashes agree with the [team source manifest](https://github.com/whippedfruit/Feed-California-Kinders/blob/574f0181e7e65bca92aa615cf3209a67d04a1dc4/analysis/2026-10-25/provenance/sources.json). The two district extracts came from team commit `50d75bbaf1d5565014f5e7303de154ec9e198eaf`. The original [CDE Stability Rate TSV](https://www3.cde.ca.gov/demo-downloads/stability/sr2425-v3.txt) has SHA-256 `1d110ca0f605ded2189a857478f8ee860315b38c398f8e45816bba51c7be1150`. Other CDE and CBEDS hashes are in the [October 30 execution record](verified_end_to_end_execution_2026_10_30.md#verifiable-run-and-source-versions).
+
+The new logs ended with:
+
+```text
+Build complete.
+All pipeline regression and integrity tests passed.
+PASS: October 2026 stability source, join, and correlation checks
+```
+
+The older team run can also be inspected at the [commit that added its archived logs](https://github.com/whippedfruit/Feed-California-Kinders/tree/574f0181e7e65bca92aa615cf3209a67d04a1dc4/analysis/2026-10-25/logs).
