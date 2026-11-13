@@ -2,6 +2,8 @@
 
 **Attendance denominator analysis for [Feed California Kinders](https://github.com/whippedfruit/Feed-California-Kinders)**
 
+Taiel Lucile maintains this analysis repository. The Feed California Kinders link above leads to the team's shared project repository.
+
 This repository documents school-level attendance denominator estimates for transitional kindergarten (TK) and kindergarten (K) in California. It combines California Department of Education (CDE) enrollment and absenteeism records with district attendance and meal data to assess what can be measured, estimated, and compared across sources.
 
 ## Research scope

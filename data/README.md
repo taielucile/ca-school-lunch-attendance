@@ -31,6 +31,16 @@ This writes a statewide school file, per-district school files, a district quali
 
 The files already committed in [`results/2025_26/`](../results/README.md#district-files) also include district-specific selections, school/grade reshaping, Ventura comparisons, and workbook-review outputs. Those require additional processing beyond this single command. See the [district extract notes](../docs/district_denominators_2025_26.md) and [full-source execution record](../docs/verified_end_to_end_execution_2026_10_30.md).
 
+## Checks without the original source files
+
+From the repository root:
+
+```sh
+python -m unittest discover -s tests -p 'test_*2526.py' -v
+```
+
+These checks use small fixtures and committed audit outputs. The [full-source workflow](../.github/workflows/fck-2025-26-repro.yml) uses the original source files for the statewide rebuild.
+
 ## Earlier R workflow
 
 `RUN_ALL.R` and `tests/test_pipeline.R` use the following inputs. They are a separate 2024–25 analysis, with some 2025–26 district records used for checks.
