@@ -1,0 +1,41 @@
+name: Lodi absence-adjusted R figures (prebuilt R image)
+on:
+  push:
+    branches:
+      - work/lodi-r-figures-2026-11-23
+    paths:
+      - ".github/workflows/lodi-r-container.yml"
+permissions:
+  contents: read
+jobs:
+  render:
+    runs-on: ubuntu-latest
+    container: rocker/tidyverse:4.4.3
+    timeout-minutes: 12
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Check R and ggplot2
+        run: |
+          Rscript --version
+          Rscript -e 'library(ggplot2); print(packageVersion("ggplot2"))'
+      - name: Recalculate absence adjusted attendance and plot
+        run: |
+          Rscript studies/lodi_2025_26/code/redraw_lodi_aligned_in_R.R \
+            studies/lodi_2025_26/outputs/lodi_31_school_grade_meal_census_for_R.csv \
+            studies/lodi_2025_26/outputs/lodi_31_school_absence_group_inputs_2025_26.csv \
+            lodi_r_rendered_figures | tee lodi_r_execution.log
+          test "$(find lodi_r_rendered_figures -name '*.png' | wc -l)" -eq 3
+          test "$(find lodi_r_rendered_figures -name '*.pdf' | wc -l)" -eq 3
+      - name: Archive
+        uses: actions/upload-artifact@v4
+        with:
+          name: lodi-r-absence-adjusted-container-figures
+          path: |
+            lodi_r_rendered_figures/
+            lodi_r_execution.log
+            studies/lodi_2025_26/code/redraw_lodi_aligned_in_R.R
+            studies/lodi_2025_26/outputs/lodi_31_school_grade_meal_census_for_R.csv
+            studies/lodi_2025_26/outputs/lodi_31_school_absence_group_inputs_2025_26.csv
+          if-no-files-found: error
+          retention-days: 14
