@@ -1,0 +1,41 @@
+name: Lodi 2025-26 R ggplot figures — isolated verification
+on:
+  push:
+    branches:
+      - work/lodi-r-figures-2026-11-23
+    paths:
+      - ".github/workflows/lodi-r-figures-verification.yml"
+      - "studies/lodi_2025_26/code/redraw_lodi_aligned_in_R.R"
+      - "studies/lodi_2025_26/outputs/lodi_31_school_grade_meal_census_for_R.csv"
+permissions:
+  contents: read
+jobs:
+  render:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Checkout working branch
+        uses: actions/checkout@v4
+      - name: Install R and ggplot2
+        run: |
+          sudo apt-get update -qq
+          sudo DEBIAN_FRONTEND=noninteractive apt-get install -y -qq r-base-core r-cran-ggplot2
+      - name: Run source checked R plotting script
+        run: |
+          Rscript --version
+          Rscript studies/lodi_2025_26/code/redraw_lodi_aligned_in_R.R \
+            studies/lodi_2025_26/outputs/lodi_31_school_grade_meal_census_for_R.csv \
+            lodi_r_rendered_figures | tee lodi_r_execution.log
+          test "$(find lodi_r_rendered_figures -name '*.png' | wc -l)" -eq 3
+          test "$(find lodi_r_rendered_figures -name '*.pdf' | wc -l)" -eq 3
+      - name: Save R-rendered figures and execution log
+        uses: actions/upload-artifact@v4
+        with:
+          name: lodi-r-ggplot-3-figures
+          path: |
+            lodi_r_rendered_figures/
+            lodi_r_execution.log
+            studies/lodi_2025_26/code/redraw_lodi_aligned_in_R.R
+            studies/lodi_2025_26/outputs/lodi_31_school_grade_meal_census_for_R.csv
+          retention-days: 14
+          if-no-files-found: error
