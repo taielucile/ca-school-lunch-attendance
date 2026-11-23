@@ -7,6 +7,7 @@ on:
       - ".github/workflows/lodi-r-figures-verification.yml"
       - "studies/lodi_2025_26/code/redraw_lodi_aligned_in_R.R"
       - "studies/lodi_2025_26/outputs/lodi_31_school_grade_meal_census_for_R.csv"
+      - "studies/lodi_2025_26/outputs/lodi_31_school_absence_group_inputs_2025_26.csv"
 permissions:
   contents: read
 jobs:
@@ -25,17 +26,19 @@ jobs:
           Rscript --version
           Rscript studies/lodi_2025_26/code/redraw_lodi_aligned_in_R.R \
             studies/lodi_2025_26/outputs/lodi_31_school_grade_meal_census_for_R.csv \
+            studies/lodi_2025_26/outputs/lodi_31_school_absence_group_inputs_2025_26.csv \
             lodi_r_rendered_figures | tee lodi_r_execution.log
           test "$(find lodi_r_rendered_figures -name '*.png' | wc -l)" -eq 3
           test "$(find lodi_r_rendered_figures -name '*.pdf' | wc -l)" -eq 3
       - name: Save R-rendered figures and execution log
         uses: actions/upload-artifact@v4
         with:
-          name: lodi-r-ggplot-3-figures
+          name: lodi-r-ggplot-3-absence-adjusted-figures
           path: |
             lodi_r_rendered_figures/
             lodi_r_execution.log
             studies/lodi_2025_26/code/redraw_lodi_aligned_in_R.R
             studies/lodi_2025_26/outputs/lodi_31_school_grade_meal_census_for_R.csv
+            studies/lodi_2025_26/outputs/lodi_31_school_absence_group_inputs_2025_26.csv
           retention-days: 14
           if-no-files-found: error
