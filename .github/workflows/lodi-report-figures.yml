@@ -1,0 +1,46 @@
+name: Lodi K–5 report figure reproduction
+
+on:
+  push:
+    paths:
+      - 'studies/lodi_2025_26/code/render_lodi_figures.R'
+      - 'studies/lodi_2025_26/outputs/lodi_31_school_grade_meal_census_for_R.csv'
+      - 'studies/lodi_2025_26/outputs/lodi_31_school_absence_group_inputs_2025_26.csv'
+      - 'studies/lodi_2025_26/outputs/lodi_186_school_grade_absence_adjusted_rates.csv'
+      - '.github/workflows/lodi-report-figures.yml'
+  pull_request:
+    paths:
+      - 'studies/lodi_2025_26/**'
+      - '.github/workflows/lodi-report-figures.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  render:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install R, ggplot2 and Poppler
+        run: |
+          sudo apt-get update -qq
+          sudo DEBIAN_FRONTEND=noninteractive apt-get install -y -qq r-base-core r-cran-ggplot2 poppler-utils
+      - name: Recalculate and render report figures
+        run: Rscript studies/lodi_2025_26/code/render_lodi_figures.R
+      - name: Verify all exports
+        shell: bash
+        run: |
+          set -euo pipefail
+          for name in 01_Lodi_Breakfast 02_Lodi_Lunch 03_Lodi_Combined_Meals; do
+            test -s "lodi_r_rendered_figures/$name.pdf"
+            test -s "lodi_r_rendered_figures/$name.png"
+          done
+          test -s lodi_r_rendered_figures/Lodi_K-5_Plot_Values.csv
+      - uses: actions/upload-artifact@v4
+        with:
+          name: lodi-k5-report-figures
+          path: lodi_r_rendered_figures/
+          if-no-files-found: error
+          retention-days: 30
