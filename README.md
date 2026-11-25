@@ -17,7 +17,7 @@ School meal participation analyses depend on denominators aligned with the same 
 | [Project overview](docs/START_HERE.md) | Research scope, analytical approach, and Ventura example |
 | [Results](results/README.md) | Statewide and district estimates, validation files, and meal-source reviews |
 | [Research status](docs/current_status.md) | Source-checked findings, corrections, and unresolved questions |
-| [Lodi 2025–26 kindergarten meal review](studies/lodi_2025_26/README.md) | Verified 31-school tables, source snapshots, R reproduction, and QA for Angela's reporting and visualization |
+| [Lodi 2025–26 meal analyses](studies/lodi_2025_26/README.md) | K–5 results and figures, the earlier kindergarten handoff, R reproduction, and source QA |
 | [2025–26 variable guide](docs/reading_2025_26_files.md) | File structure, fields, and missingness |
 | [Denominator methods](docs/denominator_method_note.md) | Measurement assumptions and sensitivity specifications |
 | [Calculation map](docs/repository_workflow.md) | Links between source files, scripts, checks, and outputs |

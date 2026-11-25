@@ -2,6 +2,10 @@
 
 Verified source extracts, matched school-level meal counts, modeled kindergarten attendance estimates, and R checks for the Lodi analysis. Angela is preparing the district report and visualizations.
 
+## November 25 K–5 update
+
+The [K–5 results and next steps](K5_MEAL_COMPARISONS.md) cover the 31 matched schools and include the school-by-grade rates, three figures, attendance model, and proposed district follow-up. The materials below document the earlier kindergarten handoff.
+
 ## Start here
 
 | File | Use |
