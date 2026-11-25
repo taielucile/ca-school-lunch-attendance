@@ -4,7 +4,7 @@ Verified source extracts, matched school-level meal counts, modeled kindergarten
 
 ## November 25 K–5 update
 
-The [K–5 results and next steps](K5_MEAL_COMPARISONS.md) cover the 31 matched schools and include the school-by-grade rates, three figures, attendance model, and proposed district follow-up. The materials below document the earlier kindergarten handoff.
+The [K–5 results and next steps](K5_MEAL_COMPARISONS.md) cover the 31 matched schools and include the school-by-grade rates, final report figure reproduction instructions, attendance model, and proposed district follow-up. The final report renderer is `code/render_lodi_figures.R`; the earlier figure files are retained as drafts. The materials below document the earlier kindergarten handoff.
 
 ## Start here
 

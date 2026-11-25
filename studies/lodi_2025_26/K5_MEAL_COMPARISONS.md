@@ -17,7 +17,7 @@ For each grade, the pooled rates divide total reported meals across the matched 
 
 Kindergarten had the lowest pooled breakfast and lunch rates. Within schools, kindergarten was below first grade at 20 schools for breakfast and 20 for lunch. It was below every grade from 1 through 5 at 10 schools for breakfast and 10 for lunch. School counts are separate for each meal.
 
-[School-by-grade results](outputs/lodi_186_school_grade_absence_adjusted_rates.csv) · [Breakfast figure](figures/01_breakfast_absence_adjusted_R.pdf) · [Lunch figure](figures/02_lunch_absence_adjusted_R.pdf) · [Combined figure](figures/03_combined_absence_adjusted_R.pdf)
+[School-by-grade results](outputs/lodi_186_school_grade_absence_adjusted_rates.csv). The final report figures use the same rates, but match the Ventura styling and omit embedded titles and notes. See the reproduction instructions below. The earlier PDFs in `figures/` are archived pre-report drafts, not the report figures.
 
 ## Modeled attendance
 
@@ -31,10 +31,22 @@ Confirm which dates the breakfast and lunch counts cover. Request recorded K–5
 
 ## Reproduce
 
-From the repository root, run the following with R and `ggplot2` installed.
+From the repository root, run the following with R, `ggplot2`, and Poppler (`pdftoppm`) installed.
 
 ```sh
-Rscript studies/lodi_2025_26/code/redraw_lodi_aligned_in_R.R
+Rscript studies/lodi_2025_26/code/render_lodi_figures.R
 ```
 
-The script reads the [meal and enrollment inputs](outputs/lodi_31_school_grade_meal_census_for_R.csv) and [grouped absence inputs](outputs/lodi_31_school_absence_group_inputs_2025_26.csv) and writes the CSV and figures to `lodi_r_rendered_figures/`. The absence input preserves the CDE source row references. The source counts come from the [team workbook](https://github.com/whippedfruit/Feed-California-Kinders/blob/main/Lodi/cleaned%20data/Lodi%20Data_copy.xlsx). See the [successful R run](https://github.com/taielucile/ca-school-lunch-attendance/actions/runs/45235444258) and [source QA](internal/QA_AND_OPEN_QUESTIONS.md) for provenance and the earlier kindergarten checks.
+The script reads the [meal and enrollment inputs](outputs/lodi_31_school_grade_meal_census_for_R.csv) and [grouped absence inputs](outputs/lodi_31_school_absence_group_inputs_2025_26.csv) and checks all 558 archived rates and pooled grade totals, then writes three title-free PDFs, three 200-dpi PNGs, and `Lodi_K-5_Plot_Values.csv` to `lodi_r_rendered_figures/`. The earlier [R script](code/redraw_lodi_aligned_in_R.R) is retained for historical reproduction only. The absence input preserves the CDE source row references. The source counts come from the [team workbook](https://github.com/whippedfruit/Feed-California-Kinders/blob/main/Lodi/cleaned%20data/Lodi%20Data_copy.xlsx). See the [successful R run](https://github.com/taielucile/ca-school-lunch-attendance/actions/runs/45235444258) and [source QA](internal/QA_AND_OPEN_QUESTIONS.md) for provenance and the earlier kindergarten checks.
+
+## Final report figure specification
+
+| Figure | Output basename | Rate |
+| --- | --- | --- |
+| 1 | `01_Lodi_Breakfast` | Breakfasts per 100 estimated days of student attendance |
+| 2 | `02_Lodi_Lunch` | Lunches per 100 estimated days of student attendance |
+| 3 | `03_Lodi_Combined_Meals` | Breakfasts plus lunches per estimated day of student attendance |
+
+All six grades are shown on each school row; points can overlap. Kindergarten is pink and grades 1–5 use five blues. Titles and methodological notes belong in the report, not in the image files. The figures are descriptive, not shares of individual students. Exact meal reporting dates and the transaction definition remain unconfirmed. The updated report requests attendance for the same dates as the meal records.
+
+The three input CSV Git blob hashes were verified against the report reproduction package on November 25. An independent recalculation of all 558 plotted rates matched within 1e-10. The new R renderer should be executed in the configured R environment to verify rendering; these checks do not establish byte-identical regenerated PDFs across platforms.
