@@ -10,7 +10,8 @@ Statewide and district outputs are organized below by research question. The [20
 | How do those estimates compare with district attendance? | [Ventura: 17 schools](2025_26/ventura_17_school_ada_validation.csv) | Estimated and district-reported TK/K average daily attendance (ADA) |
 | Which schools have enough data for an estimate? | [School counts by district](2025_26/all_district_quality_summary.csv) | How many CDE school records have usable TK/K estimates |
 | Where are the 2024–25 meal-claim matching results? | [FNS10 school-name candidates](2024_25/fns10_all_site_link_candidates_2024_25.csv) | Possible links between meal-service sites and CDE schools; not confirmed links |
-| What is the latest checked interpretation? | [Research status](../docs/current_status.md) | Source checks and open questions through the November 11 Lodi follow-up |
+| Where are the latest Lodi K–5 results? | [November 25 K–5 update](../studies/lodi_2025_26/K5_MEAL_COMPARISONS.md) | Preliminary breakfast and lunch rates across 31 matched schools, using modeled attendance |
+| What is the latest checked interpretation? | [Research status](../docs/current_status.md) | Source checks and open questions, including the November 25 Lodi update |
 
 The [October 31 source audit](../docs/independent_research_integrity_audit_2026_10_31.md) records the original-source checks.
 
@@ -38,7 +39,11 @@ The Lodi file is the corrected version with 35 TK/K-serving school records (34 c
 The statewide school file contains 6,261 CDE records with positive TK/K Census enrollment. Excluding 96 administrative placeholder codes leaves 6,165, of which 5,912 have a calculable estimate. The calculation assumes 180 instructional days; the public absence file combines TK and K. These are not observed attended days. See [field definitions and exclusions](../docs/reading_2025_26_files.md).
 
 
-### Lodi 2025–26 kindergarten meal review
+### Lodi 2025–26 K–5 meal comparisons
+
+The [November 25 K–5 update](../studies/lodi_2025_26/K5_MEAL_COMPARISONS.md) extends the earlier kindergarten analysis to grades 1–5 at the same 31 schools. It includes pooled rates, school-by-grade results, three figures, and the proposed follow-up with Lodi. The attendance denominator is modeled.
+
+#### Earlier kindergarten-only review
 
 The [Lodi 31-school review](../studies/lodi_2025_26/README.md) combines kindergarten-labeled meal counts from the district workbook with **modeled**, not observed, kindergarten attendance days. The analysis handoff provides [school-level calculations](../studies/lodi_2025_26/outputs/lodi_31_school_k_meal_attendance_review.csv), a [coverage audit](../studies/lodi_2025_26/outputs/lodi_coverage_audit.csv), [source snapshots](../studies/lodi_2025_26/inputs/) and [tested R reproduction](../studies/lodi_2025_26/code/reproduce_lodi_2025_26.R). The report and visualizations are Angela's deliverables. These meal-to-day ratios are not validated percentages of kindergarten students receiving meals.
 

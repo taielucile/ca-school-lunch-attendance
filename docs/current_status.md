@@ -1,6 +1,6 @@
 # Research status
 
-The October 31 source audit covers statewide attendance and Ventura. The November 4 reviews cover statewide meal-site matching and the Elk Grove checkpoint. The Lodi source reconciliation is dated November 8, with service-date and grade-label follow-up on November 11. CDE means California Department of Education.
+The October 31 source audit covers statewide attendance and Ventura. The November 4 reviews cover statewide meal-site matching and the Elk Grove checkpoint. The Lodi source reconciliation is dated November 8, with service-date and grade-label follow-up on November 11. The November 25 update extends the Lodi meal comparisons to K–5. CDE means California Department of Education.
 
 ## Where the work stands
 
@@ -25,7 +25,11 @@ For 17 matched schools, the district-reported TK/K average daily attendance is 1
 
 This describes those 17 schools. It does not validate either estimate statewide. [Comparison CSV](../results/2025_26/ventura_17_school_ada_validation.csv)
 
-### Lodi kindergarten meals, 2025–26
+### Lodi K–5 meal comparisons, 2025–26
+
+The [November 25 K–5 update](../studies/lodi_2025_26/K5_MEAL_COMPARISONS.md) compares reported breakfasts and lunches per modeled attended student-day across 31 matched schools. Kindergarten had the lowest pooled rates among the six grades for both meals. The update includes school-by-grade results, figures, and a proposed request to confirm meal reporting dates and TK coding and obtain recorded K–5 attendance for the same dates.
+
+#### Earlier kindergarten-only review
 
 The district workbook records 70,667 breakfasts and 203,639 lunches across 31 matched kindergarten meal schools. The school-level model uses Census enrollment, a 180-day benchmark, and a proportional allocation of grouped TK/K absences to K. The pooled estimates are 24.6 breakfasts and 70.9 lunches per 100 modeled kindergarten attendance days. Each ratio counts meals relative to modeled attendance exposure. The source workbook does not give meal service dates, and the `Preschool` label does not establish where TK meals were recorded. [Lodi handoff and verification](../studies/lodi_2025_26/README.md)
 
