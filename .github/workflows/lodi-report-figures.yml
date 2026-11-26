@@ -26,7 +26,7 @@ jobs:
       - name: Install R, ggplot2 and Poppler
         run: |
           sudo apt-get update -qq
-          sudo DEBIAN_FRONTEND=noninteractive apt-get install -y -qq r-base-core r-cran-ggplot2 poppler-utils
+          sudo DEBIAN_FRONTEND=noninteractive apt-get install -y -qq r-base-core r-cran-ggplot2 poppler-utils python3-pil
       - name: Recalculate and render report figures
         run: Rscript studies/lodi_2025_26/code/render_lodi_figures.R
       - name: Verify all exports
@@ -38,6 +38,15 @@ jobs:
             test -s "lodi_r_rendered_figures/$name.png"
           done
           test -s lodi_r_rendered_figures/Lodi_K-5_Plot_Values.csv
+          python3 - <<'PY'
+          from pathlib import Path
+          from PIL import Image
+          paths = list(Path("lodi_r_rendered_figures").glob("*.png"))
+          assert len(paths) == 3
+          for p in paths:
+              with Image.open(p) as im:
+                  assert im.size == (1000, 600), (p, im.size)
+          PY
       - uses: actions/upload-artifact@v4
         with:
           name: lodi-k5-report-figures

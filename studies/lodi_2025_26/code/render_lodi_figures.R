@@ -101,8 +101,8 @@ for (name in names(plots)) {
   pdf_path <- file.path(out, paste0(name, ".pdf"))
   prefix <- file.path(out, name)
   ggsave(pdf_path, plots[[name]], device = grDevices::pdf,
-         width = 10, height = 8.5, bg = "white", title = "")
-  status <- system2("pdftoppm", c("-r", "200", "-png", "-singlefile",
+         width = 10, height = 6, bg = "white", title = "")
+  status <- system2("pdftoppm", c("-r", "100", "-png", "-singlefile",
                                   shQuote(pdf_path), shQuote(prefix)))
   stopifnot(status == 0L, file.exists(paste0(prefix, ".png")))
 }
