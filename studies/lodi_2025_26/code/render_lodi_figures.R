@@ -1,12 +1,12 @@
 #!/usr/bin/env Rscript
 # Lodi 2025–26: kindergarten–grade 5, absence-adjusted comparisons.
 # Official CDE school Census enrollment (2025–26), grouped absenteeism (2025–26),
-# Original Lodi grade-specific meal workbook; report figures, November 25, 2026.
+# original Lodi grade-specific meal workbook. Internal research figures.
 suppressPackageStartupMessages(library(ggplot2))
 args <- commandArgs(trailingOnly=TRUE)
-meal_path <- if(length(args)>=1) args[[1]] else "studies/lodi_2025_26/outputs/lodi_31_school_grade_meal_census_for_R.csv"
-absence_path <- if(length(args)>=2) args[[2]] else "studies/lodi_2025_26/outputs/lodi_31_school_absence_group_inputs_2025_26.csv"
-out <- if(length(args)>=3) args[[3]] else "lodi_r_rendered_figures"
+meal_path <- if(length(args)>=1) args[[1]] else "inputs/lodi_31_school_grade_meal_census_for_R.csv"
+absence_path <- if(length(args)>=2) args[[2]] else "inputs/lodi_31_school_absence_group_inputs_2025_26.csv"
+out <- if(length(args)>=3) args[[3]] else "figures"
 dir.create(out, recursive=TRUE, showWarnings=FALSE)
 
 meals <- read.csv(meal_path,colClasses=c(cds="character",school="character"),check.names=FALSE)
@@ -96,15 +96,9 @@ plots <- list(
   "03_Lodi_Combined_Meals" = plot_meals("combined_rate",
       "Breakfasts plus lunches per estimated day of student attendance", 2, seq(0, 2, 0.1))
 )
-if (!nzchar(Sys.which("pdftoppm"))) stop("Install Poppler (pdftoppm) to reproduce the PNG exports.")
 for (name in names(plots)) {
-  pdf_path <- file.path(out, paste0(name, ".pdf"))
-  prefix <- file.path(out, name)
-  ggsave(pdf_path, plots[[name]], device = grDevices::pdf,
+  ggsave(file.path(out, paste0(name, ".pdf")), plots[[name]], device = grDevices::pdf,
          width = 10, height = 6, bg = "white", title = "")
-  status <- system2("pdftoppm", c("-r", "100", "-png", "-singlefile",
-                                  shQuote(pdf_path), shQuote(prefix)))
-  stopifnot(status == 0L, file.exists(paste0(prefix, ".png")))
 }
 write.csv(long,
           file.path(out, "Lodi_K-5_Plot_Values.csv"), row.names = FALSE)

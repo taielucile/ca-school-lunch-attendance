@@ -4,9 +4,19 @@ Verified source extracts, matched school-level meal counts, modeled kindergarten
 
 ## November 25 K–5 update
 
-The [K–5 results and next steps](K5_MEAL_COMPARISONS.md) cover the 31 matched schools and include the school-by-grade rates, final report figure reproduction instructions, attendance model, and proposed district follow-up. The final report renderer is `code/render_lodi_figures.R`; the earlier figure files are retained as drafts. The materials below document the earlier kindergarten handoff.
+The [K–5 results and next steps](K5_MEAL_COMPARISONS.md) cover the 31 matched schools and include the school-by-grade rates, final report figure reproduction instructions, attendance model, and proposed district follow-up. The [final report renderer](code/render_lodi_figures.R) reproduces the plots.
 
-## Start here
+## Final report figures
+
+| Figure | Final PDF | Final PNG |
+| --- | --- | --- |
+| Breakfast | [PDF](figures/01_Lodi_Breakfast.pdf) | [PNG](figures/01_Lodi_Breakfast.png) |
+| Lunch | [PDF](figures/02_Lodi_Lunch.pdf) | [PNG](figures/02_Lodi_Lunch.png) |
+| Breakfast and lunch combined | [PDF](figures/03_Lodi_Combined_Meals.pdf) | [PNG](figures/03_Lodi_Combined_Meals.png) |
+
+[SHA-256 checksums](figures/FINAL_FIGURES_SHA256.txt) for the supplied files. Historical drafts: [breakfast](figures/01_breakfast_absence_adjusted_R.pdf), [lunch](figures/02_lunch_absence_adjusted_R.pdf), and [combined](figures/03_combined_absence_adjusted_R.pdf).
+
+## Earlier kindergarten handoff
 
 | File | Use |
 | --- | --- |
