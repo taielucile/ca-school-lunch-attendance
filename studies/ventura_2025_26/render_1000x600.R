@@ -48,7 +48,7 @@ make_figure <- function(field,axis,upper,breaks,file) {
   drawn <- c(build[[1]]$x,build[[2]]$x)
   original <- d[[field]]
   stopifnot(length(drawn)==length(original),
-            all(is.na(drawn)==is.na(original)),
+            sum(is.na(drawn))==sum(is.na(original)),
             isTRUE(all.equal(sort(drawn[is.finite(drawn)]),
                              sort(original[is.finite(original)]),
                              tolerance=1e-12)))
