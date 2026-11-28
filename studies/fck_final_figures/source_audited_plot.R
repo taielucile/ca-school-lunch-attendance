@@ -101,18 +101,20 @@ plot_report <- function(df,district,grades,metric,xlabel,maxval,breaks,
    scale_y_discrete(labels=if(is.null(labels)) waiver() else labels)+
    scale_colour_manual(values=palette,breaks=grades,drop=FALSE)+
    labs(x=xlabel,y="School",colour="Grade")+
-   theme_minimal(base_size=9)+
+   theme_minimal(base_size=10)+
    theme(
     panel.grid.major.x=element_line(colour="#DEDEDE",linewidth=.35),
     panel.grid.major.y=element_line(colour="#DEDEDE",linewidth=.35),
     panel.grid.minor=element_blank(),
     plot.margin=margin(6,8,8,8),
-    axis.text.y=element_text(size=if(district=="Lodi")7.5 else 8.2),
-    axis.text.x=element_text(size=8),
-    axis.title.x=element_text(size=9),
-    axis.title.y=element_text(size=9),
-    legend.position="right",legend.title=element_text(size=9),
-    legend.text=element_text(size=8))
+    axis.text.y=element_text(size=if(district=="Lodi")8.2 else 9.1,
+                              colour="#17212B"),
+    axis.text.x=element_text(size=9.2,colour="#17212B"),
+    axis.title.x=element_text(size=10.2,colour="#101820"),
+    axis.title.y=element_text(size=10.2,colour="#101820"),
+    legend.position="right",
+    legend.title=element_text(size=10,colour="#101820"),
+    legend.text=element_text(size=9.2,colour="#17212B"))
  build <- ggplot_build(p)$data
  drawn <- c(build[[1]]$x,build[[2]]$x)
  stopifnot(length(drawn)==nrow(df),!anyNA(drawn),
