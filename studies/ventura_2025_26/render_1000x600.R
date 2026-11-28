@@ -25,9 +25,9 @@ d$breakfast_rate <- 100*as.numeric(d$Breakfast)/(as.numeric(d$attendance)*178)
 d$lunch_rate <- 100*as.numeric(d$Lunch)/(as.numeric(d$attendance)*178)
 d$combined_rate <- (as.numeric(d$Breakfast)+as.numeric(d$Lunch))/
                     (as.numeric(d$attendance)*178)
-# Reuse final Lodi report's EXACT K + grades 1–5 palette;
-# TK is the extra Ventura series and gets a lighter rose.
-palette <- c(TK="#F2A0A3",K="#DC5C60",
+# Reuse final Lodi report's EXACT grades 1–5 palette; retain Angela's
+# original Ventura TK and K colors.
+palette <- c(TK="#E57373",K="#C62828",
              "1"="#12334D","2"="#2671B4","3"="#4D9CDB",
              "4"="#9FCCED","5"="#CDE5F6")
 schools <- sort(unique(d$school_name))
@@ -74,7 +74,7 @@ writeLines(c(
  "No added titles, captions or footnotes inside PNG files.",
  "The plotting style matches Lodi final: theme_minimal() (both grids), grade point size 3,",
  "School/Grade legend at ggplot defaults, same x-axis 10-unit/.1-unit grid spacing, and grade alignment.",
- "Grade colors: TK #F2A0A3 (new pale rose), K #DC5C60;",
+ "Grade colors: TK #E57373 (original Ventura), K #C62828 (original Ventura);",
  "1 #12334D; 2 #2671B4; 3 #4D9CDB; 4 #9FCCED; 5 #CDE5F6.",
  "The original Ventura charts include TK, unlike Lodi.",
  "Each point represents a school-grade meal count divided by (reported grade attendance × 178),",
