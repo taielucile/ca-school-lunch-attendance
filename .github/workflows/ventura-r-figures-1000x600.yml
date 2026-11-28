@@ -23,10 +23,6 @@ jobs:
         shell: bash
         run: |
           Rscript studies/ventura_2025_26/render_1000x600.R team output/ventura_1000x600 | tee output_execution.log
-          for f in output/ventura_1000x600/*.pdf; do
-            prefix="${f%.pdf}"
-            pdftoppm -f 1 -l 1 -r 100 -png -singlefile "$f" "$prefix"
-          done
           python3 - <<'PY'
           import struct
           from pathlib import Path
