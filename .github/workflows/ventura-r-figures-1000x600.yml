@@ -1,4 +1,4 @@
-name: Ventura R figures 1000x600
+name: Ventura R figures 1000x500
 on:
   push:
     branches: [work/ventura-r-1000x600-2026-11-27]
@@ -22,25 +22,25 @@ jobs:
       - name: Execute original-data R plotting
         shell: bash
         run: |
-          Rscript studies/ventura_2025_26/render_1000x600.R team output/ventura_1000x600 | tee output_execution.log
+          Rscript studies/ventura_2025_26/render_1000x600.R team output/ventura_1000x500 | tee output_execution.log
           python3 - <<'PY'
           import struct
           from pathlib import Path
-          for p in sorted(Path("output/ventura_1000x600").glob("*.png")):
+          for p in sorted(Path("output/ventura_1000x500").glob("*.png")):
               data=p.read_bytes()
               assert data[:8]==b'\x89PNG\r\n\x1a\n'
               w,h=struct.unpack('>II',data[16:24])
               print(p.name,w,h)
-              assert (w,h)==(1000,600)
-          assert len(list(Path("output/ventura_1000x600").glob("*.png")))==3
-          assert len(list(Path("output/ventura_1000x600").glob("*.pdf")))==3
+              assert (w,h)==(1000,500)
+          assert len(list(Path("output/ventura_1000x500").glob("*.png")))==3
+          assert len(list(Path("output/ventura_1000x500").glob("*.pdf")))==3
           PY
       - uses: actions/upload-artifact@v4
         if: always()
         with:
-          name: ventura-1000x600-verified-r-figures
+          name: ventura-1000x500-verified-r-figures
           path: |
-            output/ventura_1000x600/
+            output/ventura_1000x500/
             output_execution.log
             studies/ventura_2025_26/render_1000x600.R
           retention-days: 30
