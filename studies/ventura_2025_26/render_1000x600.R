@@ -1,5 +1,5 @@
 #!/usr/bin/env Rscript
-# Ventura Unified 2025–26: final 1000×600 exports using the Lodi report renderer's
+# Ventura Unified 2025–26: final 1000×500 exports using the Lodi report renderer's
 # colors, grid, legend, point size, axis tick frequency, and minimal theme.
 # Source for rates: Angela's saved Ventura_analysis_copy.RData.
 suppressPackageStartupMessages(library(ggplot2))
@@ -53,9 +53,9 @@ make_figure <- function(field,axis,upper,breaks,file) {
                              sort(original[is.finite(original)]),
                              tolerance=1e-12)))
   ggsave(file.path(out,paste0(file,".pdf")),plot,device=grDevices::pdf,
-         width=10,height=6,bg="white",title="")
+         width=10,height=5,bg="white",title="")
   ggsave(file.path(out,paste0(file,".png")),plot,device="png",
-         width=10,height=6,units="in",dpi=100,bg="white")
+         width=10,height=5,units="in",dpi=100,bg="white")
   cat("Generated",file,"from",sum(is.finite(original)),"valid school/grade rates\n")
 }
 make_figure("breakfast_rate","Breakfasts per 100 estimated days of student attendance",
@@ -68,7 +68,7 @@ write.csv(d[,c("school_name","grade","Breakfast","Lunch","attendance",
               "breakfast_rate","lunch_rate","combined_rate")],
   file.path(out,"Ventura_TK-5_Plot_Values.csv"),row.names=FALSE)
 writeLines(c(
- "Ventura Unified 2025–26 | R-generated figures, 1000 × 600 pixels.",
+ "Ventura Unified 2025–26 | R-generated figures, 1000 × 500 pixels.",
  "Template: studies/lodi_2025_26/code/render_lodi_figures.R at main branch.",
  "Rates: Ventura team's original saved Ventura_analysis_copy.RData.",
  "No added titles, captions or footnotes inside PNG files.",
@@ -79,6 +79,6 @@ writeLines(c(
  "The original Ventura charts include TK, unlike Lodi.",
  "Each point represents a school-grade meal count divided by (reported grade attendance × 178),",
  "not a share of distinct children. Missing meal counts are not silently set to zero.",
- "Render method: R ggsave() at 10×6 inches, 100 DPI, produces exactly 1000×600 PNG."
+ "Render method: R ggsave() at 10×6 inches, 100 DPI, produces exactly 1000×500 PNG."
  ),file.path(out,"README.txt"))
 cat("R:",R.version.string,"ggplot2:",as.character(packageVersion("ggplot2")),"\n")
