@@ -5,7 +5,7 @@
 suppressPackageStartupMessages(library(ggplot2))
 args <- commandArgs(trailingOnly=TRUE)
 team <- if (length(args) >= 1L) args[[1]] else "team"
-out <- if (length(args) >= 2L) args[[2]] else "output/ventura_1000x600"
+out <- if (length(args) >= 2L) args[[2]] else "output/ventura_1000x500"
 dir.create(out, showWarnings=FALSE, recursive=TRUE)
 source_file <- file.path(team,"Ventura Unified","cleaned data","Ventura_analysis_copy.RData")
 stopifnot(file.exists(source_file))
@@ -79,6 +79,6 @@ writeLines(c(
  "The original Ventura charts include TK, unlike Lodi.",
  "Each point represents a school-grade meal count divided by (reported grade attendance × 178),",
  "not a share of distinct children. Missing meal counts are not silently set to zero.",
- "Render method: R ggsave() at 10×6 inches, 100 DPI, produces exactly 1000×500 PNG."
+ "Render method: R ggsave() at 10×5 inches, 100 DPI, produces exactly 1000×500 PNG."
  ),file.path(out,"README.txt"))
 cat("R:",R.version.string,"ggplot2:",as.character(packageVersion("ggplot2")),"\n")
