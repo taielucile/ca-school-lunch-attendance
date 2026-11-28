@@ -1,0 +1,58 @@
+name: Source audited Ventura and Lodi figures in R
+on:
+  push:
+    branches: [work/fck-final-figures-audit-2026-11-27]
+    paths:
+      - ".github/workflows/fck-final-figures-audited.yml"
+      - "studies/fck_final_figures/source_audited_plot.R"
+permissions:
+  contents: read
+jobs:
+  verify-and-render:
+    runs-on: ubuntu-latest
+    container: rocker/tidyverse:4.4.3
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/checkout@v4
+        with:
+          repository: whippedfruit/Feed-California-Kinders
+          path: team
+          persist-credentials: false
+      - name: Reproduce and audit from R
+        shell: bash
+        run: |
+          Rscript studies/fck_final_figures/source_audited_plot.R team final_figures | tee final_figures_execution.log
+          python3 - <<'PY'
+          from pathlib import Path
+          import struct, csv
+          d=Path('final_figures')
+          expected={f'ventura_{x}_1000x500.png':(1000,500) for x in ('breakfast','lunch','combined')}
+          expected.update({f'lodi_{x}_1000x600.png':(1000,600) for x in ('breakfast','lunch','combined')})
+          found={p.name for p in d.glob('*.png')}
+          assert found==set(expected), (found,expected)
+          for name,dims in expected.items():
+              b=(d/name).read_bytes()
+              assert b[:8]==bytes.fromhex('89504e470d0a1a0a')
+              actual=struct.unpack('>II',b[16:24])
+              assert actual==dims, (name,actual)
+              print('VERIFIED',name,*actual)
+          assert len(list(d.glob('*.pdf')))==6
+          with open(d/'ventura_school_grade_rates_audited.csv') as f:
+              v=list(csv.DictReader(f))
+          assert len(v)==124
+          assert len([r for r in v if r['breakfast_structural_zero']=='TRUE'])==6
+          assert all(r['breakfast_rate']!='NA' and r['combined_rate']!='NA' for r in v)
+          with open(d/'lodi_school_grade_rates_verified.csv') as f:
+              assert len(list(csv.DictReader(f)))==186
+          print('FINAL QA PASSED: six images, six PDFs, 124 Ventura rows, 186 Lodi rows')
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: FCK-source-audited-Ventura-Lodi-R-figures
+          path: |
+            final_figures/
+            final_figures_execution.log
+            studies/fck_final_figures/source_audited_plot.R
+          retention-days: 30
+          if-no-files-found: error
