@@ -77,6 +77,6 @@ writeLines(c(
  "The original Ventura charts include TK, unlike Lodi.",
  "Each point represents a school-grade meal count divided by (reported grade attendance × 178),",
  "not a share of distinct children. Missing meal counts are not silently set to zero.",
- "Render method: 10×6-inch R PDF; pdftoppm at 100 DPI produces exactly 1000×600 PNG."
+ "Render method: R ggsave() at 10×6 inches, 100 DPI, produces exactly 1000×600 PNG."
  ),file.path(out,"README.txt"))
 cat("R:",R.version.string,"ggplot2:",as.character(packageVersion("ggplot2")),"\n")
