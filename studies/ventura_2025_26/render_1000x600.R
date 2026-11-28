@@ -54,7 +54,8 @@ make_figure <- function(field,axis,upper,breaks,file) {
                              tolerance=1e-12)))
   ggsave(file.path(out,paste0(file,".pdf")),plot,device=grDevices::pdf,
          width=10,height=6,bg="white",title="")
-  ggsave(file.path(out,paste0(file,".png")),plot,device="png",\n         width=10,height=6,units="in",dpi=100,bg="white")
+  ggsave(file.path(out,paste0(file,".png")),plot,device="png",
+         width=10,height=6,units="in",dpi=100,bg="white")
   cat("Generated",file,"from",sum(is.finite(original)),"valid school/grade rates\n")
 }
 make_figure("breakfast_rate","Breakfasts per 100 estimated days of student attendance",
