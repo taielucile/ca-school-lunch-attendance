@@ -98,7 +98,7 @@ plot_report <- function(df,district,grades,metric,xlabel,maxval,breaks,
    geom_point(data=older,size=2.8,alpha=1,position="identity")+
    geom_point(data=early,size=2.8,alpha=1,position="identity")+
    scale_x_continuous(limits=c(0,maxval),breaks=breaks)+
-   scale_y_discrete(labels=labels)+
+   scale_y_discrete(labels=if(is.null(labels)) waiver() else labels)+
    scale_colour_manual(values=palette,breaks=grades,drop=FALSE)+
    labs(x=xlabel,y="School",colour="Grade")+
    theme_minimal(base_size=9)+
